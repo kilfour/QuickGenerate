@@ -10,15 +10,15 @@ namespace QuickGenerate.Example
 {
     public partial class Form1 : Form
     {
-        private readonly FluentGrid<Kategory> categoriesFluentGrid;
-        private readonly FluentGrid<Produkt> productsFluentGrid;
+        private readonly FluentGrid<Category> categoriesFluentGrid;
+        private readonly FluentGrid<Product> productsFluentGrid;
         
         public Form1()
         {
             InitializeComponent();
 
             categoriesFluentGrid =
-                new FluentGrid<Kategory>(masterGrid)
+                new FluentGrid<Category>(masterGrid)
                     .AsNumber(c => c.Id, col => col.Width = 30)
                     .AsText(c => c.Title, col => col.Width = 150)
                     .AsText(c => c.Description, col => col.Width = 150)
@@ -29,7 +29,7 @@ namespace QuickGenerate.Example
             categoriesFluentGrid.Populate(GetRandomData());
 
             productsFluentGrid =
-                new FluentGrid<Produkt>(detailsGrid)
+                new FluentGrid<Product>(detailsGrid)
                     .AsNumber(p => p.Id, col => col.Width = 30)
                     .AsText(p => p.Title, col => col.Width = 150)
                     .AsText(p => p.Description, col => col.Width = 150)
@@ -39,13 +39,13 @@ namespace QuickGenerate.Example
                     .Initialize();
         }
 
-        private static IEnumerable<Kategory> GetRandomData()
+        private static IEnumerable<Category> GetRandomData()
         {
             return
                 new DomainGenerator()
-                    .With<Kategory>(g => g.For(category => category.Id, 0, val => val + 1))
-                    .With<Kategory>(g => g.For(category => category.Title, new StringGenerator(5, 10, 'H', 'a', 'l')))
-                    .With<Kategory>(
+                    .With<Category>(g => g.For(category => category.Id, 0, val => val + 1))
+                    .With<Category>(g => g.For(category => category.Title, new StringGenerator(5, 10, 'H', 'a', 'l')))
+                    .With<Category>(
                         g => g.For(category => category.Description,
                                    new StringBuilderGenerator()
                                        .Append("Not many", "Lots of", "Some")
@@ -55,10 +55,10 @@ namespace QuickGenerate.Example
                                        .Append("paintbrushes", "camels", "radio antaennas")
                                        .Period(),
                                    new NumericStringGenerator(4, 12)))
-                    .OneToMany<Kategory, Produkt>(3, 7, (c, p) => c.Products.Add(p))
-                    .With<Produkt>(g => g.For(product => product.Id, 0, val => val + 1))
-                    .With<Produkt>(g => g.For(product => product.Title, "title1", "title2", "Another title"))
-                    .With<Produkt>(
+                    .OneToMany<Category, Product>(3, 7, (c, p) => c.Products.Add(p))
+                    .With<Product>(g => g.For(product => product.Id, 0, val => val + 1))
+                    .With<Product>(g => g.For(product => product.Title, "title1", "title2", "Another title"))
+                    .With<Product>(
                         g => g.For(product => product.Description,
                                    new StringBuilderGenerator()
                                        .Append(WordGenerator.FromFile("Adjectives.txt")).Space()
@@ -68,25 +68,25 @@ namespace QuickGenerate.Example
                                        .Append(WordGenerator.FromFile("Adjectives.txt")).Space()
                                        .Append(WordGenerator.FromFile("Nouns.txt"))
                                        .Period()))
-                    .With<Produkt>(g => g.For(product => product.Price, val => Math.Round(val, 2)))
-                    .With<Produkt>(g => g.For(product => product.Created, 31.December(2009), val => val.AddDays(1)))
-                    .Many<Kategory>(4, 8);
+                    .With<Product>(g => g.For(product => product.Price, val => Math.Round(val, 2)))
+                    .With<Product>(g => g.For(product => product.Created, 31.December(2009), val => val.AddDays(1)))
+                    .Many<Category>(4, 8);
         }
     }
 
-    public class Kategory
+    public class Category
     {
         public int Id { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
-        public IList<Produkt> Products { get; set; }
-        public Kategory()
+        public IList<Product> Products { get; set; }
+        public Category()
         {
-            Products = new List<Produkt>();
+            Products = new List<Product>();
         }
     }
 
-    public class Produkt
+    public class Product
     {
         public int Id { get; set; }
         public string Title { get; set; }

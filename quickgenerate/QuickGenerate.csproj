@@ -1,0 +1,105 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="3.5" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{68DF7C81-2C36-4217-8CB2-429668A9A75F}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>QuickGenerate</RootNamespace>
+    <AssemblyName>QuickGenerate</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="DomainGeneratorImplementation\IgnoreGeneratorOptions.cs" />
+    <Compile Include="Primitives\DateGenerator.cs" />
+    <Compile Include="RandomIntFromArray.cs" />
+    <Compile Include="Implementation\ChoiceGenerator.cs" />
+    <Compile Include="Complex\EmailGenerator.cs" />
+    <Compile Include="Complex\NumericStringGenerator.cs" />
+    <Compile Include="Complex\StringBuilderGenerator.cs" />
+    <Compile Include="Complex\WordGenerator.cs" />
+    <Compile Include="DomainGenerator.cs" />
+    <Compile Include="DomainGeneratorImplementation\ActionConvention.cs" />
+    <Compile Include="DomainGeneratorImplementation\CantFindConstructor.cs" />
+    <Compile Include="DomainGeneratorImplementation\ChoiceConvention.cs" />
+    <Compile Include="DomainGeneratorImplementation\ConstructionConvention.cs" />
+    <Compile Include="DomainGeneratorImplementation\Create.cs" />
+    <Compile Include="DomainGeneratorImplementation\GeneratorOptions.cs" />
+    <Compile Include="DomainGeneratorImplementation\OneToManyRelation.cs" />
+    <Compile Include="Gather.cs" />
+    <Compile Include="Generate.cs" />
+    <Compile Include="Generator.cs" />
+    <Compile Include="HardCodeThoseDates\HardCodeThatDate.cs" />
+    <Compile Include="Implementation\Gatherer.cs" />
+    <Compile Include="Maybe.cs" />
+    <Compile Include="BeingPicky.cs" />
+    <Compile Include="Implementation\FuncGenerator.cs" />
+    <Compile Include="Interfaces\IGenerator.cs" />
+    <Compile Include="Modify.cs" />
+    <Compile Include="DomainGeneratorImplementation\PrimitiveGenerators.cs" />
+    <Compile Include="Modifying\DomainModifier.cs" />
+    <Compile Include="Modifying\HeyITriedFiveTimesButCouldNotGetADifferentValue.cs" />
+    <Compile Include="Primitives\BoolGenerator.cs" />
+    <Compile Include="Primitives\CharGenerator.cs" />
+    <Compile Include="Primitives\DateTimeGenerator.cs" />
+    <Compile Include="Primitives\DecimalGenerator.cs" />
+    <Compile Include="Primitives\DoubleGenerator.cs" />
+    <Compile Include="Primitives\FloatGenerator.cs" />
+    <Compile Include="Primitives\GuidGenerator.cs" />
+    <Compile Include="Primitives\IntGenerator.cs" />
+    <Compile Include="Primitives\LongGenerator.cs" />
+    <Compile Include="Primitives\StringGenerator.cs" />
+    <Compile Include="Primitives\TimeSpanGenerator.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Implementation\Seed.cs" />
+    <Compile Include="Reflect\ExpressionExtensions.cs" />
+    <Compile Include="Reflect\FromAssembly.cs" />
+    <Compile Include="Reflect\TypePicker.cs" />
+    <Compile Include="RepeatingOnesSelve.cs" />
+    <Compile Include="Writing\GuidWriter.cs" />
+    <Compile Include="Writing\PrimitivesWriter.cs" />
+    <Compile Include="Writing\IntWriter.cs" />
+    <Compile Include="Writing\IStream.cs" />
+    <Compile Include="Writing\IWriter.cs" />
+    <Compile Include="Writing\ObjectWriter.cs" />
+    <Compile Include="Writing\StringStream.cs" />
+    <Compile Include="Writing\StringWriter.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

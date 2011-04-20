@@ -1,0 +1,147 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="3.5" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{8C8E0899-21E3-42AB-9F16-E1EDE349562E}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>QuickGenerate.Tests</RootNamespace>
+    <AssemblyName>QuickGenerate.Tests</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="QuickDoc, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Libs\QuickDoc\QuickDoc.dll</HintPath>
+    </Reference>
+    <Reference Include="QuickDotNetCheck, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Libs\quickdotnetcheck\QuickDotNetCheck.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="xunit, Version=1.5.0.1479, Culture=neutral, PublicKeyToken=8d05b1bb7a6fdb6c, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Libs\xunit\xunit.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Choices\EnumerableExtensionTests.cs" />
+    <Compile Include="DocSpike.cs" />
+    <Compile Include="DomainGeneratorTests\ActivationTests.cs" />
+    <Compile Include="DomainGeneratorTests\ComponentsTests.cs" />
+    <Compile Include="DomainGeneratorTests\CustomizeTypeActionTwoParameterMethod_MultipleTimes_Tests.cs" />
+    <Compile Include="DomainGeneratorTests\CustomizeTypeIntCounterTests.cs" />
+    <Compile Include="DomainGeneratorTests\CustomizeTypeLongCounterTests.cs" />
+    <Compile Include="DomainGeneratorTests\GeneratorOptionsKnowTheEntity.cs" />
+    <Compile Include="DomainGeneratorTests\Issues\MultipleOneToManyBug.cs" />
+    <Compile Include="DomainGeneratorTests\OneToManyTests\ComplexOneToManyTests.cs" />
+    <Compile Include="DomainGeneratorTests\CustomizeTypeAppendCounterTests.cs" />
+    <Compile Include="DomainGeneratorTests\CustomizeTypePluggableFunctionsTests.cs" />
+    <Compile Include="DomainGeneratorTests\CustomizeForEachTests.cs" />
+    <Compile Include="DomainGeneratorTests\CustomizeTypeActionOneParameterMethodTests.cs" />
+    <Compile Include="DomainGeneratorTests\CustomizeTypeActionTwoParameterMethodTests.cs" />
+    <Compile Include="DomainGeneratorTests\CustomizeTypeIgnoreTests.cs" />
+    <Compile Include="DomainGeneratorTests\CustomizeTypeMultipleSpecificGeneratorTests.cs" />
+    <Compile Include="DomainGeneratorTests\CustomizeTypeOneToManyTests.cs" />
+    <Compile Include="DomainGeneratorTests\CustomizeTypePolymorphism.cs" />
+    <Compile Include="DomainGeneratorTests\CustomizeTypePossibleValuesTests.cs" />
+    <Compile Include="DomainGeneratorTests\CustomizeTypeSpecificGeneratorTests.cs" />
+    <Compile Include="DomainGeneratorTests\CustomizeTypeSpecificStringLengthTests.cs" />
+    <Compile Include="DomainGeneratorTests\CustomizeTypeSpecificValueTests.cs" />
+    <Compile Include="DomainGeneratorTests\CustomizeTypeSupplyStartingValue.cs" />
+    <Compile Include="DomainGeneratorTests\CustomizeTypeRecurseTests.cs" />
+    <Compile Include="DomainGeneratorTests\DynamicValueConventionTests.cs" />
+    <Compile Include="DomainGeneratorTests\EntitiesTests.cs" />
+    <Compile Include="DomainGeneratorTests\ExplicitOneToOneTests.cs" />
+    <Compile Include="DomainGeneratorTests\ExplicitPolymorphicOneToOneTests.cs" />
+    <Compile Include="DomainGeneratorTests\GeneratorByConventionTests.cs" />
+    <Compile Include="DomainGeneratorTests\IgnoreConventionTests.cs" />
+    <Compile Include="DomainGeneratorTests\FirstSteps.cs" />
+    <Compile Include="DomainGeneratorTests\Issues\ForEachNullReferenceBug.cs" />
+    <Compile Include="DomainGeneratorTests\Issues\ForEachOnOneToManyOrderTests.cs" />
+    <Compile Include="DomainGeneratorTests\Issues\NestedOneToOneBug.cs" />
+    <Compile Include="DomainGeneratorTests\Issues\RelationsUsingTheModelBug.cs" />
+    <Compile Include="DomainGeneratorTests\ManyTests.cs" />
+    <Compile Include="DomainGeneratorTests\ModifyTests.cs" />
+    <Compile Include="DomainGeneratorTests\CustomizeTypeDynamicValueConventionTests.cs" />
+    <Compile Include="DomainGeneratorTests\OneToManyTests\MultipleOneToManiesTests.cs" />
+    <Compile Include="DomainGeneratorTests\OneToManyTests\OneToManyTests.cs" />
+    <Compile Include="DomainGeneratorTests\OneToManyTests\OneToManyUsingConstructorTests.cs" />
+    <Compile Include="DomainGeneratorTests\OneToManyTests\PolymorphicOneToManyTests.cs" />
+    <Compile Include="DomainGeneratorTests\ReplacingPrimitiveGeneratorsTests.cs" />
+    <Compile Include="DomainGeneratorTests\ReplacingPrimitiveGeneratorsWithConstantValueTests.cs" />
+    <Compile Include="DomainGeneratorTests\StringUniquePropertyNameTests.cs" />
+    <Compile Include="DomainGeneratorTests\TheDomain\Category.cs" />
+    <Compile Include="DomainGeneratorTests\TheDomain\BidirectionalProductPrice.cs" />
+    <Compile Include="DomainGeneratorTests\TheDomain\IThing.cs" />
+    <Compile Include="DomainGeneratorTests\TheDomain\Product.cs" />
+    <Compile Include="DomainGeneratorTests\TheDomain\ProductPrice.cs" />
+    <Compile Include="DomainGeneratorTests\IgnoreConventionTypedTests.cs" />
+    <Compile Include="GatherTests\GatherFromTests.cs" />
+    <Compile Include="MaybeDoTests.cs" />
+    <Compile Include="ModifyTests\AConendrum.cs" />
+    <Compile Include="ModifyTests\ModifyingSomethingComplexTests.cs" />
+    <Compile Include="ModifyTests\ModifyThisTests.cs" />
+    <Compile Include="ModifyTests\RepositoryModifyReusesDefinedGeneratorsTest.cs" />
+    <Compile Include="NonPublicSetters.cs" />
+    <Compile Include="NumericStringGeneratorTests\IsAlwaysAValidNumberTests.cs" />
+    <Compile Include="NumericStringGeneratorTests\MinMaxConstructionTests.cs" />
+    <Compile Include="Picking\PickSomeTests.cs" />
+    <Compile Include="PrimitiveGeneratorsTests\DefaultIntGeneratorTests.cs" />
+    <Compile Include="PrimitiveGeneratorsTests\DefaultPrimitiveGeneratorsTestsState.cs" />
+    <Compile Include="PrimitiveGeneratorsTests\DefaultStringGeneratorTests.cs" />
+    <Compile Include="PrimitiveGeneratorsTests\NullablesTests.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ReflectTests\TypePickerTests.cs" />
+    <Compile Include="StringBuilderGeneratorTests\AppendCounterTests.cs" />
+    <Compile Include="StringGeneratorTests\LengthTest.cs" />
+    <Compile Include="StructTests.cs" />
+    <Compile Include="Writing\WritingPrimitives\WritingABiDirectionalOneToOneTest.cs" />
+    <Compile Include="Writing\WritingPrimitives\WritingACompositeTest.cs" />
+    <Compile Include="Writing\WritingPrimitives\WritingBiDirectionalOneToManiesTest.cs" />
+    <Compile Include="Writing\WritingPrimitives\WritingGuidsTest.cs" />
+    <Compile Include="Writing\WritingPrimitives\WritingIntListsTest.cs" />
+    <Compile Include="Writing\WritingPrimitives\WritingIntsTest.cs" />
+    <Compile Include="Writing\WritingPrimitives\WritingStringsTest.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\QuickGenerate\QuickGenerate.csproj">
+      <Project>{68DF7C81-2C36-4217-8CB2-429668A9A75F}</Project>
+      <Name>QuickGenerate</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

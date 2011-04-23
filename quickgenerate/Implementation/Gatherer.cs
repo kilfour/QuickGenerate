@@ -49,5 +49,10 @@ namespace QuickGenerate.Implementation
         {
             return collected.Values.Where(val => val.GetType() == typeof(TResult)).Cast<TResult>().ToArray();
         }
+
+        public object[] AllCollected()
+        {
+            return collected.Values.ToArray();
+        }
     }
 }

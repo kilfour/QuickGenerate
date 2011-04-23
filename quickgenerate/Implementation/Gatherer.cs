@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 using QuickGenerate.Reflect;
@@ -42,6 +43,11 @@ namespace QuickGenerate.Implementation
         {
             var property = propertyFunc.AsPropertyInfo();
             return (Gatherer<TProperty>)gatherers[property];
+        }
+
+        public TResult[] Collected<TResult>()
+        {
+            return collected.Values.Where(val => val.GetType() == typeof(TResult)).Cast<TResult>().ToArray();
         }
     }
 }

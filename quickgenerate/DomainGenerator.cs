@@ -369,18 +369,23 @@ namespace QuickGenerate
 
         public DomainGenerator WithStringNameCounterPattern()
         {
-            Func<MemberInfo, bool> predicate = mi => ((PropertyInfo)mi).PropertyType.IsAssignableFrom(typeof(string));            
-            dynamicValueConventions[predicate] = pi => pi.Name + GetGenerator(pi).GetRandomValue().ToString();
+            return WithStringNameCounterPattern(0);
+        }
+
+        public DomainGenerator WithStringNameCounterPattern(int startingValue)
+        {
+            Func<MemberInfo, bool> predicate = mi => ((PropertyInfo)mi).PropertyType.IsAssignableFrom(typeof(string));
+            dynamicValueConventions[predicate] = pi => pi.Name + GetGenerator(pi, startingValue).GetRandomValue().ToString();
             return this;
         }
 
         private Dictionary<PropertyInfo, FuncGenerator<int>> counters =
             new Dictionary<PropertyInfo, FuncGenerator<int>>();
 
-        private FuncGenerator<int> GetGenerator(PropertyInfo propertyInfo)
+        private FuncGenerator<int> GetGenerator(PropertyInfo propertyInfo, int startingValue)
         {
             if(!counters.ContainsKey(propertyInfo))
-                counters[propertyInfo] = new FuncGenerator<int>(0, val => ++val);
+                counters[propertyInfo] = new FuncGenerator<int>(startingValue, val => ++val);
             return counters[propertyInfo];
         }
 

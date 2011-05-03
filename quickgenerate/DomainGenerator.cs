@@ -338,6 +338,8 @@ namespace QuickGenerate
                 return true;
             if (IsAKnownPrimitive(target, propertyInfo))
                 return true;
+            if (IsAnEnumeration(target, propertyInfo))
+                return true;
             if (IsComponent(target, propertyInfo))
                 return true;
             return false;
@@ -404,6 +406,24 @@ namespace QuickGenerate
         {
             componentTypes.Add(typeof(T));
             return this;
+        }
+
+        private bool IsAnEnumeration(object target, PropertyInfo propertyInfo)
+        {
+            if (propertyInfo.PropertyType.IsEnum)
+            {
+
+                propertyInfo.SetValue(target, GetEnumValues(propertyInfo.PropertyType).PickOne(), null);
+                return true;
+            }
+            return false;
+        }
+
+        private static IEnumerable<object> GetEnumValues(IReflect type)
+        {
+            return
+                type.GetFields(BindingFlags.Public | BindingFlags.Static)
+                    .Select(i => i.GetRawConstantValue());
         }
     }
 }

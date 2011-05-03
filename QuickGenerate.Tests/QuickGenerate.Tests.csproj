@@ -103,6 +103,7 @@
     <Compile Include="DomainGeneratorTests\TheDomain\Product.cs" />
     <Compile Include="DomainGeneratorTests\TheDomain\ProductPrice.cs" />
     <Compile Include="DomainGeneratorTests\IgnoreConventionTypedTests.cs" />
+    <Compile Include="EnumTests.cs" />
     <Compile Include="GatherTests\GatherFromTests.cs" />
     <Compile Include="MaybeDoTests.cs" />
     <Compile Include="ModifyTests\AConendrum.cs" />

@@ -5,7 +5,6 @@ using System.Linq.Expressions;
 using System.Reflection;
 using QuickGenerate.DomainGeneratorImplementation;
 using QuickGenerate.Implementation;
-using QuickGenerate.Interfaces;
 using QuickGenerate.Modifying;
 using QuickGenerate.Primitives;
 using QuickGenerate.Reflect;

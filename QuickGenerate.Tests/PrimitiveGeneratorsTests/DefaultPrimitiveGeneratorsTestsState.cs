@@ -1,5 +1,4 @@
 using QuickGenerate.DomainGeneratorImplementation;
-using QuickGenerate.Interfaces;
 
 namespace QuickGenerate.Tests.PrimitiveGeneratorsTests
 {

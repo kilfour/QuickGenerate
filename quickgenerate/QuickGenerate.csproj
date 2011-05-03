@@ -40,6 +40,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DomainGeneratorImplementation\IgnoreGeneratorOptions.cs" />
+    <Compile Include="IGenerator.cs" />
     <Compile Include="Primitives\DateGenerator.cs" />
     <Compile Include="RandomIntFromArray.cs" />
     <Compile Include="Implementation\ChoiceGenerator.cs" />
@@ -63,7 +64,6 @@
     <Compile Include="Maybe.cs" />
     <Compile Include="BeingPicky.cs" />
     <Compile Include="Implementation\FuncGenerator.cs" />
-    <Compile Include="Interfaces\IGenerator.cs" />
     <Compile Include="Modify.cs" />
     <Compile Include="DomainGeneratorImplementation\PrimitiveGenerators.cs" />
     <Compile Include="Modifying\DomainModifier.cs" />

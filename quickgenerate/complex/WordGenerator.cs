@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using System.IO;
 using QuickGenerate.Implementation;
-using QuickGenerate.Interfaces;
 
 namespace QuickGenerate.Complex
 {

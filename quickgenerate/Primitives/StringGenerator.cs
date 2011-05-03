@@ -1,6 +1,5 @@
 using System.Text;
 using QuickGenerate.Implementation;
-using QuickGenerate.Interfaces;
 
 namespace QuickGenerate.Primitives
 {

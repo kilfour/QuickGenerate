@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using QuickGenerate.Implementation;
-using QuickGenerate.Interfaces;
 
 namespace QuickGenerate.Complex
 {

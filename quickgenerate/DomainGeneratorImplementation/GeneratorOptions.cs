@@ -3,7 +3,6 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 using QuickGenerate.Implementation;
-using QuickGenerate.Interfaces;
 using QuickGenerate.Primitives;
 using QuickGenerate.Reflect;
 

@@ -1,5 +1,3 @@
-using QuickGenerate.Interfaces;
-
 namespace QuickGenerate
 {
     public abstract class Generator<T> : IGenerator<T>

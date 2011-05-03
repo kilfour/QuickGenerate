@@ -4,7 +4,6 @@ using Xunit;
 
 namespace QuickGenerate.Tests.Choices
 {
-    
     public class EnumerableExtensionTests
     {
         [Fact] 
@@ -33,11 +32,11 @@ namespace QuickGenerate.Tests.Choices
         {
             10.Times(
                 () =>
-                {
-                    var ints = new DomainGenerator().Many<int>(0, 5); // 5 == 4, tschh
-                    Assert.Throws<BeingPicky.TheNumberOfElementsToPickMustBeSmallerThanTheNumberOfPossibleChoices>(
-                        () => ints.Pick(5));
-                });
+                    {
+                        var ints = new[] {1, 2, 3, 4};
+                        Assert.Throws<BeingPicky.TheNumberOfElementsToPickMustBeSmallerThanTheNumberOfPossibleChoices>(
+                            () => ints.Pick(5));
+                    });
         }
 
         [Fact]

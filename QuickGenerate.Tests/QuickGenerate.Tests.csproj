@@ -51,7 +51,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Choices\EnumerableExtensionTests.cs" />
+    <Compile Include="Choices\FromRangeTests.cs" />
+    <Compile Include="Choices\TimesTests.cs" />
     <Compile Include="DocSpike.cs" />
     <Compile Include="DomainGeneratorTests\ActivationTests.cs" />
     <Compile Include="DomainGeneratorTests\ComponentsTests.cs" />
@@ -113,7 +114,7 @@
     <Compile Include="NonPublicSetters.cs" />
     <Compile Include="NumericStringGeneratorTests\IsAlwaysAValidNumberTests.cs" />
     <Compile Include="NumericStringGeneratorTests\MinMaxConstructionTests.cs" />
-    <Compile Include="Picking\PickSomeTests.cs" />
+    <Compile Include="Picking\BeingPickyTests.cs" />
     <Compile Include="PrimitiveGeneratorsTests\DefaultIntGeneratorTests.cs" />
     <Compile Include="PrimitiveGeneratorsTests\DefaultPrimitiveGeneratorsTestsState.cs" />
     <Compile Include="PrimitiveGeneratorsTests\DefaultStringGeneratorTests.cs" />

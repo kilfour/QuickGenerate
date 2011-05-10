@@ -57,6 +57,7 @@
     <Compile Include="DomainGeneratorTests\ActivationTests.cs" />
     <Compile Include="DomainGeneratorTests\ComponentsTests.cs" />
     <Compile Include="DomainGeneratorTests\CustomizeTypeActionTwoParameterMethod_MultipleTimes_Tests.cs" />
+    <Compile Include="DomainGeneratorTests\CustomizeTypeIgnoreInheritedTests.cs" />
     <Compile Include="DomainGeneratorTests\CustomizeTypeIntCounterTests.cs" />
     <Compile Include="DomainGeneratorTests\CustomizeTypeLongCounterTests.cs" />
     <Compile Include="DomainGeneratorTests\GeneratorOptionsKnowTheEntity.cs" />

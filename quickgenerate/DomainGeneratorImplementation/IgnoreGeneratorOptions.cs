@@ -20,7 +20,7 @@ namespace QuickGenerate.DomainGeneratorImplementation
         public void Ignore<TProperty>(Expression<Func<T, TProperty>> propertyExpression)
         {
             Func<MemberInfo, bool> func =
-                mi => mi.ReflectedType == typeof(T)
+                mi =>  typeof(T).IsAssignableFrom(mi.ReflectedType)
                       && mi.Name == propertyExpression.AsPropertyInfo().Name;
 
             ignoreConventions.Add(func);

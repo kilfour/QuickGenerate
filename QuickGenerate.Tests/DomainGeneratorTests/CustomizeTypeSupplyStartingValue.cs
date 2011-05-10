@@ -4,15 +4,14 @@ namespace QuickGenerate.Tests.DomainGeneratorTests
 {
     public class CustomizeTypeSupplyStartingValue
     {
+        private DomainGenerator generator =
+            new DomainGenerator()
+                    .With<SomethingToGenerate>(
+                        opt => opt.DefaultValue(() => new SomethingToGenerate(42)));
         [Fact]
         public void UsesDefaultValue()
         {
-            Assert.Equal(
-                42,
-                new DomainGenerator()
-                    .With<SomethingToGenerate>(
-                        opt => opt.DefaultValue(() => new SomethingToGenerate(42)))
-                    .One<SomethingToGenerate>().GetInt());
+            Assert.Equal(42, generator.One<SomethingToGenerate>().GetInt());
         }
 
         public class SomethingToGenerate

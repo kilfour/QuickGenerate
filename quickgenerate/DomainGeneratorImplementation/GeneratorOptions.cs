@@ -133,7 +133,7 @@ namespace QuickGenerate.DomainGeneratorImplementation
         private static Func<MemberInfo, bool> GetPredicate<TProperty>(Expression<Func<T, TProperty>> propertyExpression)
         {
             Func<MemberInfo, bool> predicate =
-                mi => mi.ReflectedType.IsAssignableFrom(typeof(T))
+                mi => typeof(T).IsAssignableFrom(mi.ReflectedType)
                       && mi.Name == propertyExpression.AsPropertyInfo().Name;
             return predicate;
         }

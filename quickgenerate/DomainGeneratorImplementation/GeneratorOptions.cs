@@ -1,5 +1,4 @@
 using System;
-using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 using QuickGenerate.Implementation;
@@ -213,6 +212,18 @@ namespace QuickGenerate.DomainGeneratorImplementation
         public GeneratorOptions<T> Length(Expression<Func<T, string>> propertyExpression, int minlength, int maxlength)
         {
             return For(propertyExpression, new StringGenerator(minlength, maxlength));
+        }
+
+        public GeneratorOptions<T> Range(Expression<Func<T, decimal>> propertyExpression, decimal min, decimal max)
+        {
+            var generator = new DecimalGenerator(min, max);
+            return For(propertyExpression, generator);
+        }
+
+        public GeneratorOptions<T> Range(Expression<Func<T, double>> propertyExpression, double min, double max)
+        {
+            var generator = new DoubleGenerator(min, max);
+            return For(propertyExpression, generator);
         }
     }
 }

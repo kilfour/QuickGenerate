@@ -57,12 +57,14 @@
     <Compile Include="DomainGeneratorTests\ActivationTests.cs" />
     <Compile Include="DomainGeneratorTests\ComponentsTests.cs" />
     <Compile Include="DomainGeneratorTests\CustomizeTypeActionTwoParameterMethod_MultipleTimes_Tests.cs" />
+    <Compile Include="DomainGeneratorTests\CustomizeTypeDateTimeRangeTests.cs" />
     <Compile Include="DomainGeneratorTests\CustomizeTypeDecimalRangeTests.cs" />
     <Compile Include="DomainGeneratorTests\CustomizeTypeDoubleRangeTests.cs" />
     <Compile Include="DomainGeneratorTests\CustomizeTypeIgnoreInheritedTests.cs" />
     <Compile Include="DomainGeneratorTests\CustomizeTypeIntCounterTests.cs" />
+    <Compile Include="DomainGeneratorTests\CustomizeTypeIntRangeTests.cs" />
     <Compile Include="DomainGeneratorTests\CustomizeTypeLongCounterTests.cs" />
-    <Compile Include="DomainGeneratorTests\GeneratorOptionsKnowTheEntity.cs" />
+    <Compile Include="DomainGeneratorTests\CustomizeTypeLongRangeTests.cs" />
     <Compile Include="DomainGeneratorTests\Issues\MultipleOneToManyBug.cs" />
     <Compile Include="DomainGeneratorTests\OneToManyTests\ComplexOneToManyTests.cs" />
     <Compile Include="DomainGeneratorTests\CustomizeTypeAppendCounterTests.cs" />

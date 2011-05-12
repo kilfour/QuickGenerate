@@ -225,5 +225,23 @@ namespace QuickGenerate.DomainGeneratorImplementation
             var generator = new DoubleGenerator(min, max);
             return For(propertyExpression, generator);
         }
+
+        public GeneratorOptions<T> Range(Expression<Func<T, int>> propertyExpression, int min, int max)
+        {
+            var generator = new IntGenerator(min, max);
+            return For(propertyExpression, generator);
+        }
+
+        public GeneratorOptions<T> Range(Expression<Func<T, long>> propertyExpression, long min, long max)
+        {
+            var generator = new LongGenerator(min, max);
+            return For(propertyExpression, generator);
+        }
+
+        public GeneratorOptions<T> Range(Expression<Func<T, DateTime>> propertyExpression, DateTime min, DateTime max)
+        {
+            var generator = new DateTimeGenerator(min, max);
+            return For(propertyExpression, generator);
+        }
     }
 }

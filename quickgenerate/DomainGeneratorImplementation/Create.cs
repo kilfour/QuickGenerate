@@ -11,7 +11,7 @@ namespace QuickGenerate.DomainGeneratorImplementation
 
         public static object Object(this DomainGenerator domaingenerator, Type type)
         {
-            if (domaingenerator.constructionConventions.ContainsKey(type))
+            if (domaingenerator.constructionConventions.Keys.Any(t => t.IsAssignableFrom(type)))
                 return domaingenerator.constructionConventions[type]();
 
             var choiceConvention = domaingenerator.choiceConventions.FirstOrDefault(c => c.Type == type);

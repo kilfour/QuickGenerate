@@ -61,6 +61,7 @@
     <Compile Include="DomainGeneratorTests\CustomizeTypeDecimalRangeTests.cs" />
     <Compile Include="DomainGeneratorTests\CustomizeTypeDoubleRangeTests.cs" />
     <Compile Include="DomainGeneratorTests\CustomizeTypeIgnoreInheritedTests.cs" />
+    <Compile Include="DomainGeneratorTests\CustomizeTypeInheritenceTests.cs" />
     <Compile Include="DomainGeneratorTests\CustomizeTypeIntCounterTests.cs" />
     <Compile Include="DomainGeneratorTests\CustomizeTypeIntRangeTests.cs" />
     <Compile Include="DomainGeneratorTests\CustomizeTypeLongCounterTests.cs" />

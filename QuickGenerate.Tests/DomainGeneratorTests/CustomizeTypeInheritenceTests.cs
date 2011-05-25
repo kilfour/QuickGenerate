@@ -7,7 +7,7 @@ namespace QuickGenerate.Tests.DomainGeneratorTests
         private readonly DomainGenerator domainGenerator =
             new DomainGenerator()
                 .With(42)
-                .With<SomethingToGenerate>(opt => opt.DefaultValue(
+                .With<SomethingToGenerate>(opt => opt.StartingValue(
                     () =>
                     new[]
                         {
@@ -18,7 +18,7 @@ namespace QuickGenerate.Tests.DomainGeneratorTests
 
         [Fact]
         public void Inheritence()
-        {
+        {   
             var generatedSomething = false;
             var generatedSomethingDerived = false;
             var generatedSomethingElseDerived = false;

@@ -137,7 +137,7 @@ namespace QuickGenerate.DomainGeneratorImplementation
             return predicate;
         }
 
-        public GeneratorOptions<T> DefaultValue(Func<T> func)
+        public GeneratorOptions<T> StartingValue(Func<T> func)
         {
             domainGenerator.constructionConventions[typeof(T)] = () => func();
             return this;

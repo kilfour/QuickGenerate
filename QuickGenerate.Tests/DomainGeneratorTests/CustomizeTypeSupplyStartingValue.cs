@@ -7,7 +7,7 @@ namespace QuickGenerate.Tests.DomainGeneratorTests
         private DomainGenerator generator =
             new DomainGenerator()
                     .With<SomethingToGenerate>(
-                        opt => opt.DefaultValue(() => new SomethingToGenerate(42)));
+                        opt => opt.StartingValue(() => new SomethingToGenerate(42)));
         [Fact]
         public void UsesDefaultValue()
         {

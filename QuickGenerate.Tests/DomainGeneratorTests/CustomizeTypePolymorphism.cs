@@ -11,14 +11,14 @@ namespace QuickGenerate.Tests.DomainGeneratorTests
             domainGenerator =
                 new DomainGenerator()
                     .With<BaseClass>(
-                        opt => opt.DefaultValue(
+                        opt => opt.StartingValue(
                             () =>
                             new[]
                                 {
                                     new BaseClass(), new DervivedOne(), new DervivedTwo()
                                 }.PickOne()))
                     .With<AbstractBaseClass>(
-                        opt => opt.DefaultValue(
+                        opt => opt.StartingValue(
                             () =>
                             new AbstractBaseClass[]
                                 {

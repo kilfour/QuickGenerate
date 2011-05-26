@@ -66,6 +66,7 @@
     <Compile Include="DomainGeneratorTests\CustomizeTypeIntRangeTests.cs" />
     <Compile Include="DomainGeneratorTests\CustomizeTypeLongCounterTests.cs" />
     <Compile Include="DomainGeneratorTests\CustomizeTypeLongRangeTests.cs" />
+    <Compile Include="DomainGeneratorTests\CustomizeTypeSpecificCompositeValueTests.cs" />
     <Compile Include="DomainGeneratorTests\Issues\MultipleOneToManyBug.cs" />
     <Compile Include="DomainGeneratorTests\OneToManyTests\ComplexOneToManyTests.cs" />
     <Compile Include="DomainGeneratorTests\CustomizeTypeAppendCounterTests.cs" />

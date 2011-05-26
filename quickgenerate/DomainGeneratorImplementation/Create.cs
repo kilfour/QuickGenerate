@@ -14,10 +14,6 @@ namespace QuickGenerate.DomainGeneratorImplementation
             if (domaingenerator.constructionConventions.Keys.Any(t => t.IsAssignableFrom(type)))
                 return domaingenerator.constructionConventions[type]();
 
-            var choiceConvention = domaingenerator.choiceConventions.FirstOrDefault(c => c.Type == type);
-            if (choiceConvention != null)
-                return choiceConvention.Possibilities.PickOne();
-
             var isPrimitiveGenerator = primitiveGenerators.Get(type);
             if (isPrimitiveGenerator != null)
             {

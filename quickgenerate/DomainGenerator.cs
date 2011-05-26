@@ -322,6 +322,10 @@ namespace QuickGenerate
 
         public object OneWithoutRelations(Type type)
         {
+            var choiceConvention = choiceConventions.FirstOrDefault(c => c.Type == type);
+            if (choiceConvention != null)
+                return choiceConvention.Possibilities.PickOne();
+
             return OneWithoutRelations(Create.Object(this, type));
         }
 

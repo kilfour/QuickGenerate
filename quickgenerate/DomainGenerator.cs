@@ -309,7 +309,7 @@ namespace QuickGenerate
         public object OneWithoutRelations(object target)
         {
             if (target == null)
-                return target;
+                return null;
 
             generatedObjects.Add(target);
             foreach (var propertyInfo in target.GetType().GetProperties(FlattenHierarchyBindingFlag))

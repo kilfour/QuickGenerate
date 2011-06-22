@@ -111,6 +111,12 @@
     <Compile Include="DomainGeneratorTests\TheDomain\Product.cs" />
     <Compile Include="DomainGeneratorTests\TheDomain\ProductPrice.cs" />
     <Compile Include="DomainGeneratorTests\IgnoreConventionTypedTests.cs" />
+    <Compile Include="EntityGeneratorTests\DateTimeRangeTests.cs" />
+    <Compile Include="EntityGeneratorTests\DecimalRangeTests.cs" />
+    <Compile Include="EntityGeneratorTests\DoubleRangeTests.cs" />
+    <Compile Include="EntityGeneratorTests\IgnoreTests.cs" />
+    <Compile Include="EntityGeneratorTests\IntRangeTests.cs" />
+    <Compile Include="EntityGeneratorTests\LongRangeTests.cs" />
     <Compile Include="EnumTests.cs" />
     <Compile Include="GatherTests\GatherFromTests.cs" />
     <Compile Include="MaybeDoTests.cs" />

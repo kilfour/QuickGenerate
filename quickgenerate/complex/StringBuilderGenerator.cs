@@ -89,5 +89,19 @@ namespace QuickGenerate.Complex
         {
             return Append("!");
         }
+
+        public StringBuilderGenerator Numbers(int numberOfNumbers)
+        {
+            var generator = new NumericStringGenerator(numberOfNumbers);
+            builders.Add(generator.GetRandomValue);
+            return this;
+        }
+
+        public StringBuilderGenerator Numbers(int minNumberOfNumbers, int maxNumberOfNumbers)
+        {
+            var generator = new NumericStringGenerator(minNumberOfNumbers, maxNumberOfNumbers);
+            builders.Add(generator.GetRandomValue);
+            return this;
+        }
     }
 }

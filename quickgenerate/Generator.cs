@@ -9,4 +9,12 @@ namespace QuickGenerate
             return GetRandomValue();
         }
     }
+
+    public static class Generator
+    {
+        public static EntityGenerator<T> For<T>()
+        {
+            return new EntityGenerator<T>();
+        }
+    }
 }

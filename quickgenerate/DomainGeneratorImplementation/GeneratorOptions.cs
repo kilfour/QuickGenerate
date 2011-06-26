@@ -79,6 +79,12 @@ namespace QuickGenerate.DomainGeneratorImplementation
             return For(propertyExpression, val => val + generator.GetRandomValue());
         }
 
+        public GeneratorOptions<T> AppendCounter(Expression<Func<T, string>> propertyExpression, Func<string> prefix)
+        {
+            var generator = new FuncGenerator<long, string>(0, val => ++val, val => val.ToString());
+            return For(propertyExpression, () => prefix() + generator.GetRandomValue());
+        }
+
         public GeneratorOptions<T> Counter(Expression<Func<T, int>> propertyExpression)
         {
             var generator = new FuncGenerator<int>(0, val => ++val);
@@ -113,12 +119,6 @@ namespace QuickGenerate.DomainGeneratorImplementation
         {
             var generator = new FuncGenerator<long>(startingValue - step, val => val = val + step);
             return For(propertyExpression, generator);
-        }
-
-        public GeneratorOptions<T> AppendCounter(Expression<Func<T, string>> propertyExpression, Func<string> prefix)
-        {
-            var generator = new FuncGenerator<long, string>(0, val => ++val, val => val.ToString());
-            return For(propertyExpression, () => prefix() + generator.GetRandomValue());
         }
 
         private GeneratorOptions<T> AddConvention<TProperty>(

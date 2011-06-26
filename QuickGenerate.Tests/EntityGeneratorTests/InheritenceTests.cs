@@ -1,32 +1,32 @@
 ﻿using Xunit;
 
-namespace QuickGenerate.Tests.DomainGeneratorTests
+namespace QuickGenerate.Tests.EntityGeneratorTests
 {
-    public class CustomizeTypeInheritenceTests
+    public class InheritenceTests
     {
-        private readonly DomainGenerator domainGenerator =
-            new DomainGenerator()
+        private readonly EntityGenerator<SomethingToGenerate> generator =
+            new EntityGenerator<SomethingToGenerate>()
                 .With(42)
-                .With<SomethingToGenerate>(opt => opt.StartingValue(
+                .StartingValue(
                     () =>
                     new[]
                         {
                             new SomethingToGenerate(),
                             new SomethingDerivedToGenerate(),
                             new SomethingElseDerivedToGenerate()
-                        }.PickOne()));
+                        }.PickOne());
 
         [Fact]
         public void Inheritence()
-        {   
+        {
             var generatedSomething = false;
             var generatedSomethingDerived = false;
             var generatedSomethingElseDerived = false;
             100.Times(
                 () =>
                 {
-                    var something = domainGenerator.One<SomethingToGenerate>();
-                    generatedSomething = generatedSomething || something.GetType() == typeof (SomethingToGenerate);
+                    var something = generator.One();
+                    generatedSomething = generatedSomething || something.GetType() == typeof(SomethingToGenerate);
                     generatedSomethingDerived = generatedSomethingDerived || something.GetType() == typeof(SomethingDerivedToGenerate);
                     generatedSomethingElseDerived = generatedSomethingElseDerived || something.GetType() == typeof(SomethingElseDerivedToGenerate);
                 });
@@ -41,7 +41,7 @@ namespace QuickGenerate.Tests.DomainGeneratorTests
             10.Times(
                 () =>
                 {
-                    var something = domainGenerator.One<SomethingToGenerate>();
+                    var something = generator.One();
                     Assert.Equal(42, something.MyProperty);
                 });
         }

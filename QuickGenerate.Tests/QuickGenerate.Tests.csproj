@@ -166,6 +166,7 @@
     <Compile Include="StringBuilderGeneratorTests\AppendCounterTests.cs" />
     <Compile Include="StringGeneratorTests\LengthTest.cs" />
     <Compile Include="StructTests.cs" />
+    <Compile Include="Uniqueness\IntGeneratorUniqueTests.cs" />
     <Compile Include="Writing\WritingPrimitives\WritingABiDirectionalOneToOneTest.cs" />
     <Compile Include="Writing\WritingPrimitives\WritingACompositeTest.cs" />
     <Compile Include="Writing\WritingPrimitives\WritingBiDirectionalOneToManiesTest.cs" />

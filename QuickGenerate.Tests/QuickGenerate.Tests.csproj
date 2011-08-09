@@ -111,6 +111,7 @@
     <Compile Include="DomainGeneratorTests\TheDomain\Product.cs" />
     <Compile Include="DomainGeneratorTests\TheDomain\ProductPrice.cs" />
     <Compile Include="DomainGeneratorTests\IgnoreConventionTypedTests.cs" />
+    <Compile Include="DomainGeneratorTests\WeaklyTypedOneTests.cs" />
     <Compile Include="EntityGeneratorTests\ActivationTests.cs" />
     <Compile Include="EntityGeneratorTests\ComponentsTests.cs" />
     <Compile Include="EntityGeneratorTests\ForEachTests.cs" />

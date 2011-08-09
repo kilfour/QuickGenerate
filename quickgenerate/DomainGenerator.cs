@@ -285,8 +285,14 @@ namespace QuickGenerate
 
         public T One<T>()
         {
+            return (T)One(typeof(T));
+        }
+
+        public object One(Type resultType)
+        {
             generatedObjects.Clear();
-            var target = One(typeof(T));
+            var result = OneWithoutRelations(resultType);
+            ApplyRelations(result);
             foreach (var actionConvention in actionConventions)
             {
                 for (int i = 0; i < generatedObjects.Count(); i++)
@@ -296,13 +302,6 @@ namespace QuickGenerate
                         actionConvention.Action(obj);
                 }
             }
-            return (T)target;
-        }
-
-        private object One(Type resultType)
-        {
-            var result = OneWithoutRelations(resultType);
-            ApplyRelations(result);
             return result;
         }
 

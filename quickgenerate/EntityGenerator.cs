@@ -1,6 +1,8 @@
 using System;
+using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Reflection;
+using QuickGenerate.Primitives;
 
 namespace QuickGenerate
 {
@@ -195,6 +197,16 @@ namespace QuickGenerate
         public TEntity One()
         {
             return generator.One<TEntity>();
+        }
+
+        public IEnumerable<TEntity> Many(int numberOfMany)
+        {
+            return generator.Many<TEntity>(numberOfMany);
+        }
+
+        public IEnumerable<TEntity> Many(int minNumberOfMany, int maxNumberOfMany)
+        {
+            return generator.Many<TEntity>(minNumberOfMany, maxNumberOfMany);
         }
     }
 }

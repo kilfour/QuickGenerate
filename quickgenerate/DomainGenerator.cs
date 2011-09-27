@@ -172,7 +172,7 @@ namespace QuickGenerate
             if (choiceConvention != null)
             {
                 var choice = choiceConvention.Possibilities.PickOne();
-                propertyInfo.SetValue(target, choice, null);
+                SetPropertyValue(propertyInfo, target, choice);
                 return true;
             }
             return false;
@@ -208,7 +208,7 @@ namespace QuickGenerate
         private void ApplyConvention(object target, PropertyInfo propertyInfo, Func<MemberInfo, bool> key)
         {
             var value = dynamicValueConventions[key](propertyInfo);
-            propertyInfo.SetValue(target, value, null);
+            SetPropertyValue(propertyInfo, target, value);
         }
 
         private bool MatchesAConvention(object target, PropertyInfo propertyInfo)
@@ -225,7 +225,7 @@ namespace QuickGenerate
             var primitiveGenerator = primitiveGenerators.Get(propertyInfo.PropertyType);
             if (primitiveGenerator != null)
             {
-                propertyInfo.SetValue(target, primitiveGenerator.RandomAsObject(), null);
+                SetPropertyValue(propertyInfo, target, primitiveGenerator.RandomAsObject());
                 return true;
             }
             return false;
@@ -328,9 +328,16 @@ namespace QuickGenerate
             return OneWithoutRelations(Create.Object(this, type));
         }
 
+        private bool IsWritable(PropertyInfo propertyInfo)
+        {
+            if (propertyInfo.CanWrite)
+                return true;
+            return propertyInfo.DeclaringType.GetProperty(propertyInfo.Name).CanWrite;
+        }
+
         public bool IsSimpleProperty(object target, PropertyInfo propertyInfo)
         {
-            if (!propertyInfo.CanWrite)
+            if (!IsWritable(propertyInfo))
                 return true;
             if (NeedsToBeIgnored(propertyInfo))
                 return true;
@@ -393,11 +400,19 @@ namespace QuickGenerate
             return counters[propertyInfo];
         }
 
+        private void SetPropertyValue(PropertyInfo propertyInfo, object target, object value)
+        {
+            var prop = propertyInfo;
+            if(!prop.CanWrite)
+                prop = propertyInfo.DeclaringType.GetProperty(propertyInfo.Name);
+            prop.SetValue(target, value, null);    
+        }
+
         private bool IsComponent(object target, PropertyInfo propertyInfo)
         {
             if (componentTypes.Any(t => t == propertyInfo.PropertyType))
             {
-                propertyInfo.SetValue(target, OneWithoutRelations(propertyInfo.PropertyType), null);
+                SetPropertyValue(propertyInfo, target, OneWithoutRelations(propertyInfo.PropertyType));
                 return true;
             }
             return false;
@@ -415,7 +430,7 @@ namespace QuickGenerate
             if (propertyInfo.PropertyType.IsEnum)
             {
 
-                propertyInfo.SetValue(target, GetEnumValues(propertyInfo.PropertyType).PickOne(), null);
+                SetPropertyValue(propertyInfo, target, GetEnumValues(propertyInfo.PropertyType).PickOne());
                 return true;
             }
             return false;

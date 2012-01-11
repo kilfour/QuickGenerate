@@ -5,7 +5,7 @@ namespace QuickGenerate.Tests.DomainGeneratorTests.Constructors
     public class ClassParametersInConstructorTests
     {
         [Fact]
-        public void Ints()
+        public void GeneratorIsApplied()
         {
             var generated = Generator.For<ToBeGenerated>().With(42).One();
             Assert.NotNull(generated.GetFieldValue("justSome"));

@@ -58,18 +58,6 @@ namespace QuickGenerate.DomainGeneratorImplementation
             for (int i = 0; i < parameters.Length; i++)
             {
                 parameterValues.SetValue(domaingenerator.One(parameters[i].ParameterType), i);
-                //var parmeterChoiceConvention = domaingenerator.choiceConventions.FirstOrDefault(c => c.Type == parameters[i].ParameterType);
-                //if (parmeterChoiceConvention != null)
-                //{
-                //    var choice = parmeterChoiceConvention.Possibilities.PickOne();
-                //    parameterValues.SetValue(choice, i);
-                //    continue;
-                //}
-                //var primitiveGenerator = primitiveGenerators.Get(parameters[i].ParameterType);
-                //if (primitiveGenerator != null)
-                //{
-                //    parameterValues.SetValue(primitiveGenerator.RandomAsObject(), i);
-                //}
             }
             return constructor.Invoke(parameterValues);
         }

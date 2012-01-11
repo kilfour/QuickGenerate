@@ -54,14 +54,15 @@
     <Compile Include="Choices\FromRangeTests.cs" />
     <Compile Include="Choices\TimesTests.cs" />
     <Compile Include="DocSpike.cs" />
-    <Compile Include="DomainGeneratorTests\ActivationTests.cs" />
     <Compile Include="DomainGeneratorTests\ComponentsTests.cs" />
+    <Compile Include="DomainGeneratorTests\Constructors\ClassParametersInConstructorTests.cs" />
+    <Compile Include="DomainGeneratorTests\Constructors\ConstructorPreferenceTests.cs" />
+    <Compile Include="DomainGeneratorTests\Constructors\PrimitiveParametersInConstructorTests.cs" />
     <Compile Include="DomainGeneratorTests\CustomizeTypeActionTwoParameterMethod_MultipleTimes_Tests.cs" />
     <Compile Include="DomainGeneratorTests\CustomizeTypeDateTimeRangeTests.cs" />
     <Compile Include="DomainGeneratorTests\CustomizeTypeDecimalRangeTests.cs" />
     <Compile Include="DomainGeneratorTests\CustomizeTypeDoubleRangeTests.cs" />
     <Compile Include="DomainGeneratorTests\CustomizeTypeIgnoreInheritedTests.cs" />
-    <Compile Include="DomainGeneratorTests\CustomizeTypeInheritenceTests.cs" />
     <Compile Include="DomainGeneratorTests\CustomizeTypeIntCounterTests.cs" />
     <Compile Include="DomainGeneratorTests\CustomizeTypeIntRangeTests.cs" />
     <Compile Include="DomainGeneratorTests\CustomizeTypeLongCounterTests.cs" />
@@ -69,6 +70,10 @@
     <Compile Include="DomainGeneratorTests\CustomizeTypeSpecificCompositeValueTests.cs" />
     <Compile Include="DomainGeneratorTests\ForEachTests.cs" />
     <Compile Include="DomainGeneratorTests\GeneratorByTypeTests.cs" />
+    <Compile Include="DomainGeneratorTests\Inheritance\CustomizeTypeInheritenceTests.cs" />
+    <Compile Include="DomainGeneratorTests\Inheritance\CustomizeTypePolymorphism.cs" />
+    <Compile Include="DomainGeneratorTests\Inheritance\ExplicitPolymorphicOneToOneTests.cs" />
+    <Compile Include="DomainGeneratorTests\Issues\CircularStuff.cs" />
     <Compile Include="DomainGeneratorTests\Issues\MultipleOneToManyBug.cs" />
     <Compile Include="DomainGeneratorTests\Issues\PrivateSettersInheritanceTests.cs" />
     <Compile Include="DomainGeneratorTests\OneToManyTests\ComplexOneToManyTests.cs" />
@@ -79,7 +84,6 @@
     <Compile Include="DomainGeneratorTests\CustomizeTypeIgnoreTests.cs" />
     <Compile Include="DomainGeneratorTests\CustomizeTypeMultipleSpecificGeneratorTests.cs" />
     <Compile Include="DomainGeneratorTests\CustomizeTypeOneToManyTests.cs" />
-    <Compile Include="DomainGeneratorTests\CustomizeTypePolymorphism.cs" />
     <Compile Include="DomainGeneratorTests\CustomizeTypePossibleValuesTests.cs" />
     <Compile Include="DomainGeneratorTests\CustomizeTypeSpecificGeneratorTests.cs" />
     <Compile Include="DomainGeneratorTests\CustomizeTypeSpecificStringLengthTests.cs" />
@@ -89,7 +93,6 @@
     <Compile Include="DomainGeneratorTests\DynamicValueConventionTests.cs" />
     <Compile Include="DomainGeneratorTests\EntitiesTests.cs" />
     <Compile Include="DomainGeneratorTests\ExplicitOneToOneTests.cs" />
-    <Compile Include="DomainGeneratorTests\ExplicitPolymorphicOneToOneTests.cs" />
     <Compile Include="DomainGeneratorTests\GeneratorByConventionTests.cs" />
     <Compile Include="DomainGeneratorTests\IgnoreConventionTests.cs" />
     <Compile Include="DomainGeneratorTests\Issues\ForEachNullReferenceBug.cs" />

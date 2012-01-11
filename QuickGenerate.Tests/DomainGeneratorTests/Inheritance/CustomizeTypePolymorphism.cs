@@ -1,6 +1,6 @@
 using Xunit;
 
-namespace QuickGenerate.Tests.DomainGeneratorTests
+namespace QuickGenerate.Tests.DomainGeneratorTests.Inheritance
 {
     public class CustomizeTypePolymorphism
     {

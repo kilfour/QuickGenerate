@@ -9,7 +9,7 @@ namespace QuickGenerate.Primitives
         private readonly int max;
         public IGenerator<char> CharGenerator { get; set; }
 
-        public StringGenerator() : this(new CharGenerator(), 0, 10) { }
+        public StringGenerator() : this(new CharGenerator(), 1, 10) { }
 
         public StringGenerator(int minValue, int maxValue) : this(new CharGenerator(), minValue, maxValue) { }
 

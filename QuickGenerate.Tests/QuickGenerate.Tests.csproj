@@ -59,6 +59,7 @@
     <Compile Include="DomainGeneratorTests\CustomizeTypeLongCounterTests.cs" />
     <Compile Include="DomainGeneratorTests\CustomizeTypeLongRangeTests.cs" />
     <Compile Include="DomainGeneratorTests\CustomizeTypeSpecificCompositeValueTests.cs" />
+    <Compile Include="DomainGeneratorTests\DefaultStringGeneratorIsNeverEmptyString.cs" />
     <Compile Include="DomainGeneratorTests\ForEachTests.cs" />
     <Compile Include="DomainGeneratorTests\GeneratorByTypeTests.cs" />
     <Compile Include="DomainGeneratorTests\Inheritance\CustomizeTypeInheritenceTests.cs" />

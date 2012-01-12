@@ -1,5 +1,4 @@
-﻿using QuickGenerate.Tests.DomainGeneratorTests.TheDomain;
-using Xunit;
+﻿using Xunit;
 
 namespace QuickGenerate.Tests.DomainGeneratorTests
 {

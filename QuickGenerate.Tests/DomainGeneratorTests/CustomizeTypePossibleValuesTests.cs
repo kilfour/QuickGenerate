@@ -1,4 +1,3 @@
-using QuickGenerate.Tests.DomainGeneratorTests.TheDomain;
 using Xunit;
 
 namespace QuickGenerate.Tests.DomainGeneratorTests
@@ -11,7 +10,7 @@ namespace QuickGenerate.Tests.DomainGeneratorTests
         {
             domainGenerator =
                 new DomainGenerator()
-                    .With<Product>(g => g.For(e => e.Id, 42, 43));
+                    .With<Something>(g => g.For(e => e.Value, 42, 43));
         }
 
         [Fact]
@@ -22,12 +21,17 @@ namespace QuickGenerate.Tests.DomainGeneratorTests
             20.Times(
                 () =>
                     {
-                        var product = domainGenerator.One<Product>();
-                        is42 = is42 || product.Id == 42;
-                        is43 = is43 || product.Id == 43;
+                        var something = domainGenerator.One<Something>();
+                        is42 = is42 || something.Value == 42;
+                        is43 = is43 || something.Value == 43;
                     });
             Assert.True(is42);
             Assert.True(is43);
+        }
+
+        public class Something
+        {
+            public int Value { get; set; }
         }
     }
 }

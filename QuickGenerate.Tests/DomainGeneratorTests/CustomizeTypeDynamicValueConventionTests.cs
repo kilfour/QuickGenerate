@@ -1,4 +1,3 @@
-using QuickGenerate.Tests.DomainGeneratorTests.TheDomain;
 using Xunit;
 
 namespace QuickGenerate.Tests.DomainGeneratorTests
@@ -11,7 +10,7 @@ namespace QuickGenerate.Tests.DomainGeneratorTests
         {
             domainGenerator =
                 new DomainGenerator()
-                    .With<Product>(g => g.For(e => e.Id, GetNextProductId));
+                    .With<Something>(g => g.For(e => e.Value, GetNextProductId));
         }
 
         private int autoincrement;
@@ -23,14 +22,19 @@ namespace QuickGenerate.Tests.DomainGeneratorTests
         [Fact]
         public void JustWorks()
         {
-            var product1 = domainGenerator.One<Product>();
-            Assert.Equal(1, product1.Id);
+            var product1 = domainGenerator.One<Something>();
+            Assert.Equal(1, product1.Value);
 
-            var product2 = domainGenerator.One<Product>();
-            Assert.Equal(2, product2.Id);
+            var product2 = domainGenerator.One<Something>();
+            Assert.Equal(2, product2.Value);
 
-            var product3 = domainGenerator.One<Product>();
-            Assert.Equal(3, product3.Id);
+            var product3 = domainGenerator.One<Something>();
+            Assert.Equal(3, product3.Value);
+        }
+
+        public class Something
+        {
+            public int Value { get; set; }
         }
     }
 }

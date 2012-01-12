@@ -100,11 +100,6 @@
     <Compile Include="DomainGeneratorTests\ReplacingPrimitiveGeneratorsTests.cs" />
     <Compile Include="DomainGeneratorTests\ReplacingPrimitiveGeneratorsWithConstantValueTests.cs" />
     <Compile Include="DomainGeneratorTests\StringUniquePropertyNameTests.cs" />
-    <Compile Include="DomainGeneratorTests\TheDomain\Category.cs" />
-    <Compile Include="DomainGeneratorTests\TheDomain\BidirectionalProductPrice.cs" />
-    <Compile Include="DomainGeneratorTests\TheDomain\IThing.cs" />
-    <Compile Include="DomainGeneratorTests\TheDomain\Product.cs" />
-    <Compile Include="DomainGeneratorTests\TheDomain\ProductPrice.cs" />
     <Compile Include="DomainGeneratorTests\IgnoreConventionTypedTests.cs" />
     <Compile Include="DomainGeneratorTests\WeaklyTypedOneTests.cs" />
     <Compile Include="EntityGeneratorTests\ActivationTests.cs" />

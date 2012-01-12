@@ -15,7 +15,10 @@ namespace QuickGenerate.NHibernate.Testing.Sample.Tests.CrudTests
 
         protected override bool DeleteEntity(SuperPower entity)
         {
-            return false;// deleted when the SuperHero dies
+            // Why ? : 
+            //  - deleted when the last SuperHero with this superpower dies
+            //  - unidirectional relation means we need a specific test
+            return false; 
         }
     }
 }

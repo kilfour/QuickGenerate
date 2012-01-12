@@ -1,7 +1,6 @@
 using System;
 using System.Linq.Expressions;
 using System.Reflection;
-using QuickGenerate.Implementation;
 using QuickGenerate.Reflect;
 
 namespace QuickGenerate.Modifying

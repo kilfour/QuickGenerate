@@ -12,6 +12,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		Build.xml = Build.xml
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuickGenerate.NHibernate.Testing.Sample", "QuickGenerate.NHibernate.Testing.Sample\QuickGenerate.NHibernate.Testing.Sample.csproj", "{765E3F9B-7AD6-4EBC-A16B-814CB68331AF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -30,6 +32,10 @@ Global
 		{8C8E0899-21E3-42AB-9F16-E1EDE349562E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8C8E0899-21E3-42AB-9F16-E1EDE349562E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8C8E0899-21E3-42AB-9F16-E1EDE349562E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{765E3F9B-7AD6-4EBC-A16B-814CB68331AF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{765E3F9B-7AD6-4EBC-A16B-814CB68331AF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{765E3F9B-7AD6-4EBC-A16B-814CB68331AF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{765E3F9B-7AD6-4EBC-A16B-814CB68331AF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -49,6 +49,7 @@
     <Compile Include="DomainGeneratorTests\Constructors\ClassParametersInConstructorTests.cs" />
     <Compile Include="DomainGeneratorTests\Constructors\ConstructorPreferenceTests.cs" />
     <Compile Include="DomainGeneratorTests\Constructors\PrimitiveParametersInConstructorTests.cs" />
+    <Compile Include="DomainGeneratorTests\Conventions\RoundingAllThingsTests.cs" />
     <Compile Include="DomainGeneratorTests\CustomizeTypeActionTwoParameterMethod_MultipleTimes_Tests.cs" />
     <Compile Include="DomainGeneratorTests\CustomizeTypeDateTimeRangeTests.cs" />
     <Compile Include="DomainGeneratorTests\CustomizeTypeDecimalRangeTests.cs" />

@@ -136,6 +136,11 @@ namespace QuickGenerate
             return this;
         }
 
+        public DomainGenerator With<T>(Func<T, T> func)
+        {
+            return With(mi => true, () => func(One<T>()));
+        }
+
         public DomainGenerator With<T>(Func<MemberInfo, bool> predicate, Func<T> func)
         {
             Func<MemberInfo, bool> decoratedPredicate =

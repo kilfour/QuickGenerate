@@ -3,17 +3,12 @@
   <UsingTask TaskName="NUnit" AssemblyFile="$(teamcity_dotnet_nunitlauncher_msbuild_task)" />
   <UsingTask AssemblyFile="Libs\xunit\xunit.runner.msbuild.dll" TaskName="Xunit.Runner.MSBuild.xunitproject"/>
   <UsingTask AssemblyFile="Libs\xunit\xunit.runner.msbuild.dll" TaskName="Xunit.Runner.MSBuild.xunit"/>
-  <UsingTask AssemblyFile="Libs\QuickDoc\QuickDoc.MSBuild.dll" TaskName="QuickDoc.MSBuild.DocTask"/>
   <Target Name="Build">
     <MSBuild Projects="QuickGenerate.sln" Properties="Configuration=Debug"/>
     <xunit
       Assembly="QuickGenerate.Tests/bin/Debug/QuickGenerate.Tests.dll"
       TeamCity="true"
       xml="out.xml" />
-    <DocTask 
-    	AssemblyPath="QuickGenerate.Tests/bin/Debug/QuickGenerate.Tests.dll"
-    	OutputFile="../QuickDoc.html"
-    	HtmlOutput="true"/>
   </Target>
   <Target Name="Release">
     <MSBuild Projects="QuickGenerate.sln" Properties="Configuration=Release"/>

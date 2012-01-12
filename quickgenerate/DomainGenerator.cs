@@ -299,9 +299,6 @@ namespace QuickGenerate
                     ApplyManyToOneRelations(one, manyToOnes.Where(r => r != relation).ToList());
                     ApplyOneToManyRelations(one, oneToManyRelations.Where(r => r.One != relation.One && r.Many != relation.Many).ToList());
 
-                    ApplyManyToOneRelations(many, manyToOnes.Where(r => r != relation).ToList());
-                    ApplyOneToManyRelations(many, oneToManyRelations.Where(r => r.One != relation.One && r.Many != relation.Many).ToList());
-
                     relation.Action(many, one);
                 }
             }

@@ -272,7 +272,7 @@ namespace QuickGenerate
                             : OneWithoutRelations(relation.ManyFunc(target));
                     relation.Action(target, many);
                     ApplyOneToManyRelations(many, oneToManies.Where(r => r != relation).ToList());
-                    ApplyManyToOneRelations(many, manyToOneRelations.Where(r => r.One != relation.One && r.Many != relation.Many).ToList());
+                    ApplyManyToOneRelations(many, manyToOneRelations.Where(r => r.One != relation.One || r.Many != relation.Many).ToList());
                 }
             }
         }
@@ -289,7 +289,7 @@ namespace QuickGenerate
                 {
                     one = OneWithoutRelations(relation.One);
                     ApplyManyToOneRelations(one, manyToOnes.Where(r => r != relation).ToList());
-                    ApplyOneToManyRelations(one, oneToManyRelations.Where(r => r.One != relation.One && r.Many != relation.Many).ToList());
+                    ApplyOneToManyRelations(one, oneToManyRelations.Where(r => r.One != relation.One || r.Many != relation.Many).ToList());
                     relation.Action(target, one);
                 }
 
@@ -297,8 +297,7 @@ namespace QuickGenerate
                 {
                     var many = OneWithoutRelations(relation.Many);
                     ApplyManyToOneRelations(one, manyToOnes.Where(r => r != relation).ToList());
-                    ApplyOneToManyRelations(one, oneToManyRelations.Where(r => r.One != relation.One && r.Many != relation.Many).ToList());
-
+                    ApplyOneToManyRelations(one, oneToManyRelations.Where(r => r.One != relation.One || r.Many != relation.Many).ToList());
                     relation.Action(many, one);
                 }
             }

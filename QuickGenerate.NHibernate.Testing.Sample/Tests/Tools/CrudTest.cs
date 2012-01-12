@@ -22,11 +22,6 @@ namespace QuickGenerate.NHibernate.Testing.Sample.Tests.Tools
                     ;//.ForEach<IHaveAnId>(e => NHibernateSession.Save(e));
         }
 
-        protected CrudTest()
-        {
-            properties = typeof (TEntity).GetProperties().ToList();
-        }
-
         protected void IsRequired<T>(Expression<Func<TEntity, T>> expression)
         {
             Assert.Throws<GenericADOException>(
@@ -141,17 +136,15 @@ namespace QuickGenerate.NHibernate.Testing.Sample.Tests.Tools
             return true;
         }
 
-        private readonly List<PropertyInfo> properties;
-
         protected void DontAssert<TProperty>(Expression<Func<TEntity, TProperty>> propertyExpression)
         {
             var propertyName = propertyExpression.AsMemberExpression().Member.Name;
-            properties.RemoveAll(src => src.Name == propertyName);
+            typeof (TEntity).GetProperties().ToList().RemoveAll(src => src.Name == propertyName);
         }
 
         protected virtual void AssertEqual<T>(T expectedEntity, T actualEntity)
         {
-            properties
+            typeof (TEntity).GetProperties().ToList()
                 .Where(p => p.PropertyType.Namespace != null && p.PropertyType.Namespace.StartsWith("System"))
                 .ForEach(src => VerifyEqualityOf(src, expectedEntity, actualEntity));
         }

@@ -10,7 +10,8 @@ namespace QuickGenerate.NHibernate.Testing.Sample.Tests.CrudTests
         {
             return 
                 base.GenerateIt()
-                    .OneToMany<SuperHero, SuperPower>(1, (sh, sp) => sh.SuperPowers.Add(sp));
+                    .OneToMany<SuperHero, SuperPower>(1, (sh, sp) => sh.SuperPowers.Add(sp))
+                    .ForEach<SuperHero>(e => NHibernateSession.Save(e));
         }
 
         [Fact]

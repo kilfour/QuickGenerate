@@ -19,7 +19,7 @@ namespace QuickGenerate.NHibernate.Testing.Sample.Tests.Tools
             return  
                 new DomainGenerator()
                     .With<IHaveAnId>(opt => opt.Ignore(e => e.Id))
-                    .ForEach<IHaveAnId>(e => NHibernateSession.Save(e));
+                    ;//.ForEach<IHaveAnId>(e => NHibernateSession.Save(e));
         }
 
         protected CrudTest()
@@ -66,6 +66,7 @@ namespace QuickGenerate.NHibernate.Testing.Sample.Tests.Tools
             NHibernateSession.Clear();
             entity = NHibernateSession.Get<TEntity>(entityId);
             manies = expression.Compile().Invoke(entity).ToList();
+            Assert.Equal(ids.Count, manies.Count());
             foreach (var many in manies)
             {
                 Assert.True(ids.Contains(many.Id));
@@ -108,9 +109,11 @@ namespace QuickGenerate.NHibernate.Testing.Sample.Tests.Tools
         {
             var entity = BuildEntity();
             NHibernateSession.Flush();
-            DeleteEntity(entity);
-            NHibernateSession.Flush();
-            Assert.Null(NHibernateSession.Get<TEntity>(entity.Id));
+            if (DeleteEntity(entity))
+            {
+                NHibernateSession.Flush();
+                Assert.Null(NHibernateSession.Get<TEntity>(entity.Id));
+            }
         }
 
         protected virtual TEntity BuildEntity()
@@ -132,9 +135,10 @@ namespace QuickGenerate.NHibernate.Testing.Sample.Tests.Tools
             NHibernateSession.Flush();
         }
 
-        protected virtual void DeleteEntity(TEntity entity)
+        protected virtual bool DeleteEntity(TEntity entity)
         {
             NHibernateSession.Delete(entity);
+            return true;
         }
 
         private readonly List<PropertyInfo> properties;
@@ -148,7 +152,7 @@ namespace QuickGenerate.NHibernate.Testing.Sample.Tests.Tools
         protected virtual void AssertEqual<T>(T expectedEntity, T actualEntity)
         {
             properties
-                .Where(p => p.PropertyType.Namespace.StartsWith("System"))
+                .Where(p => p.PropertyType.Namespace != null && p.PropertyType.Namespace.StartsWith("System"))
                 .ForEach(src => VerifyEqualityOf(src, expectedEntity, actualEntity));
         }
 

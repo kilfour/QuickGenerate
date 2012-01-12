@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Xunit;
 
-namespace QuickGenerate.Tests.DomainGeneratorTests.OneToManyTests
+namespace QuickGenerate.Tests.DomainGeneratorTests.Relations.OneToManyTests
 {
     public class OneToManyUsingConstructorTests
     {

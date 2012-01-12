@@ -2,7 +2,7 @@
 using System.Linq;
 using Xunit;
 
-namespace QuickGenerate.Tests.DomainGeneratorTests.OneToManyTests
+namespace QuickGenerate.Tests.DomainGeneratorTests.Relations.OneToManyTests
 {
     public class PolymorphicOneToManyTests
     {
@@ -31,10 +31,10 @@ namespace QuickGenerate.Tests.DomainGeneratorTests.OneToManyTests
         }
 
         [Fact]
-        public void GeneratingMany()
+        public void GeneratingManyDoesNotGenerateOne()
         {
             var many = domainGenerator.One<Many>();
-            Assert.Equal(many, many.One.Manies[0]);
+            Assert.Null(many.One);
         }
 
         public abstract class AbstractBase { }

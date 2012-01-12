@@ -31,14 +31,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="QuickDoc, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Libs\QuickDoc\QuickDoc.dll</HintPath>
-    </Reference>
-    <Reference Include="QuickDotNetCheck, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Libs\quickdotnetcheck\QuickDotNetCheck.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
@@ -53,7 +45,6 @@
   <ItemGroup>
     <Compile Include="Choices\FromRangeTests.cs" />
     <Compile Include="Choices\TimesTests.cs" />
-    <Compile Include="DocSpike.cs" />
     <Compile Include="DomainGeneratorTests\ComponentsTests.cs" />
     <Compile Include="DomainGeneratorTests\Constructors\ClassParametersInConstructorTests.cs" />
     <Compile Include="DomainGeneratorTests\Constructors\ConstructorPreferenceTests.cs" />
@@ -72,41 +63,38 @@
     <Compile Include="DomainGeneratorTests\GeneratorByTypeTests.cs" />
     <Compile Include="DomainGeneratorTests\Inheritance\CustomizeTypeInheritenceTests.cs" />
     <Compile Include="DomainGeneratorTests\Inheritance\CustomizeTypePolymorphism.cs" />
-    <Compile Include="DomainGeneratorTests\Inheritance\ExplicitPolymorphicOneToOneTests.cs" />
     <Compile Include="DomainGeneratorTests\Issues\CircularStuff.cs" />
-    <Compile Include="DomainGeneratorTests\Issues\MultipleOneToManyBug.cs" />
+    <Compile Include="DomainGeneratorTests\Issues\CreateBug.cs" />
     <Compile Include="DomainGeneratorTests\Issues\PrivateSettersInheritanceTests.cs" />
-    <Compile Include="DomainGeneratorTests\OneToManyTests\ComplexOneToManyTests.cs" />
     <Compile Include="DomainGeneratorTests\CustomizeTypeAppendCounterTests.cs" />
     <Compile Include="DomainGeneratorTests\CustomizeTypePluggableFunctionsTests.cs" />
     <Compile Include="DomainGeneratorTests\CustomizeTypeActionOneParameterMethodTests.cs" />
     <Compile Include="DomainGeneratorTests\CustomizeTypeActionTwoParameterMethodTests.cs" />
     <Compile Include="DomainGeneratorTests\CustomizeTypeIgnoreTests.cs" />
     <Compile Include="DomainGeneratorTests\CustomizeTypeMultipleSpecificGeneratorTests.cs" />
-    <Compile Include="DomainGeneratorTests\CustomizeTypeOneToManyTests.cs" />
     <Compile Include="DomainGeneratorTests\CustomizeTypePossibleValuesTests.cs" />
     <Compile Include="DomainGeneratorTests\CustomizeTypeSpecificGeneratorTests.cs" />
     <Compile Include="DomainGeneratorTests\CustomizeTypeSpecificStringLengthTests.cs" />
     <Compile Include="DomainGeneratorTests\CustomizeTypeSpecificValueTests.cs" />
     <Compile Include="DomainGeneratorTests\CustomizeTypeSupplyStartingValue.cs" />
-    <Compile Include="DomainGeneratorTests\CustomizeTypeRecurseTests.cs" />
     <Compile Include="DomainGeneratorTests\DynamicValueConventionTests.cs" />
     <Compile Include="DomainGeneratorTests\EntitiesTests.cs" />
-    <Compile Include="DomainGeneratorTests\ExplicitOneToOneTests.cs" />
     <Compile Include="DomainGeneratorTests\GeneratorByConventionTests.cs" />
     <Compile Include="DomainGeneratorTests\IgnoreConventionTests.cs" />
     <Compile Include="DomainGeneratorTests\Issues\ForEachNullReferenceBug.cs" />
-    <Compile Include="DomainGeneratorTests\Issues\ForEachOnOneToManyOrderTests.cs" />
-    <Compile Include="DomainGeneratorTests\Issues\NestedOneToOneBug.cs" />
-    <Compile Include="DomainGeneratorTests\Issues\RelationsUsingTheModelBug.cs" />
     <Compile Include="DomainGeneratorTests\ManyTests.cs" />
     <Compile Include="DomainGeneratorTests\ModifyTests.cs" />
     <Compile Include="DomainGeneratorTests\CustomizeTypeDynamicValueConventionTests.cs" />
-    <Compile Include="DomainGeneratorTests\OneToManyTests\MultipleOneToManiesTests.cs" />
-    <Compile Include="DomainGeneratorTests\OneToManyTests\OneToManyTests.cs" />
-    <Compile Include="DomainGeneratorTests\OneToManyTests\OneToManyUsingConstructorTests.cs" />
-    <Compile Include="DomainGeneratorTests\OneToManyTests\PolymorphicOneToManyTests.cs" />
-    <Compile Include="DomainGeneratorTests\OneToOneTests.cs" />
+    <Compile Include="DomainGeneratorTests\Relations\AvoidingRecursion.cs" />
+    <Compile Include="DomainGeneratorTests\Relations\ManyToOneTests\SimpleManyToOneTest.cs" />
+    <Compile Include="DomainGeneratorTests\Relations\OneToManyTests\ComplexOneToManyTests.cs" />
+    <Compile Include="DomainGeneratorTests\Relations\OneToManyTests\ForEachOnOneToManyOrderTests.cs" />
+    <Compile Include="DomainGeneratorTests\Relations\OneToManyTests\MultipleOneToManiesTests.cs" />
+    <Compile Include="DomainGeneratorTests\Relations\OneToManyTests\OneToManyUsingConstructorTests.cs" />
+    <Compile Include="DomainGeneratorTests\Relations\OneToManyTests\PolymorphicOneToManyTests.cs" />
+    <Compile Include="DomainGeneratorTests\Relations\OneToOneTests\ExplicitOneToOneTests.cs" />
+    <Compile Include="DomainGeneratorTests\Relations\OneToOneTests\ExplicitPolymorphicOneToOneTests.cs" />
+    <Compile Include="DomainGeneratorTests\Relations\OneToOneTests\OneToOneTests.cs" />
     <Compile Include="DomainGeneratorTests\ReplacingPrimitiveGeneratorsTests.cs" />
     <Compile Include="DomainGeneratorTests\ReplacingPrimitiveGeneratorsWithConstantValueTests.cs" />
     <Compile Include="DomainGeneratorTests\StringUniquePropertyNameTests.cs" />
@@ -163,9 +151,6 @@
     <Compile Include="NumericStringGeneratorTests\IsAlwaysAValidNumberTests.cs" />
     <Compile Include="NumericStringGeneratorTests\MinMaxConstructionTests.cs" />
     <Compile Include="Picking\BeingPickyTests.cs" />
-    <Compile Include="PrimitiveGeneratorsTests\DefaultIntGeneratorTests.cs" />
-    <Compile Include="PrimitiveGeneratorsTests\DefaultPrimitiveGeneratorsTestsState.cs" />
-    <Compile Include="PrimitiveGeneratorsTests\DefaultStringGeneratorTests.cs" />
     <Compile Include="PrimitiveGeneratorsTests\NullablesTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ReflectTests\TypePickerTests.cs" />

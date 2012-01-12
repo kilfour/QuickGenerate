@@ -12,18 +12,20 @@ namespace QuickGenerate.DomainGeneratorImplementation
         public static object Object(this DomainGenerator domaingenerator, Type type)
         {
             if (domaingenerator.constructionConventions.Keys.Any(t => t.IsAssignableFrom(type)))
-                return domaingenerator.constructionConventions[type]();
-            
+            {
+                if (domaingenerator.constructionConventions.Keys.Contains(type))
+                    return domaingenerator.constructionConventions[type]();
+            }
             // code above can lead to a bug
             // code below assumes too much
 
-            // if (domaingenerator.constructionConventions.Keys.Any(t => t.IsAssignableFrom(type)))
-            //     return
-            //        domaingenerator
-            //            .constructionConventions
-            //            .Where(kv => kv.Key.IsAssignableFrom(type))
-            //            .PickOne()
-            //            .Value();
+            //if (domaingenerator.constructionConventions.Keys.Any(t => t.IsAssignableFrom(type)))
+            //    return
+            //       domaingenerator
+            //           .constructionConventions
+            //           .Where(kv => kv.Key.IsAssignableFrom(type))
+            //           .PickOne()
+            //           .Value();
 
             var isPrimitiveGenerator = primitiveGenerators.Get(type);
             if (isPrimitiveGenerator != null)

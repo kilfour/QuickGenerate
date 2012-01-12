@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using Xunit;
 
 namespace QuickGenerate.Tests.DomainGeneratorTests
@@ -22,12 +23,9 @@ namespace QuickGenerate.Tests.DomainGeneratorTests
         [Fact]
         public void ShouldBeCalledForEachIThing()
         {
-            var somethingToGenerate = domainGenerator.One<SomethingToGenerate>();
-            Assert.True(spy.Checked.Contains(somethingToGenerate));
-            Assert.True(spy.Checked.Contains(somethingToGenerate.MySomethingElseToGenerate));
-
-            var category = domainGenerator.One<SomethingElseToGenerate>();
-            Assert.True(spy.Checked.Contains(category));
+            var somethingElseToGenerate = domainGenerator.One<SomethingElseToGenerate>();
+            Assert.True(spy.Checked.Contains(somethingElseToGenerate));
+            Assert.True(spy.Checked.Contains(somethingElseToGenerate.SomethingToGenerates.First()));
         }
 
         public interface IThing { }

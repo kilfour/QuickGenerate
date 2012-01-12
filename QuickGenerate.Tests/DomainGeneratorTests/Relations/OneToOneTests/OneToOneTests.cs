@@ -1,7 +1,7 @@
 using QuickGenerate.Tests.DomainGeneratorTests.TheDomain;
 using Xunit;
 
-namespace QuickGenerate.Tests.DomainGeneratorTests
+namespace QuickGenerate.Tests.DomainGeneratorTests.Relations.OneToOneTests
 {
     public class OneToOneTests
     {
@@ -35,7 +35,7 @@ namespace QuickGenerate.Tests.DomainGeneratorTests
         }
 
         [Fact]
-        public void BidirectionalOneToOne_OtherWayRound()
+        public void BidirectionalOneToOne_OtherWayRound_does_Not_Generate_LeftHand()
         {
             var productPrice = 
                 new DomainGenerator()
@@ -46,9 +46,7 @@ namespace QuickGenerate.Tests.DomainGeneratorTests
                             r.MyProduct = l;
                         }).One<BidirectionalProductPrice>();
 
-            Assert.NotNull(productPrice.MyProduct);
-
-            Assert.Equal(productPrice, productPrice.MyProduct.MyBidirectionalProductPrice);
+            Assert.Null(productPrice.MyProduct);
         }
     }
 }

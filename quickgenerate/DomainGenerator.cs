@@ -32,6 +32,9 @@ namespace QuickGenerate
         private readonly List<OneToManyRelation> oneToManyRelations =
             new List<OneToManyRelation>();
 
+        private readonly List<ManyToOneRelation> manyToOneRelations =
+            new List<ManyToOneRelation>();
+
         public readonly List<ActionConvention> actionConventions
             = new List<ActionConvention>();
 
@@ -108,6 +111,24 @@ namespace QuickGenerate
                 new OneToManyRelation
                 {
                     Action = (one, many) => action((TOne)one, (TMany)many),
+                    Amount = () => new IntGenerator(minmumNumberOfMany, maximumNumberOfMany).GetRandomValue(),
+                    One = typeof(TOne),
+                    Many = typeof(TMany)
+                });
+            return this;
+        }
+
+        public DomainGenerator ManyToOne<TMany, TOne>(int numberOfMany, Action<TMany, TOne> action)
+        {
+            return ManyToOne(numberOfMany, numberOfMany, action); ;
+        }
+
+        public DomainGenerator ManyToOne<TMany, TOne>(int minmumNumberOfMany, int maximumNumberOfMany, Action<TMany, TOne> action)
+        {
+            manyToOneRelations.Add(
+                new ManyToOneRelation
+                {
+                    Action = (many, one) => action((TMany)many, (TOne)one),
                     Amount = () => new IntGenerator(minmumNumberOfMany, maximumNumberOfMany).GetRandomValue(),
                     One = typeof(TOne),
                     Many = typeof(TMany)
@@ -231,43 +252,15 @@ namespace QuickGenerate
             return false;
         }
 
-        private void ApplyRelations<TTarget>(TTarget target, List<OneToManyRelation> oneToManies)
-        {
-            ApplyOneToManyRelations(target, oneToManies);
-        }
-
         private void ApplyRelations<TTarget>(TTarget target)
         {
-            ApplyRelations(target, oneToManyRelations);
+            ApplyOneToManyRelations(target, oneToManyRelations);
+            ApplyManyToOneRelations(target, manyToOneRelations);
         }
 
         private void ApplyOneToManyRelations<TTarget>(TTarget target, List<OneToManyRelation> oneToManies)
         {
-            var relations = oneToManies.Where(r => r.Many.IsAssignableFrom(target.GetType())).ToList();
-            
-            foreach (var relation in relations)
-            {
-                object one = null;
-                var amount = relation.Amount();
-                if (amount > 0)
-                {
-                    one = OneWithoutRelations(relation.One);
-                    ApplyRelations(one, oneToManies.Where(r => r != relation).ToList());
-                    relation.Action(one, target);
-                }
-
-                for (int i = 1; i < amount; i++)
-                {
-                    var many =
-                        relation.ManyFunc == null
-                            ? OneWithoutRelations(relation.Many)
-                            : OneWithoutRelations(relation.ManyFunc(one));
-                    ApplyRelations(many, oneToManies.Where(r => r != relation).ToList()); 
-                    relation.Action(one, many);
-                }
-            }
-
-            relations = oneToManies.Where(r => r.One.IsAssignableFrom(target.GetType())).ToList();
+            var relations = oneToManies.Where(r => r.One.IsAssignableFrom(target.GetType())).ToList();
             foreach (var relation in relations)
             {
                 var amount = relation.Amount();
@@ -278,7 +271,34 @@ namespace QuickGenerate
                             ? OneWithoutRelations(relation.Many)
                             : OneWithoutRelations(relation.ManyFunc(target));
                     relation.Action(target, many);
-                    ApplyRelations(many, oneToManies.Where(r => r != relation).ToList());
+                    ApplyOneToManyRelations(many, oneToManies.Where(r => r != relation).ToList());
+                    ApplyManyToOneRelations(many, manyToOneRelations.Where(r => r.One != relation.One || r.Many != relation.Many).ToList());
+                }
+            }
+        }
+
+        private void ApplyManyToOneRelations<TTarget>(TTarget target, List<ManyToOneRelation> manyToOnes)
+        {
+            var relations = manyToOnes.Where(r => r.Many.IsAssignableFrom(target.GetType())).ToList();
+
+            foreach (var relation in relations)
+            {
+                object one = null;
+                var amount = relation.Amount();
+                if (amount > 0)
+                {
+                    one = OneWithoutRelations(relation.One);
+                    ApplyManyToOneRelations(one, manyToOnes.Where(r => r != relation).ToList());
+                    ApplyOneToManyRelations(one, oneToManyRelations.Where(r => r.One != relation.One || r.Many != relation.Many).ToList());
+                    relation.Action(target, one);
+                }
+
+                for (int i = 1; i < amount; i++)
+                {
+                    var many = OneWithoutRelations(relation.Many);
+                    ApplyManyToOneRelations(one, manyToOnes.Where(r => r != relation).ToList());
+                    ApplyOneToManyRelations(one, oneToManyRelations.Where(r => r.One != relation.One || r.Many != relation.Many).ToList());
+                    relation.Action(many, one);
                 }
             }
         }
@@ -332,7 +352,10 @@ namespace QuickGenerate
         {
             if (propertyInfo.CanWrite)
                 return true;
-            return propertyInfo.DeclaringType.GetProperty(propertyInfo.Name).CanWrite;
+            var info = propertyInfo.DeclaringType.GetProperty(propertyInfo.Name);
+            if (info == null)
+                return false;
+            return info.CanWrite;
         }
 
         public bool IsSimpleProperty(object target, PropertyInfo propertyInfo)

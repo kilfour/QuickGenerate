@@ -1,6 +1,6 @@
 using Xunit;
 
-namespace QuickGenerate.Tests.DomainGeneratorTests.Inheritance
+namespace QuickGenerate.Tests.DomainGeneratorTests.Relations.OneToOneTests
 {
     public class ExplicitPolymorphicOneToOneTests
     {
@@ -29,10 +29,10 @@ namespace QuickGenerate.Tests.DomainGeneratorTests.Inheritance
         }
 
         [Fact]
-        public void GeneratingRightHand()
+        public void GeneratingRightHandDoesNotGenerateLeftHand()
         {
             var somethingElse = domainGenerator.One<SomethingBaseToGenerate>();
-            Assert.Equal(somethingElse, somethingElse.Something.SomethingElse);
+            Assert.Null(somethingElse.Something);
         }
 
         public class SomethingToGenerate

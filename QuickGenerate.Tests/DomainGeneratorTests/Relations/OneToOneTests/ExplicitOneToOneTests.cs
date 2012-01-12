@@ -1,6 +1,6 @@
 using Xunit;
 
-namespace QuickGenerate.Tests.DomainGeneratorTests
+namespace QuickGenerate.Tests.DomainGeneratorTests.Relations.OneToOneTests
 {
     public class ExplicitOneToOneTests
     {
@@ -10,7 +10,6 @@ namespace QuickGenerate.Tests.DomainGeneratorTests
         {
             domainGenerator =
                 new DomainGenerator()
-
                     .OneToOne<SomethingToGenerate, SomethingElseToGenerate>((l, r) => l.MyMethod(r));
         }
 
@@ -22,10 +21,10 @@ namespace QuickGenerate.Tests.DomainGeneratorTests
         }
 
         [Fact]
-        public void GeneratingRightHand()
+        public void GeneratingRightHandDoesNotGenerateLeftHand()
         {
             var somethingElse = domainGenerator.One<SomethingElseToGenerate>();
-            Assert.Equal(somethingElse, somethingElse.Something.SomethingElse);
+            Assert.Null(somethingElse.Something);
         }
 
         public class SomethingToGenerate

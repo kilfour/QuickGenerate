@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Xunit;
 
-namespace QuickGenerate.Tests.DomainGeneratorTests.OneToManyTests
+namespace QuickGenerate.Tests.DomainGeneratorTests.Relations.OneToManyTests
 {
     public class ComplexOneToManyTests
     {

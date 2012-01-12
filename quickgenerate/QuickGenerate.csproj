@@ -40,6 +40,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DomainGeneratorImplementation\IgnoreGeneratorOptions.cs" />
+    <Compile Include="DomainGeneratorImplementation\ManyToOneRelation.cs" />
     <Compile Include="EntityGenerator.cs" />
     <Compile Include="IGenerator.cs" />
     <Compile Include="Primitives\DateGenerator.cs" />

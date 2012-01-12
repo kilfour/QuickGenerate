@@ -96,6 +96,7 @@
     <Compile Include="DomainGeneratorTests\Relations\OneToOneTests\ExplicitOneToOneTests.cs" />
     <Compile Include="DomainGeneratorTests\Relations\OneToOneTests\ExplicitPolymorphicOneToOneTests.cs" />
     <Compile Include="DomainGeneratorTests\Relations\OneToOneTests\OneToOneTests.cs" />
+    <Compile Include="DomainGeneratorTests\Relations\UpDownUp.cs" />
     <Compile Include="DomainGeneratorTests\ReplacingPrimitiveGeneratorsTests.cs" />
     <Compile Include="DomainGeneratorTests\ReplacingPrimitiveGeneratorsWithConstantValueTests.cs" />
     <Compile Include="DomainGeneratorTests\StringUniquePropertyNameTests.cs" />

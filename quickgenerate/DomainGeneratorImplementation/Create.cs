@@ -1,6 +1,7 @@
 using System;
 using System.Linq;
 using System.Reflection;
+using QuickGenerate.Implementation;
 
 namespace QuickGenerate.DomainGeneratorImplementation
 {
@@ -23,7 +24,7 @@ namespace QuickGenerate.DomainGeneratorImplementation
             {
                 var constructor = 
                     type
-                        .GetConstructors(DomainGenerator.FlattenHierarchyBindingFlag)
+                        .GetConstructors(MyBinding.Flags)
                         .Where(c => c.GetParameters().Count()  == constructorTypeParameters.Count())
                         .First(
                             c =>
@@ -48,7 +49,7 @@ namespace QuickGenerate.DomainGeneratorImplementation
                     return domaingenerator.constructionConventions[type]();
             }
 
-            var publicConstructors = type.GetConstructors(DomainGenerator.FlattenHierarchyBindingFlag);
+            var publicConstructors = type.GetConstructors(MyBinding.Flags);
 
             if (publicConstructors.Count() > 0)
             {
@@ -57,7 +58,7 @@ namespace QuickGenerate.DomainGeneratorImplementation
                 return Construct(type, domaingenerator, constructor, highestParameterCount);
             }
 
-            var allConstructors = type.GetConstructors(DomainGenerator.FlattenHierarchyBindingFlag);
+            var allConstructors = type.GetConstructors(MyBinding.Flags);
             if (allConstructors.Count() > 0)
             {
                 var highestParameterCount = allConstructors.Max(c => c.GetParameters().Count());

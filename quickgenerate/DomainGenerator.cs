@@ -13,9 +13,6 @@ namespace QuickGenerate
 {
     public class DomainGenerator
     {
-        public const BindingFlags FlattenHierarchyBindingFlag =
-            BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.FlattenHierarchy;
-
         private readonly List<object> generatedObjects = new List<object>();
 
         public IEnumerable<object> GeneratedObjects {get { return generatedObjects; }}
@@ -374,7 +371,7 @@ namespace QuickGenerate
                 return null;
 
             generatedObjects.Add(target);
-            foreach (var propertyInfo in target.GetType().GetProperties(FlattenHierarchyBindingFlag))
+            foreach (var propertyInfo in target.GetType().GetProperties(MyBinding.Flags))
             {
                 if (IsSimpleProperty(target, propertyInfo))
                     continue;

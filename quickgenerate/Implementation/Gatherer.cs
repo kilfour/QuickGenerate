@@ -25,6 +25,15 @@ namespace QuickGenerate.Implementation
             return this;
         }
 
+        public Gatherer<T> CollectAll()
+        {
+            foreach (var property in typeof(T).GetProperties(MyBinding.Flags))
+            {
+                collected.Add(property, property.GetValue(value, null));
+            }
+            return this;
+        }
+
         public TProperty Recall<TProperty>(Expression<Func<T, TProperty>> propertyFunc)
         {
             var property = propertyFunc.AsPropertyInfo();

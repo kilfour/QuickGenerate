@@ -1,6 +1,6 @@
 ﻿using Xunit;
 
-namespace QuickGenerate.Tests.GatherTests
+namespace QuickGenerate.Tests.Gathering
 {
     public class GatherFromTests
     {

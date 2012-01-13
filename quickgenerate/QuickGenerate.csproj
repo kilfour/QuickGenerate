@@ -46,6 +46,7 @@
     <Compile Include="DomainGeneratorImplementation\RecursiveRelationDefinedException.cs" />
     <Compile Include="EntityGenerator.cs" />
     <Compile Include="IGenerator.cs" />
+    <Compile Include="Implementation\MyBinding.cs" />
     <Compile Include="Primitives\DateGenerator.cs" />
     <Compile Include="Primitives\ShortGenerator.cs" />
     <Compile Include="RandomIntFromArray.cs" />

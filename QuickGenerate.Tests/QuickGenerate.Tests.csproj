@@ -145,7 +145,8 @@
     <Compile Include="EntityGeneratorTests\ReplacingPrimitiveGeneratorsWithConstantValueTests.cs" />
     <Compile Include="EntityGeneratorTests\StringUniquePropertyNameTests.cs" />
     <Compile Include="EnumTests.cs" />
-    <Compile Include="GatherTests\GatherFromTests.cs" />
+    <Compile Include="Gathering\GatherAllTests.cs" />
+    <Compile Include="Gathering\GatherFromTests.cs" />
     <Compile Include="MaybeDoTests.cs" />
     <Compile Include="ModifyTests\AConendrum.cs" />
     <Compile Include="ModifyTests\ModifyingSomethingComplexTests.cs" />

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using QuickGenerate.Implementation;
 
 namespace QuickGenerate.Writing
 {
@@ -17,7 +18,7 @@ namespace QuickGenerate.Writing
             objectCounter.Add(somethingToWrite);
             stream.Write(string.Format("#{0} : {1}.", objectCounter.Count, somethingToWrite.GetType().Name));
             stream.WriteLine();
-            foreach (var propertyInfo in somethingToWrite.GetType().GetProperties(DomainGenerator.FlattenHierarchyBindingFlag))
+            foreach (var propertyInfo in somethingToWrite.GetType().GetProperties(MyBinding.Flags))
             {
                 level.Times(() => stream.Write("    "));
                 stream.Write(string.Format("{0} = ", propertyInfo.Name));

@@ -1,6 +1,7 @@
 using System;
 using System.Linq.Expressions;
 using System.Reflection;
+using QuickGenerate.Implementation;
 using QuickGenerate.Reflect;
 
 namespace QuickGenerate.Modifying
@@ -53,7 +54,7 @@ namespace QuickGenerate.Modifying
 
         public DomainModifier<T> ChangeAll()
         {
-            foreach (var propertyInfo in typeof(T).GetProperties(DomainGenerator.FlattenHierarchyBindingFlag))
+            foreach (var propertyInfo in typeof(T).GetProperties(MyBinding.Flags))
             {
                 TryChangePropertyFiftyTimes(propertyInfo);
             }

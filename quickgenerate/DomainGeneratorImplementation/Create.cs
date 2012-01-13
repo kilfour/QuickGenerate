@@ -9,32 +9,23 @@ namespace QuickGenerate.DomainGeneratorImplementation
         private static readonly PrimitiveGenerators primitiveGenerators =
             new PrimitiveGenerators();
 
-        public static object Object(this DomainGenerator domaingenerator, Type type)
+        public static object Object(this DomainGenerator domaingenerator, Type inputType)
         {
-            if (domaingenerator.constructionConventions.Keys.Any(t => t.IsAssignableFrom(type)))
-            {
-                if (domaingenerator.constructionConventions.Keys.Contains(type))
-                    return domaingenerator.constructionConventions[type]();
-            }
-            // code above can lead to a bug
-            // code below assumes too much
-
-            //if (domaingenerator.constructionConventions.Keys.Any(t => t.IsAssignableFrom(type)))
-            //    return
-            //       domaingenerator
-            //           .constructionConventions
-            //           .Where(kv => kv.Key.IsAssignableFrom(type))
-            //           .PickOne()
-            //           .Value();
-
-            var isPrimitiveGenerator = primitiveGenerators.Get(type);
+            var isPrimitiveGenerator = primitiveGenerators.Get(inputType);
             if (isPrimitiveGenerator != null)
             {
                 return isPrimitiveGenerator.RandomAsObject();
             }
 
-            var publicConstructors =
-                type.GetConstructors(DomainGenerator.FlattenHierarchyBindingFlag);
+            var type = domaingenerator.GetTypeToGenerate(inputType);
+
+            if (domaingenerator.constructionConventions.Keys.Any(t => t.IsAssignableFrom(type)))
+            {
+                if (domaingenerator.constructionConventions.Keys.Contains(type))
+                    return domaingenerator.constructionConventions[type]();
+            }
+
+            var publicConstructors = type.GetConstructors(DomainGenerator.FlattenHierarchyBindingFlag);
 
             if (publicConstructors.Count() > 0)
             {

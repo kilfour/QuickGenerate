@@ -172,6 +172,25 @@ namespace QuickGenerate
             return this;
         }
 
+        private readonly IDictionary<Type, IInheritanceGeneratorOptions> inheritanceGeneratorOptions =
+            new Dictionary<Type, IInheritanceGeneratorOptions>();
+
+        public DomainGenerator With<T>(Action<InheritanceGeneratorOptions<T>> customization)
+        {
+            if (!inheritanceGeneratorOptions.ContainsKey(typeof(T)))
+                inheritanceGeneratorOptions[typeof(T)] = new InheritanceGeneratorOptions<T>();
+            customization((InheritanceGeneratorOptions<T>)inheritanceGeneratorOptions[typeof(T)]);
+            return this;
+        }
+
+        public Type GetTypeToGenerate(Type type)
+        {
+            if (!inheritanceGeneratorOptions.ContainsKey(type))
+                return type;
+            var options = inheritanceGeneratorOptions[type];
+            return options.PickType();
+        }
+
         public DomainGenerator With<T>(Func<IGenerator<T>> generatorFunc)
         {
             var generator = generatorFunc();

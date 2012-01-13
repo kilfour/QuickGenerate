@@ -65,6 +65,9 @@
     <Compile Include="DomainGeneratorTests\GeneratorByTypeTests.cs" />
     <Compile Include="DomainGeneratorTests\Inheritance\CustomizeTypeInheritenceTests.cs" />
     <Compile Include="DomainGeneratorTests\Inheritance\CustomizeTypePolymorphism.cs" />
+    <Compile Include="DomainGeneratorTests\Inheritance\Deeper.cs" />
+    <Compile Include="DomainGeneratorTests\Inheritance\ExplicitlyDefinedTests.cs" />
+    <Compile Include="DomainGeneratorTests\Inheritance\WithAbstractBase.cs" />
     <Compile Include="DomainGeneratorTests\Issues\CircularStuff.cs" />
     <Compile Include="DomainGeneratorTests\Issues\CreateBug.cs" />
     <Compile Include="DomainGeneratorTests\Issues\PrivateSettersInheritanceTests.cs" />

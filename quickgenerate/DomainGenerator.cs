@@ -191,6 +191,25 @@ namespace QuickGenerate
             return options.PickType();
         }
 
+        private readonly IDictionary<Type, IConstructorGeneratorOptions> constructorGeneratorOptions =
+            new Dictionary<Type, IConstructorGeneratorOptions>();
+
+        public DomainGenerator With<T>(Action<ConstructorGeneratorOptions<T>> customization)
+        {
+            if (!constructorGeneratorOptions.ContainsKey(typeof(T)))
+                constructorGeneratorOptions[typeof(T)] = new ConstructorGeneratorOptions<T>();
+            customization((ConstructorGeneratorOptions<T>)constructorGeneratorOptions[typeof(T)]);
+            return this;
+        }
+
+        public Type[] GetConstructorTypeParameters(Type type)
+        {
+            if (!constructorGeneratorOptions.ContainsKey(type))
+                return null;
+            var options = constructorGeneratorOptions[type];
+            return options.GetParameterTypes();
+        }
+
         public DomainGenerator With<T>(Func<IGenerator<T>> generatorFunc)
         {
             var generator = generatorFunc();

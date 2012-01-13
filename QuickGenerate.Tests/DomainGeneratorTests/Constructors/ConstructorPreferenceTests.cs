@@ -2,11 +2,11 @@
 
 namespace QuickGenerate.Tests.DomainGeneratorTests.Constructors
 {
-    public class ActivationTests
+    public class ConstructorPreferenceTests
     {
         private readonly DomainGenerator domainGenerator;
 
-        public ActivationTests()
+        public ConstructorPreferenceTests()
         {
             domainGenerator =
                 new DomainGenerator()
@@ -84,6 +84,42 @@ namespace QuickGenerate.Tests.DomainGeneratorTests.Constructors
             public SomethingEvenElserToGenerate(int anArgument)
             {
                 this.anArgument = anArgument;
+            }
+        }
+
+        [Fact]
+        public void InCaseOfSameAmountOfParamatersItPicksTheFirstAvailable()
+        {
+            var thing = domainGenerator.One<SomethingStrangeToGenerate>();
+            Assert.NotNull(thing);
+            Assert.Equal(42, thing.CheckInt());
+            Assert.Null(thing.CheckString());
+        }
+
+        public class SomethingStrangeToGenerate
+        {
+            private readonly int anInt;
+            public int CheckInt()
+            {
+                return anInt;
+            }
+
+            private readonly string aString;
+            public string CheckString()
+            {
+                return aString;
+            }
+
+            public SomethingStrangeToGenerate() { }
+
+            public SomethingStrangeToGenerate(int anInt)
+            {
+                this.anInt = anInt;
+            }
+
+            public SomethingStrangeToGenerate(string aString)
+            {
+                this.aString = aString;
             }
         }
     }

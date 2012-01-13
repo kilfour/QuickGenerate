@@ -16,8 +16,31 @@ namespace QuickGenerate.DomainGeneratorImplementation
             {
                 return isPrimitiveGenerator.RandomAsObject();
             }
-
             var type = domaingenerator.GetTypeToGenerate(inputType);
+
+            var constructorTypeParameters = domaingenerator.GetConstructorTypeParameters(type);
+            if(constructorTypeParameters != null)
+            {
+                var constructor = 
+                    type
+                        .GetConstructors(DomainGenerator.FlattenHierarchyBindingFlag)
+                        .Where(c => c.GetParameters().Count()  == constructorTypeParameters.Count())
+                        .First(
+                            c =>
+                                {
+                                    var ctorParams = c.GetParameters();
+                                    int ix = 0;
+                                    foreach (var parameterInfo in ctorParams)
+                                    {
+                                        if(parameterInfo.ParameterType != constructorTypeParameters[ix])
+                                            return false;
+                                        ix++;
+
+                                    }
+                                    return true;
+                                });
+                return Construct(domaingenerator, constructor, constructorTypeParameters.Count());
+            }
 
             if (domaingenerator.constructionConventions.Keys.Any(t => t.IsAssignableFrom(type)))
             {

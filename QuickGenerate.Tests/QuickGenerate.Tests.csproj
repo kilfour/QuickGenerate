@@ -46,6 +46,9 @@
     <Compile Include="Choices\FromRangeTests.cs" />
     <Compile Include="Choices\TimesTests.cs" />
     <Compile Include="DomainGeneratorTests\ComponentsTests.cs" />
+    <Compile Include="DomainGeneratorTests\Constructors\ChoosingAConstructor.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="DomainGeneratorTests\Constructors\ClassParametersInConstructorTests.cs" />
     <Compile Include="DomainGeneratorTests\Constructors\ConstructorPreferenceTests.cs" />
     <Compile Include="DomainGeneratorTests\Constructors\PrimitiveParametersInConstructorTests.cs" />

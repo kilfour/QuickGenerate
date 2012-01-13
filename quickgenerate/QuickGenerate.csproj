@@ -39,6 +39,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DomainGeneratorImplementation\ConstructorGeneratorOptions.cs" />
     <Compile Include="DomainGeneratorImplementation\IgnoreGeneratorOptions.cs" />
     <Compile Include="DomainGeneratorImplementation\InheritanceGeneratorOptions.cs" />
     <Compile Include="DomainGeneratorImplementation\ManyToOneRelation.cs" />

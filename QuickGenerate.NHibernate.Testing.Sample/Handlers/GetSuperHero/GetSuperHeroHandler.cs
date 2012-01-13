@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 
 namespace QuickGenerate.NHibernate.Testing.Sample.Handlers.GetSuperHero
 {
@@ -11,7 +12,7 @@ namespace QuickGenerate.NHibernate.Testing.Sample.Handlers.GetSuperHero
             this.query = query;
         }
 
-        public SuperHeroDto Handle(int superHeroId)
+        public SuperHeroDto Handle(Guid superHeroId)
         {
             var hero = query.One(superHeroId);
             return

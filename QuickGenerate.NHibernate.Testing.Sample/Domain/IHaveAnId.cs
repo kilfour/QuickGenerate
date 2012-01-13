@@ -1,7 +1,9 @@
+using System;
+
 namespace QuickGenerate.NHibernate.Testing.Sample.Domain
 {
     public interface IHaveAnId
     {
-        int Id { get; }
+        Guid Id { get; }
     }
 }

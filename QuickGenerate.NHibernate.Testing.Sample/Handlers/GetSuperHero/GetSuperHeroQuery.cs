@@ -8,7 +8,7 @@ namespace QuickGenerate.NHibernate.Testing.Sample.Handlers.GetSuperHero
 {
     public interface IGetSuperHeroQuery
     {
-        SuperHero One(int superHeroId);
+        SuperHero One(Guid superHeroId);
     }
 
     public class GetSuperHeroQuery : IGetSuperHeroQuery
@@ -20,7 +20,7 @@ namespace QuickGenerate.NHibernate.Testing.Sample.Handlers.GetSuperHero
             this.session = session;
         }
 
-        public SuperHero One(int superHeroId)
+        public SuperHero One(Guid superHeroId)
         {
             return
                 session

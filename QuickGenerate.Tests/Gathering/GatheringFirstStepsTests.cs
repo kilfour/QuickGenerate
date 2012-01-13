@@ -2,7 +2,7 @@
 
 namespace QuickGenerate.Tests.Gathering
 {
-    public class GatherFromTests
+    public class GatheringFirstStepsTests
     {
         [Fact]
         public void Simple_Collect_Recall()

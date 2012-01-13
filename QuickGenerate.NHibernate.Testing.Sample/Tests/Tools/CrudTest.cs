@@ -83,7 +83,7 @@ namespace QuickGenerate.NHibernate.Testing.Sample.Tests.Tools
             var reloadedEntity = NHibernateSession.Get<TEntity>(entity.Id);
             Assert.NotNull(reloadedEntity);
             AssertEqual(entity, reloadedEntity);
-            Assert.NotEqual(0, entity.Id);
+            Assert.NotEqual(Guid.Empty, entity.Id);
         }
 
         [Fact]

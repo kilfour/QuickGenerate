@@ -7,7 +7,7 @@
 
   <class name="SuperHero" optimistic-lock="dirty" dynamic-update="true">
     <id name="Id" column="Id" >
-      <generator class="identity" />
+      <generator class="guid.comb" />
     </id>
     <property name="Name" length="50" not-null="true" />
     <set name="SuperPowers" cascade="all-delete-orphan">

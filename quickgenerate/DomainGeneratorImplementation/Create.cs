@@ -39,7 +39,7 @@ namespace QuickGenerate.DomainGeneratorImplementation
                                     }
                                     return true;
                                 });
-                return Construct(domaingenerator, constructor, constructorTypeParameters.Count());
+                return Construct(type, domaingenerator, constructor, constructorTypeParameters.Count());
             }
 
             if (domaingenerator.constructionConventions.Keys.Any(t => t.IsAssignableFrom(type)))
@@ -54,7 +54,7 @@ namespace QuickGenerate.DomainGeneratorImplementation
             {
                 var highestParameterCount = publicConstructors.Max(c => c.GetParameters().Count());
                 var constructor = publicConstructors.First(c => c.GetParameters().Count() == highestParameterCount);
-                return Construct(domaingenerator, constructor, highestParameterCount);
+                return Construct(type, domaingenerator, constructor, highestParameterCount);
             }
 
             var allConstructors = type.GetConstructors(DomainGenerator.FlattenHierarchyBindingFlag);
@@ -62,17 +62,18 @@ namespace QuickGenerate.DomainGeneratorImplementation
             {
                 var highestParameterCount = allConstructors.Max(c => c.GetParameters().Count());
                 var constructor = allConstructors.First(c => c.GetParameters().Count() == highestParameterCount);
-                return Construct(domaingenerator, constructor, highestParameterCount); 
+                return Construct(type, domaingenerator, constructor, highestParameterCount); 
             }
             return Activator.CreateInstance(type);
         }
 
-        private static object Construct(DomainGenerator domaingenerator, ConstructorInfo constructor, int highestParameterCount)
+        private static object Construct(Type type, DomainGenerator domaingenerator, ConstructorInfo constructor, int highestParameterCount)
         {
             var parameters = constructor.GetParameters();
             var parameterValues = new object[highestParameterCount];
             for (int i = 0; i < parameters.Length; i++)
             {
+                domaingenerator.CheckForRecursiveRelation(type, parameters[i].ParameterType);
                 parameterValues.SetValue(domaingenerator.One(parameters[i].ParameterType), i);
             }
             return constructor.Invoke(parameterValues);

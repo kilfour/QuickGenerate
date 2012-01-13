@@ -508,5 +508,15 @@ namespace QuickGenerate
                 type.GetFields(BindingFlags.Public | BindingFlags.Static)
                     .Select(i => i.GetRawConstantValue());
         }
+
+        public void CheckForRecursiveRelation(Type type, Type parameterType)
+        {
+            var oneToMany = oneToManyRelations.FirstOrDefault(r => r.One == parameterType && r.Many == type);
+            if(oneToMany != null)
+                throw new RecursiveRelationDefinedException(string.Format("From {0} to {1}.", oneToMany.One, oneToMany.Many));
+            var manyToOne = manyToOneRelations.FirstOrDefault(r => r.Many == parameterType && r.One == type);
+            if (manyToOne != null)
+                throw new RecursiveRelationDefinedException(string.Format("From {0} to {1}.", manyToOne.Many, manyToOne.One));
+        }
     }
 }

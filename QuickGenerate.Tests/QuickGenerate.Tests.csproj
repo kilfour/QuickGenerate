@@ -64,7 +64,6 @@
     <Compile Include="DomainGeneratorTests\CustomizeTypeLongRangeTests.cs" />
     <Compile Include="DomainGeneratorTests\CustomizeTypeSpecificCompositeValueTests.cs" />
     <Compile Include="DomainGeneratorTests\DefaultStringGeneratorIsNeverEmptyString.cs" />
-    <Compile Include="DomainGeneratorTests\ForEachTests.cs" />
     <Compile Include="DomainGeneratorTests\GeneratorByTypeTests.cs" />
     <Compile Include="DomainGeneratorTests\Inheritance\CustomizeTypeInheritenceTests.cs" />
     <Compile Include="DomainGeneratorTests\Inheritance\CustomizeTypePolymorphism.cs" />
@@ -90,6 +89,7 @@
     <Compile Include="DomainGeneratorTests\GeneratorByConventionTests.cs" />
     <Compile Include="DomainGeneratorTests\IgnoreConventionTests.cs" />
     <Compile Include="DomainGeneratorTests\Issues\ForEachNullReferenceBug.cs" />
+    <Compile Include="DomainGeneratorTests\Iterating\ForEachTests.cs" />
     <Compile Include="DomainGeneratorTests\ManyTests.cs" />
     <Compile Include="DomainGeneratorTests\ModifyTests.cs" />
     <Compile Include="DomainGeneratorTests\CustomizeTypeDynamicValueConventionTests.cs" />
@@ -103,6 +103,7 @@
     <Compile Include="DomainGeneratorTests\Relations\OneToOneTests\ExplicitOneToOneTests.cs" />
     <Compile Include="DomainGeneratorTests\Relations\OneToOneTests\ExplicitPolymorphicOneToOneTests.cs" />
     <Compile Include="DomainGeneratorTests\Relations\OneToOneTests\OneToOneTests.cs" />
+    <Compile Include="DomainGeneratorTests\Relations\WarnAgainstRecursionTests.cs" />
     <Compile Include="DomainGeneratorTests\ReplacingPrimitiveGeneratorsTests.cs" />
     <Compile Include="DomainGeneratorTests\ReplacingPrimitiveGeneratorsWithConstantValueTests.cs" />
     <Compile Include="DomainGeneratorTests\StringUniquePropertyNameTests.cs" />

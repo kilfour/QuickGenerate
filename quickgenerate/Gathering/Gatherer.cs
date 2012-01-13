@@ -3,14 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
+using QuickGenerate.Implementation;
 using QuickGenerate.Reflect;
 
-namespace QuickGenerate.Implementation
+namespace QuickGenerate.Gathering
 {
     public class Gatherer<T>
     {
         private readonly T value;
-        private readonly Dictionary<PropertyInfo, object> collected = new Dictionary<PropertyInfo, object>();
+        public readonly Dictionary<PropertyInfo, object> collected = new Dictionary<PropertyInfo, object>();
         private readonly Dictionary<PropertyInfo, object> gatherers = new Dictionary<PropertyInfo, object>();
 
         public Gatherer(T value)
@@ -62,6 +63,48 @@ namespace QuickGenerate.Implementation
         public object[] AllCollected()
         {
             return collected.Values.ToArray();
+        }
+
+        public GathererMatchResult Matches(Gatherer<T> theOtherGatherer)
+        {
+            var matchResult = new GathererMatchResult();
+            var iHaveMore = collected.Keys.Where(k1 => !theOtherGatherer.collected.Keys.Any(k2 => k1 == k2)).ToList();
+            foreach (var propertyInfo in iHaveMore)
+            {
+                matchResult.AddMessage(
+                    string.Format(
+                        "{0}.{1} : {2} != [Not Collected]", 
+                        propertyInfo.DeclaringType,
+                        propertyInfo.Name, 
+                        collected[propertyInfo]));
+            }
+
+            var youHaveMore = theOtherGatherer.collected.Keys.Where(k1 => !collected.Keys.Any(k2 => k1 == k2));
+            foreach (var propertyInfo in youHaveMore)
+            {
+                matchResult.AddMessage(
+                    string.Format(
+                        "{0}.{1} : [Not Collected] != {2}", 
+                        propertyInfo.DeclaringType,
+                        propertyInfo.Name, 
+                        collected[propertyInfo]));
+            }
+
+            var weBothHaveThem = collected.Keys.Where(k => !iHaveMore.Contains(k));
+            foreach (var propertyInfo in weBothHaveThem)
+            {
+                if(!Equals(collected[propertyInfo], theOtherGatherer.collected[propertyInfo]))
+                {
+                    matchResult.AddMessage(
+                        string.Format("{0}.{1} : {2} != {3}",
+                                      propertyInfo.DeclaringType.Name,
+                                      propertyInfo.Name,
+                                      collected[propertyInfo],
+                                      theOtherGatherer.collected[propertyInfo]));
+                }
+            }
+            
+            return matchResult;
         }
     }
 }

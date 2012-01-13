@@ -1,3 +1,4 @@
+using QuickGenerate.Gathering;
 using QuickGenerate.Implementation;
 
 namespace QuickGenerate

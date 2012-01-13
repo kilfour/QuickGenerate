@@ -45,6 +45,8 @@
     <Compile Include="DomainGeneratorImplementation\ManyToOneRelation.cs" />
     <Compile Include="DomainGeneratorImplementation\RecursiveRelationDefinedException.cs" />
     <Compile Include="EntityGenerator.cs" />
+    <Compile Include="Gathering\Gatherer.cs" />
+    <Compile Include="Gathering\GathererMatchResult.cs" />
     <Compile Include="IGenerator.cs" />
     <Compile Include="Implementation\MyBinding.cs" />
     <Compile Include="Primitives\DateGenerator.cs" />
@@ -67,7 +69,6 @@
     <Compile Include="Generate.cs" />
     <Compile Include="Generator.cs" />
     <Compile Include="HardCodeThoseDates\HardCodeThatDate.cs" />
-    <Compile Include="Implementation\Gatherer.cs" />
     <Compile Include="Maybe.cs" />
     <Compile Include="BeingPicky.cs" />
     <Compile Include="Implementation\FuncGenerator.cs" />

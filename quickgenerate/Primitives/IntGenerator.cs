@@ -7,7 +7,7 @@ namespace QuickGenerate.Primitives
         private readonly int min;
         private readonly int max;
 
-        public IntGenerator() : this(-1, 100) { }
+        public IntGenerator() : this(1, 100) { }
 
         public IntGenerator(int minValue, int maxValue) { min = minValue; max = maxValue; }
 

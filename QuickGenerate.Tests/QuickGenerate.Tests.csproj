@@ -151,6 +151,7 @@
     <Compile Include="NumericStringGeneratorTests\IsAlwaysAValidNumberTests.cs" />
     <Compile Include="NumericStringGeneratorTests\MinMaxConstructionTests.cs" />
     <Compile Include="Picking\BeingPickyTests.cs" />
+    <Compile Include="PrimitiveGeneratorsTests\IntGeneratorTests.cs" />
     <Compile Include="PrimitiveGeneratorsTests\NullablesTests.cs" />
     <Compile Include="PrimitiveGeneratorsTests\ShortGeneratorTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

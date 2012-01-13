@@ -74,7 +74,7 @@
     <Compile Include="Handlers\GetSuperHero\SuperHeroDto.cs" />
     <Compile Include="Tests\CrudTests\SuperHeroCrudTests.cs" />
     <Compile Include="Tests\CrudTests\SuperPowerCrudTests.cs" />
-    <Compile Include="Tests\PerformanceTests\GetSuperHero\GetSuperHeroHandlerDoesNotLazyLoad.cs" />
+    <Compile Include="Tests\PerformanceTests\GetSuperHero\GetSuperHeroHandlerTests.cs" />
     <Compile Include="Tests\Tools\AssertQuery.cs" />
     <Compile Include="Tests\Tools\AssertQueryBuilder.cs" />
     <Compile Include="Tests\Tools\DatabaseTest.cs" />

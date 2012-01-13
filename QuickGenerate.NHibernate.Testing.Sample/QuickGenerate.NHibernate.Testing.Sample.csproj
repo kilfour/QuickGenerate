@@ -69,13 +69,21 @@
   <ItemGroup>
     <Compile Include="Domain\SuperHero.cs" />
     <Compile Include="Domain\SuperPower.cs" />
+    <Compile Include="Handlers\GetSuperHero\GetSuperHeroHandler.cs" />
+    <Compile Include="Handlers\GetSuperHero\GetSuperHeroQuery.cs" />
+    <Compile Include="Handlers\GetSuperHero\SuperHeroDto.cs" />
     <Compile Include="Tests\CrudTests\SuperHeroCrudTests.cs" />
     <Compile Include="Tests\CrudTests\SuperPowerCrudTests.cs" />
+    <Compile Include="Tests\PerformanceTests\GetSuperHero\GetSuperHeroHandlerDoesNotLazyLoad.cs" />
+    <Compile Include="Tests\Tools\AssertQuery.cs" />
+    <Compile Include="Tests\Tools\AssertQueryBuilder.cs" />
     <Compile Include="Tests\Tools\DatabaseTest.cs" />
     <Compile Include="Domain\IHaveAnId.cs" />
     <Compile Include="Tests\Tools\FileHelper.cs" />
     <Compile Include="Tests\Tools\CrudTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Tests\Tools\LogSpy.cs" />
+    <Compile Include="Tests\Tools\NHibernateSqlLogSpy.cs" />
     <Compile Include="Tests\Tools\SessionFactoryBuilder.cs" />
   </ItemGroup>
   <ItemGroup>

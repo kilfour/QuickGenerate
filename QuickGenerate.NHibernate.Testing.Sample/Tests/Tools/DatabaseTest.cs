@@ -1,5 +1,6 @@
 ﻿using System;
 using NHibernate;
+using QuickGenerate.NHibernate.Testing.Sample.Domain;
 
 namespace QuickGenerate.NHibernate.Testing.Sample.Tests.Tools
 {
@@ -32,6 +33,11 @@ namespace QuickGenerate.NHibernate.Testing.Sample.Tests.Tools
         {
             NHibernateSession.Flush();
             NHibernateSession.Clear();
+        }
+
+        protected void SaveToSession(IHaveAnId entity)
+        {
+            NHibernateSession.Save(entity);
         }
     }
 }

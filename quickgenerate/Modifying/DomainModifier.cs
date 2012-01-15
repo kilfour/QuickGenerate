@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Reflection;
 using QuickGenerate.Implementation;
@@ -58,8 +59,6 @@ namespace QuickGenerate.Modifying
             {
                 TryChangePropertyFiftyTimes(propertyInfo);
             }
-            //generator.ApplyRelations(value);
-            generator.ApplyForEachActions(value);
             return this;
         }
 

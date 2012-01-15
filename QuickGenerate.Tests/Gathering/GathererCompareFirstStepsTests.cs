@@ -44,7 +44,7 @@ namespace QuickGenerate.Tests.Gathering
 
             var result = theGatherer.Matches(theOtherGatherer);
 
-            Assert.True(result.IsMatch, result.GetMessage());
+            Assert.False(result.IsMatch, result.GetMessage());
             Assert.Equal(1, result.Messages.Count());
         }
 

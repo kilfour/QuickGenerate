@@ -31,6 +31,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="QuickDotNetCheck, Version=0.2.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Libs\quickdotnetcheck\QuickDotNetCheck.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
@@ -98,7 +102,9 @@
     <Compile Include="DomainGeneratorTests\Relations\OneToManyTests\ComplexOneToManyTests.cs" />
     <Compile Include="DomainGeneratorTests\Relations\OneToManyTests\ForEachOnOneToManyOrderTests.cs" />
     <Compile Include="DomainGeneratorTests\Relations\OneToManyTests\MultipleOneToManiesTests.cs" />
-    <Compile Include="DomainGeneratorTests\Relations\OneToManyTests\OneToManyUsingConstructorTests.cs" />
+    <Compile Include="DomainGeneratorTests\Relations\OneToManyTests\OneToManyUsingConstructorTests.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="DomainGeneratorTests\Relations\OneToManyTests\PolymorphicOneToManyTests.cs" />
     <Compile Include="DomainGeneratorTests\Relations\OneToOneTests\ExplicitOneToOneTests.cs" />
     <Compile Include="DomainGeneratorTests\Relations\OneToOneTests\ExplicitPolymorphicOneToOneTests.cs" />
@@ -145,9 +151,14 @@
     <Compile Include="EntityGeneratorTests\ReplacingPrimitiveGeneratorsWithConstantValueTests.cs" />
     <Compile Include="EntityGeneratorTests\StringUniquePropertyNameTests.cs" />
     <Compile Include="EnumTests.cs" />
+    <Compile Include="Inspecting\CompositeTests.cs" />
+    <Compile Include="Inspecting\InspectorReportTests.cs" />
+    <Compile Include="Inspecting\ListTests.cs" />
+    <Compile Include="Inspecting\Primitives\PrimitivesTests.cs" />
     <Compile Include="Gathering\GatherAllTests.cs" />
     <Compile Include="Gathering\GathererCompareFirstStepsTests.cs" />
     <Compile Include="Gathering\GatheringFirstStepsTests.cs" />
+    <Compile Include="Inspecting\PropertyBasedTesting.cs" />
     <Compile Include="MaybeDoTests.cs" />
     <Compile Include="ModifyTests\AConendrum.cs" />
     <Compile Include="ModifyTests\ModifyingSomethingComplexTests.cs" />

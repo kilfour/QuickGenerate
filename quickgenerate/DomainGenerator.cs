@@ -68,7 +68,7 @@ namespace QuickGenerate
             oneToManyRelations.Add(
                 new OneToManyRelation
                     {
-                        Action = (one, many) => action((TOne)one, (TMany)many),
+                        AddChildElement = (one, many) => action((TOne)one, (TMany)many),
                         Amount = () => numberOfMany,
                         One = typeof(TOne), 
                         Many = typeof(TMany)
@@ -93,8 +93,8 @@ namespace QuickGenerate
             oneToManyRelations.Add(
                 new OneToManyRelation
                 {
-                    ManyFunc = one => manyFunc((TOne)one),
-                    Action = (one, many) => action((TOne)one, (TMany)many),
+                    CreateChildElement = one => manyFunc((TOne)one),
+                    AddChildElement = (one, many) => action((TOne)one, (TMany)many),
                     Amount = () => new IntGenerator(minmumNumberOfMany, maximumNumberOfMany).GetRandomValue(),
                     One = typeof(TOne),
                     Many = typeof(TMany)
@@ -107,7 +107,7 @@ namespace QuickGenerate
             oneToManyRelations.Add(
                 new OneToManyRelation
                 {
-                    Action = (one, many) => action((TOne)one, (TMany)many),
+                    AddChildElement = (one, many) => action((TOne)one, (TMany)many),
                     Amount = () => new IntGenerator(minmumNumberOfMany, maximumNumberOfMany).GetRandomValue(),
                     One = typeof(TOne),
                     Many = typeof(TMany)
@@ -307,10 +307,10 @@ namespace QuickGenerate
                 for (int i = 0; i < amount; i++)
                 {
                     var many =
-                        relation.ManyFunc == null
+                        relation.CreateChildElement == null
                             ? OneWithoutRelations(relation.Many)
-                            : OneWithoutRelations(relation.ManyFunc(target));
-                    relation.Action(target, many);
+                            : OneWithoutRelations(relation.CreateChildElement(target));
+                    relation.AddChildElement(target, many);
                     ApplyOneToManyRelations(many, oneToManies.Where(r => r != relation).ToList());
                     ApplyManyToOneRelations(many, manyToOneRelations.Where(r => r.One != relation.One || r.Many != relation.Many).ToList());
                 }

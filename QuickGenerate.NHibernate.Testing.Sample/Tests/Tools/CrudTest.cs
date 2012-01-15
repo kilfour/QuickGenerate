@@ -2,11 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Reflection;
 using NHibernate.Exceptions;
-using NHibernate.Linq;
 using QuickGenerate.NHibernate.Testing.Sample.Domain;
-using QuickGenerate.Reflect;
 using Xunit;
 
 namespace QuickGenerate.NHibernate.Testing.Sample.Tests.Tools
@@ -16,10 +13,9 @@ namespace QuickGenerate.NHibernate.Testing.Sample.Tests.Tools
     {
         protected virtual DomainGenerator GenerateIt()
         {
-            return  
+            return
                 new DomainGenerator()
-                    .With<IHaveAnId>(opt => opt.Ignore(e => e.Id))
-                    ;//.ForEach<IHaveAnId>(e => NHibernateSession.Save(e));
+                    .With<IHaveAnId>(opt => opt.Ignore(e => e.Id));
         }
 
         protected void IsRequired<T>(Expression<Func<TEntity, T>> expression)
@@ -35,32 +31,29 @@ namespace QuickGenerate.NHibernate.Testing.Sample.Tests.Tools
         protected void Has_A<T>(Expression<Func<TEntity, T>> expression)
             where T : IHaveAnId
         {
+            var compiledExpression = expression.Compile();
             var entity = BuildEntity();
-
             NHibernateSession.Flush();
-
             var entityId = entity.Id;
-            var childId = expression.Compile().Invoke(entity).Id;
-
+            var childId = compiledExpression.Invoke(entity).Id;
             NHibernateSession.Clear();
-
             entity = NHibernateSession.Get<TEntity>(entityId);
-
-            Assert.Equal(childId, expression.Compile().Invoke(entity).Id);
+            Assert.Equal(childId, compiledExpression.Invoke(entity).Id);
         }
 
         protected void HasMany<TMany>(Expression<Func<TEntity, IEnumerable<TMany>>> expression)
             where TMany : IHaveAnId
         {
+            var compiledExpression = expression.Compile();
             var entity = BuildEntity();
             NHibernateSession.Flush();
-            var manies = expression.Compile().Invoke(entity).ToList();
+            var manies = compiledExpression.Invoke(entity).ToList();
             Assert.NotEqual(0, manies.Count());
             var entityId = entity.Id;
             var ids = manies.Select(many => many.Id).ToList();
             NHibernateSession.Clear();
             entity = NHibernateSession.Get<TEntity>(entityId);
-            manies = expression.Compile().Invoke(entity).ToList();
+            manies = compiledExpression.Invoke(entity).ToList();
             Assert.Equal(ids.Count, manies.Count());
             foreach (var many in manies)
             {
@@ -111,6 +104,14 @@ namespace QuickGenerate.NHibernate.Testing.Sample.Tests.Tools
             }
         }
 
+        private static void AssertEqual<T>(T expectedEntity, T actualEntity)
+        {
+            Inspector
+                .For(expectedEntity, actualEntity)
+                .Report(Assert.True)
+                .AreMemberWiseEqual();
+        }
+
         protected virtual TEntity BuildEntity()
         {
             var generator = GenerateIt();
@@ -134,33 +135,6 @@ namespace QuickGenerate.NHibernate.Testing.Sample.Tests.Tools
         {
             NHibernateSession.Delete(entity);
             return true;
-        }
-
-        protected void DontAssert<TProperty>(Expression<Func<TEntity, TProperty>> propertyExpression)
-        {
-            var propertyName = propertyExpression.AsMemberExpression().Member.Name;
-            typeof (TEntity).GetProperties().ToList().RemoveAll(src => src.Name == propertyName);
-        }
-
-        protected virtual void AssertEqual<T>(T expectedEntity, T actualEntity)
-        {
-            typeof (TEntity).GetProperties().ToList()
-                .Where(p => p.PropertyType.Namespace != null && p.PropertyType.Namespace.StartsWith("System"))
-                .ForEach(src => VerifyEqualityOf(src, expectedEntity, actualEntity));
-        }
-
-        private static void VerifyEqualityOf<T>(PropertyInfo src, T expectedEntity, T actualEntity)
-        {
-            var errorMessage = string.Format(
-                "{2}{0}.{1}{2}  Expected : {3}.{2}  Actual : {4}.{2}",
-                typeof (TEntity).Name,
-                src.Name,
-                Environment.NewLine,
-                src.GetValue(expectedEntity, null),
-                src.GetValue(actualEntity, null));
-
-            Assert.True(
-                Equals(src.GetValue(expectedEntity, null), src.GetValue(actualEntity, null)), errorMessage);
         }
     }
 }

@@ -13,7 +13,7 @@ namespace QuickGenerate.Tests.Specs
        
         public override void Arrange()
         {
-            type = typeof (JustABool);//Pick.TestObjectType();
+            type = Pick.TestObjectType();
         }
 
         protected override void Act()

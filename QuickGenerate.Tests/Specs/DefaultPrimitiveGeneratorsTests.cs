@@ -1,20 +1,11 @@
 using System;
 using QuickDotNetCheck;
+using QuickGenerate.Tests.Doc.Domain.Primitives.SingleProperty;
 using QuickGenerate.Tests.Specs.TestObjects;
 using Xunit;
 
 namespace QuickGenerate.Tests.Specs
 {
-    public class DomainGeneratorFixture : Fixture
-    {
-        public DomainGenerator Generator { get; private set; }
-
-        public DomainGeneratorFixture(DomainGenerator generator)
-        {
-            Generator = generator;
-        }
-    }
-
     public class DefaultPrimitiveGeneratorsTests : Fixture
     {
         private Type type { get; set; }
@@ -22,7 +13,7 @@ namespace QuickGenerate.Tests.Specs
        
         public override void Arrange()
         {
-            type = Pick.TestObjectType();
+            type = typeof (JustABool);//Pick.TestObjectType();
         }
 
         protected override void Act()

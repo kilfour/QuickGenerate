@@ -385,7 +385,7 @@ namespace QuickGenerate
             if (choiceConvention != null)
                 return choiceConvention.Possibilities.PickOne();
 
-            return OneWithoutRelations(Create.Object(this, type));
+            return OneWithoutRelations(this.Object(type));
         }
 
         private bool IsWritable(PropertyInfo propertyInfo)
@@ -475,6 +475,9 @@ namespace QuickGenerate
         {
             if (componentTypes.Any(t => t == propertyInfo.PropertyType))
             {
+                if(target.GetType() == propertyInfo.PropertyType)
+                    throw new RecursiveRelationDefinedException(string.Format("Component Type for {0} is same as {1}.", target.GetType(), propertyInfo.PropertyType));
+
                 SetPropertyValue(propertyInfo, target, OneWithoutRelations(propertyInfo.PropertyType));
                 return true;
             }

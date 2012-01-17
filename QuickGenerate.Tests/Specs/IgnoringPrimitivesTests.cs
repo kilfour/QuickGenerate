@@ -14,7 +14,7 @@ namespace QuickGenerate.Tests.Specs
         [Fact]
         public void RunTest()
         {
-            var suite = new Suite(100, 10).Verbose();
+            var suite = new Suite(100, 1).Verbose();
             suite.Using(() => new DomainGenerator().With(true));
             RegisterFixtures(suite);
             suite.Run();

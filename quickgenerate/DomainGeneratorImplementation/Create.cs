@@ -26,7 +26,7 @@ namespace QuickGenerate.DomainGeneratorImplementation
                     type
                         .GetConstructors(MyBinding.Flags)
                         .Where(c => c.GetParameters().Count()  == constructorTypeParameters.Count())
-                        .First(
+                        .FirstOrDefault(
                             c =>
                                 {
                                     var ctorParams = c.GetParameters();
@@ -40,6 +40,11 @@ namespace QuickGenerate.DomainGeneratorImplementation
                                     }
                                     return true;
                                 });
+                if(constructor == null)
+                {
+                    var types = string.Join(", ", constructorTypeParameters.Select(t => t.Name).ToArray()); 
+                    throw new CantFindConstructorException(string.Format("For these types : {0}.",types));
+                }
                 return Construct(type, domaingenerator, constructor, constructorTypeParameters.Count());
             }
 

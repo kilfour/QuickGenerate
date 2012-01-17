@@ -39,6 +39,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DomainGeneratorImplementation\CantFindConstructorException.cs" />
     <Compile Include="DomainGeneratorImplementation\ConstructorGeneratorOptions.cs" />
     <Compile Include="DomainGeneratorImplementation\IgnoreGeneratorOptions.cs" />
     <Compile Include="DomainGeneratorImplementation\InheritanceGeneratorOptions.cs" />
@@ -62,7 +63,6 @@
     <Compile Include="Complex\WordGenerator.cs" />
     <Compile Include="DomainGenerator.cs" />
     <Compile Include="DomainGeneratorImplementation\ActionConvention.cs" />
-    <Compile Include="DomainGeneratorImplementation\CantFindConstructor.cs" />
     <Compile Include="DomainGeneratorImplementation\ChoiceConvention.cs" />
     <Compile Include="DomainGeneratorImplementation\ConstructionConvention.cs" />
     <Compile Include="DomainGeneratorImplementation\Create.cs" />

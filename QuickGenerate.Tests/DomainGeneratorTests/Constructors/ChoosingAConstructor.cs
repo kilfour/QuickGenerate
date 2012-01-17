@@ -1,11 +1,26 @@
+using QuickGenerate.DomainGeneratorImplementation;
 using Xunit;
 
 namespace QuickGenerate.Tests.DomainGeneratorTests.Constructors
 {
     public class ChoosingAConstructor
     {
+
         [Fact]
-        public void TheInt()
+        public void TheDefaultConstructor()
+        {
+            var thing =
+                new DomainGenerator()
+                    .With<SomethingToGenerate>(opt => opt.Construct())
+                    .One<SomethingToGenerate>();
+
+            Assert.NotNull(thing);
+            Assert.Equal(0, thing.CheckInt());
+            Assert.Null(thing.CheckString());
+        }
+
+        [Fact]
+        public void TheString()
         {
             var thing = 
                 new DomainGenerator()
@@ -18,7 +33,7 @@ namespace QuickGenerate.Tests.DomainGeneratorTests.Constructors
         }
 
         [Fact]
-        public void TheString()
+        public void TheInt()
         {
             var thing =
                 new DomainGenerator()
@@ -41,6 +56,16 @@ namespace QuickGenerate.Tests.DomainGeneratorTests.Constructors
             Assert.NotNull(thing);
             Assert.NotEqual(0, thing.CheckInt());
             Assert.NotNull(thing.CheckString());
+        }
+
+        [Fact]
+        public void NoMatchThrows()
+        {
+            Assert.Throws<CantFindConstructorException>(
+                () =>
+                new DomainGenerator()
+                    .With<SomethingToGenerate>(opt => opt.Construct<string>().Construct<int>())
+                    .One<SomethingToGenerate>());
         }
 
         public class SomethingToGenerate

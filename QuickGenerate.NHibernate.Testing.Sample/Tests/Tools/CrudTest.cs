@@ -106,8 +106,8 @@ namespace QuickGenerate.NHibernate.Testing.Sample.Tests.Tools
 
         private static void AssertEqual<T>(T expectedEntity, T actualEntity)
         {
-            Inspector
-                .For(expectedEntity, actualEntity)
+            Inspect
+                .This(expectedEntity, actualEntity)
                 .Report(Assert.True)
                 .AreMemberWiseEqual();
         }

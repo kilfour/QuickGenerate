@@ -14,8 +14,8 @@ namespace QuickGenerate.Tests.Inspecting
             var thingOne = new Something { MyProp = 42 };
             var thingTwo = new Something { MyProp = 42 };
             var inspector = 
-                Inspector
-                    .For(thingOne, thingTwo)
+                Inspect
+                    .This(thingOne, thingTwo)
                     .Report((b, m) => result = b);
             Assert.True(inspector.AreMemberWiseEqual());
             Assert.True(result);

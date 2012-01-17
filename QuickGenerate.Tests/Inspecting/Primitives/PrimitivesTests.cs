@@ -13,7 +13,7 @@ namespace QuickGenerate.Tests.Inspecting.Primitives
             var thingOne = new SomethingInt {MyProp = 42};
             var thingTwo = new SomethingInt {MyProp = 42};
 
-            var inspector = Inspector.For(thingOne, thingTwo);
+            var inspector = Inspect.This(thingOne, thingTwo);
            
             Assert.True(inspector.AreMemberWiseEqual());
 

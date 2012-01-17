@@ -49,6 +49,24 @@
   <ItemGroup>
     <Compile Include="Choices\FromRangeTests.cs" />
     <Compile Include="Choices\TimesTests.cs" />
+    <Compile Include="Specs\IgnoringPrimitivesTests.cs" />
+    <Compile Include="Specs\TestObjects\AllPrimitives.cs" />
+    <Compile Include="Specs\TestObjects\IHaveOnlyPrimitives.cs" />
+    <Compile Include="Specs\TestObjects\ITestObject.cs" />
+    <Compile Include="Specs\TestObjects\Pick.cs" />
+    <Compile Include="Specs\TestObjects\SingleProperty\IHaveOnlyOnePrimitive.cs" />
+    <Compile Include="Specs\TestObjects\SingleProperty\JustABool.cs" />
+    <Compile Include="Specs\TestObjects\SingleProperty\JustAChar.cs" />
+    <Compile Include="Specs\TestObjects\SingleProperty\JustADateTime.cs" />
+    <Compile Include="Specs\TestObjects\SingleProperty\JustADecimal.cs" />
+    <Compile Include="Specs\TestObjects\SingleProperty\JustADouble.cs" />
+    <Compile Include="Specs\TestObjects\SingleProperty\JustAFloat.cs" />
+    <Compile Include="Specs\TestObjects\SingleProperty\JustAGuid.cs" />
+    <Compile Include="Specs\TestObjects\SingleProperty\JustALong.cs" />
+    <Compile Include="Specs\TestObjects\SingleProperty\JustAnInt.cs" />
+    <Compile Include="Specs\TestObjects\SingleProperty\JustAShort.cs" />
+    <Compile Include="Specs\TestObjects\SingleProperty\JustAString.cs" />
+    <Compile Include="Specs\TestObjects\SingleProperty\JustATimeSpan.cs" />
     <Compile Include="DomainGeneratorTests\ComponentsTests.cs" />
     <Compile Include="DomainGeneratorTests\Constructors\ChoosingAConstructor.cs">
       <SubType>Code</SubType>
@@ -154,11 +172,12 @@
     <Compile Include="Inspecting\CompositeTests.cs" />
     <Compile Include="Inspecting\InspectorReportTests.cs" />
     <Compile Include="Inspecting\ListTests.cs" />
+    <Compile Include="Inspecting\NavigatorTests.cs" />
     <Compile Include="Inspecting\Primitives\PrimitivesTests.cs" />
     <Compile Include="Gathering\GatherAllTests.cs" />
     <Compile Include="Gathering\GathererCompareFirstStepsTests.cs" />
     <Compile Include="Gathering\GatheringFirstStepsTests.cs" />
-    <Compile Include="Inspecting\PropertyBasedTesting.cs" />
+    <Compile Include="Specs\DefaultPrimitiveGeneratorsTests.cs" />
     <Compile Include="MaybeDoTests.cs" />
     <Compile Include="ModifyTests\AConendrum.cs" />
     <Compile Include="ModifyTests\ModifyingSomethingComplexTests.cs" />

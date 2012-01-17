@@ -8,7 +8,7 @@ namespace QuickGenerate.Primitives
         private readonly long min;
         private readonly long max;
 
-        public LongGenerator() : this(-1, 100) { }
+        public LongGenerator() : this(1, 100) { }
 
         public LongGenerator(long minValue, long maxValue) { min = minValue; max = maxValue; }
 

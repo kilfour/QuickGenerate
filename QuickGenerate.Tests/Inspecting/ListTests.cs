@@ -15,8 +15,8 @@ namespace QuickGenerate.Tests.Inspecting
             var thingOne = generator.One<Something>();
             var thingTwo = generator.One<Something>();
             var inspector =
-                Inspector
-                    .For(thingOne, thingTwo)
+                Inspect
+                    .This(thingOne, thingTwo)
                     .Inspect<Something, SomethingElse>(s => s.MySomethingElse);
             Assert.True(inspector.AreMemberWiseEqual());
             thingTwo.MySomethingElse[1].MyProp = 43;

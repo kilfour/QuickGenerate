@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using QuickGenerate.Implementation;
+using QuickGenerate.Complex;
 
 namespace QuickGenerate.DomainGeneratorImplementation
 {
@@ -44,6 +44,13 @@ namespace QuickGenerate.DomainGeneratorImplementation
             return null;
         }
 
+        public void foo()
+        {
+            foreach (var requiredGeneratorType in GetRequiredGeneratorTypes())
+            {
+                Console.WriteLine(requiredGeneratorType.Name);
+            }
+        }
         private static IEnumerable<Type> GetRequiredGeneratorTypes()
         {
             return typeof(PrimitiveGenerators).Assembly.GetTypes().Where(IsARequiredGenerator);
@@ -64,23 +71,6 @@ namespace QuickGenerate.DomainGeneratorImplementation
             var valuesType = GetTypeOfGeneratedValues(type);
             var nullable = typeof (Nullable<>).MakeGenericType(valuesType);
             return nullable;
-        }
-    }
-
-    public class NullableGenerator<T> : Generator<object>
-    {
-        private readonly IGenerator<T> generator;
-
-        public NullableGenerator(IGenerator<T> generator)
-        {
-            this.generator = generator;
-        }
-
-        public override object GetRandomValue()
-        {
-            if(new[]{1,10}.FromRange()==1)
-                return null;
-            return generator.GetRandomValue();
         }
     }
 }

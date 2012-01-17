@@ -43,6 +43,7 @@
     <Compile Include="DomainGeneratorImplementation\IgnoreGeneratorOptions.cs" />
     <Compile Include="DomainGeneratorImplementation\InheritanceGeneratorOptions.cs" />
     <Compile Include="DomainGeneratorImplementation\ManyToOneRelation.cs" />
+    <Compile Include="Complex\NullableGenerator.cs" />
     <Compile Include="DomainGeneratorImplementation\RecursiveRelationDefinedException.cs" />
     <Compile Include="EntityGenerator.cs" />
     <Compile Include="Gathering\Gatherer.cs" />
@@ -50,6 +51,7 @@
     <Compile Include="IGenerator.cs" />
     <Compile Include="Implementation\MyBinding.cs" />
     <Compile Include="Inspector.cs" />
+    <Compile Include="Modifying\HeyITriedFiftyTimesButCouldNotGetADifferentValue.cs" />
     <Compile Include="Primitives\DateGenerator.cs" />
     <Compile Include="Primitives\ShortGenerator.cs" />
     <Compile Include="RandomIntFromArray.cs" />
@@ -76,7 +78,6 @@
     <Compile Include="Modify.cs" />
     <Compile Include="DomainGeneratorImplementation\PrimitiveGenerators.cs" />
     <Compile Include="Modifying\DomainModifier.cs" />
-    <Compile Include="Modifying\HeyITriedFiveTimesButCouldNotGetADifferentValue.cs" />
     <Compile Include="Primitives\BoolGenerator.cs" />
     <Compile Include="Primitives\CharGenerator.cs" />
     <Compile Include="Primitives\DateTimeGenerator.cs" />

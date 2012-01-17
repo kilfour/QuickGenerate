@@ -50,6 +50,7 @@
     <Compile Include="Choices\FromRangeTests.cs" />
     <Compile Include="Choices\TimesTests.cs" />
     <Compile Include="DomainGeneratorTests\Components\AvoidingRecursion.cs" />
+    <Compile Include="DomainGeneratorTests\Constructors\ChoosingAConstructorAndSupplyingValue.cs" />
     <Compile Include="Specs\IgnoringPrimitivesTests.cs" />
     <Compile Include="Specs\TestObjects\AllPrimitives.cs" />
     <Compile Include="Specs\TestObjects\IHaveOnlyPrimitives.cs" />

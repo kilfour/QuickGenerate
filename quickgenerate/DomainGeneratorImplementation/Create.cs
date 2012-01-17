@@ -33,7 +33,7 @@ namespace QuickGenerate.DomainGeneratorImplementation
                                     int ix = 0;
                                     foreach (var parameterInfo in ctorParams)
                                     {
-                                        if(parameterInfo.ParameterType != constructorTypeParameters[ix])
+                                        if(parameterInfo.ParameterType != constructorTypeParameters[ix].Type)
                                             return false;
                                         ix++;
 
@@ -42,10 +42,10 @@ namespace QuickGenerate.DomainGeneratorImplementation
                                 });
                 if(constructor == null)
                 {
-                    var types = string.Join(", ", constructorTypeParameters.Select(t => t.Name).ToArray()); 
+                    var types = string.Join(", ", constructorTypeParameters.Select(pi => pi.Type.Name).ToArray()); 
                     throw new CantFindConstructorException(string.Format("For these types : {0}.",types));
                 }
-                return Construct(type, domaingenerator, constructor, constructorTypeParameters.Count());
+                return Construct(type, domaingenerator, constructor, constructorTypeParameters);
             }
 
             if (domaingenerator.constructionConventions.Keys.Any(t => t.IsAssignableFrom(type)))
@@ -71,6 +71,22 @@ namespace QuickGenerate.DomainGeneratorImplementation
                 return Construct(type, domaingenerator, constructor, highestParameterCount); 
             }
             return Activator.CreateInstance(type);
+        }
+
+        private static object Construct(Type type, DomainGenerator domaingenerator, ConstructorInfo constructor, ConstructorParameterInfo[] constructorTypeParameters)
+        {
+            var parameterValues = new object[constructorTypeParameters.Count()];
+            int i = 0;
+            foreach (var constructorTypeParameter in constructorTypeParameters)
+            {
+                domaingenerator.CheckForRecursiveRelation(type, constructorTypeParameter.Type);
+                if(constructorTypeParameter.Generate != null)
+                    parameterValues.SetValue(constructorTypeParameter.Generate(), i);
+                else
+                    parameterValues.SetValue(domaingenerator.One(constructorTypeParameter.Type), i);
+                i++;
+            }
+            return constructor.Invoke(parameterValues);
         }
 
         private static object Construct(Type type, DomainGenerator domaingenerator, ConstructorInfo constructor, int highestParameterCount)

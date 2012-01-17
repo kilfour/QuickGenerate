@@ -199,12 +199,12 @@ namespace QuickGenerate
             return this;
         }
 
-        public Type[] GetConstructorTypeParameters(Type type)
+        public ConstructorParameterInfo[] GetConstructorTypeParameters(Type type)
         {
             if (!constructorGeneratorOptions.ContainsKey(type))
                 return null;
             var options = constructorGeneratorOptions[type];
-            return options.GetParameterTypes();
+            return options.GetParameterInfos();
         }
 
         public DomainGenerator With<T>(Func<IGenerator<T>> generatorFunc)

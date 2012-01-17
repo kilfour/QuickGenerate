@@ -26,6 +26,7 @@ namespace QuickGenerate.NHibernate.Testing.Sample.Handlers.GetSuperHero
                 session
                     .CreateCriteria<SuperHero>()
                     .Add(Restrictions.Eq("Id", superHeroId))
+                    // Comment out line below to see the GetSuperHeroHandlerTest fail
                     .CreateAlias("SuperPowers", "sp", JoinType.LeftOuterJoin)
                     .UniqueResult<SuperHero>();
         }

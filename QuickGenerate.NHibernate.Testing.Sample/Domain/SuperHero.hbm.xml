@@ -9,7 +9,7 @@
     <id name="Id" column="Id" >
       <generator class="guid.comb" />
     </id>
-    
+    <property name="Name" length="50" not-null="true" />
     <set name="SuperPowers" cascade="all-delete-orphan">
       <key column="SuperHeroId" />
       <one-to-many class="SuperPower" />

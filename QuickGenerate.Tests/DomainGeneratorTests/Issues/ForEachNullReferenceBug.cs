@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using QuickGenerate.Reflect;
+﻿using System.Linq;
 using Xunit;
 
 namespace QuickGenerate.Tests.DomainGeneratorTests.Issues

@@ -83,7 +83,7 @@ namespace QuickGenerate.DomainGeneratorImplementation
                 if(constructorTypeParameter.Generate != null)
                     parameterValues.SetValue(constructorTypeParameter.Generate(), i);
                 else
-                    parameterValues.SetValue(domaingenerator.One(constructorTypeParameter.Type), i);
+                    parameterValues.SetValue(domaingenerator.AnotherOne(constructorTypeParameter.Type), i);
                 i++;
             }
             return constructor.Invoke(parameterValues);
@@ -96,7 +96,7 @@ namespace QuickGenerate.DomainGeneratorImplementation
             for (int i = 0; i < parameters.Length; i++)
             {
                 domaingenerator.CheckForRecursiveRelation(type, parameters[i].ParameterType);
-                parameterValues.SetValue(domaingenerator.One(parameters[i].ParameterType), i);
+                parameterValues.SetValue(domaingenerator.AnotherOne(parameters[i].ParameterType), i);
             }
             return constructor.Invoke(parameterValues);
         }

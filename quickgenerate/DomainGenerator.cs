@@ -351,8 +351,7 @@ namespace QuickGenerate
         public object One(Type resultType)
         {
             generatedObjects.Clear();
-            var result = OneWithoutRelations(resultType);
-            ApplyRelations(result);
+            var result = AnotherOne(resultType);
             foreach (var actionConvention in actionConventions)
             {
                 for (int i = 0; i < generatedObjects.Count(); i++)
@@ -362,6 +361,13 @@ namespace QuickGenerate
                         actionConvention.Action(obj);
                 }
             }
+            return result;
+        }
+
+        public object AnotherOne(Type resultType)
+        {
+            var result = OneWithoutRelations(resultType);
+            ApplyRelations(result);
             return result;
         }
 

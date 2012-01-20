@@ -134,7 +134,6 @@
     <Compile Include="DomainGeneratorTests\Relations\WarnAgainstRecursionTests.cs" />
     <Compile Include="DomainGeneratorTests\ReplacingPrimitiveGeneratorsTests.cs" />
     <Compile Include="DomainGeneratorTests\ReplacingPrimitiveGeneratorsWithConstantValueTests.cs" />
-    <Compile Include="DomainGeneratorTests\StringUniquePropertyNameTests.cs" />
     <Compile Include="DomainGeneratorTests\IgnoreConventionTypedTests.cs" />
     <Compile Include="DomainGeneratorTests\WeaklyTypedOneTests.cs" />
     <Compile Include="EntityGeneratorTests\ActivationTests.cs" />

@@ -41,6 +41,15 @@ namespace QuickGenerate
         public readonly Dictionary<Type, Func<object>> constructionConventions
             = new Dictionary<Type, Func<object>>();
 
+        private readonly IDictionary<Type, IIgnoreGeneratorOptions> ignoreGeneratorOptions =
+            new Dictionary<Type, IIgnoreGeneratorOptions>();
+
+        private readonly IDictionary<Type, IInheritanceGeneratorOptions> inheritanceGeneratorOptions =
+            new Dictionary<Type, IInheritanceGeneratorOptions>();
+
+        private readonly IDictionary<Type, IConstructorGeneratorOptions> constructorGeneratorOptions =
+            new Dictionary<Type, IConstructorGeneratorOptions>();
+
         public DomainGenerator Ignore(Func<MemberInfo, bool> ignoreThis)
         {
             ignoreConventions.Add(ignoreThis);
@@ -133,7 +142,7 @@ namespace QuickGenerate
 
         public DomainGenerator ManyToOne<TMany, TOne>(int numberOfMany, Action<TMany, TOne> action)
         {
-            return ManyToOne(numberOfMany, numberOfMany, action); ;
+            return ManyToOne(numberOfMany, numberOfMany, action);
         }
 
         public DomainGenerator ManyToOne<TMany, TOne>(int minmumNumberOfMany, int maximumNumberOfMany, Action<TMany, TOne> action)
@@ -182,9 +191,6 @@ namespace QuickGenerate
             return this;
         }
 
-        private readonly IDictionary<Type, IIgnoreGeneratorOptions> ignoreGeneratorOptions =
-            new Dictionary<Type, IIgnoreGeneratorOptions>();
-
         public DomainGenerator With<T>(Action<IgnoreGeneratorOptions<T>> customization)
         {
             if (!ignoreGeneratorOptions.ContainsKey(typeof(T)))
@@ -192,9 +198,6 @@ namespace QuickGenerate
             customization((IgnoreGeneratorOptions<T>)ignoreGeneratorOptions[typeof(T)]);
             return this;
         }
-
-        private readonly IDictionary<Type, IInheritanceGeneratorOptions> inheritanceGeneratorOptions =
-            new Dictionary<Type, IInheritanceGeneratorOptions>();
 
         public DomainGenerator With<T>(Action<InheritanceGeneratorOptions<T>> customization)
         {
@@ -211,9 +214,6 @@ namespace QuickGenerate
             var options = inheritanceGeneratorOptions[type];
             return options.PickType();
         }
-
-        private readonly IDictionary<Type, IConstructorGeneratorOptions> constructorGeneratorOptions =
-            new Dictionary<Type, IConstructorGeneratorOptions>();
 
         public DomainGenerator With<T>(Action<ConstructorGeneratorOptions<T>> customization)
         {
@@ -469,28 +469,6 @@ namespace QuickGenerate
         public DomainModifier<T> ModifyThis<T>(T somethingToModify)
         {
             return new DomainModifier<T>(somethingToModify, this);
-        }
-
-        public DomainGenerator WithStringNameCounterPattern()
-        {
-            return WithStringNameCounterPattern(0);
-        }
-
-        public DomainGenerator WithStringNameCounterPattern(int startingValue)
-        {
-            Func<MemberInfo, bool> predicate = mi => ((PropertyInfo)mi).PropertyType.IsAssignableFrom(typeof(string));
-            dynamicValueConventions[predicate] = pi => pi.Name + GetGenerator(pi, startingValue).GetRandomValue().ToString();
-            return this;
-        }
-
-        private readonly Dictionary<PropertyInfo, FuncGenerator<int>> counters =
-            new Dictionary<PropertyInfo, FuncGenerator<int>>();
-
-        private FuncGenerator<int> GetGenerator(PropertyInfo propertyInfo, int startingValue)
-        {
-            if(!counters.ContainsKey(propertyInfo))
-                counters[propertyInfo] = new FuncGenerator<int>(startingValue, val => ++val);
-            return counters[propertyInfo];
         }
 
         private void SetPropertyValue(PropertyInfo propertyInfo, object target, object value)

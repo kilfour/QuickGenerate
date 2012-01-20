@@ -9,8 +9,6 @@ namespace QuickGenerate.DomainGeneratorImplementation
 {
     public class GeneratorOptions<T>
     {
-        //public T Entity { get { return (T)domainGenerator.GeneratedObjects.Last(obj => obj.GetType() == typeof (T)); } }
-
         private readonly DomainGenerator domainGenerator;
 
         public GeneratorOptions(DomainGenerator domainGenerator)

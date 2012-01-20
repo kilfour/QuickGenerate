@@ -1,6 +1,5 @@
 using System;
 using QuickDotNetCheck;
-using QuickGenerate.Tests.Doc.Domain.Primitives.SingleProperty;
 using QuickGenerate.Tests.Specs.TestObjects;
 using Xunit;
 

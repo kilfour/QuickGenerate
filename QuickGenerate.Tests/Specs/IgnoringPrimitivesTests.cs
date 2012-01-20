@@ -24,47 +24,51 @@ namespace QuickGenerate.Tests.Specs
         {
             return
                 suite
-                    .Register(Build<AllPrimitives, long>(suite, e => e.LongProperty))
-                    .Register(Build<AllPrimitives, DateTime>(suite, e => e.DateTimeProperty))
-                    .Register(Build<AllPrimitives, short>(suite, e => e.ShortProperty))
-                    .Register(Build<AllPrimitives, decimal>(suite, e => e.DecimalProperty))
-                    .Register(Build<AllPrimitives, int>(suite, e => e.IntProperty))
-                    .Register(Build<AllPrimitives, string>(suite, e => e.StringProperty))
-                    .Register(Build<AllPrimitives, Guid>(suite, e => e.GuidProperty))
-                    .Register(Build<AllPrimitives, char>(suite, e => e.CharProperty))
-                    .Register(Build<AllPrimitives, float>(suite, e => e.FloatProperty))
-                    .Register(Build<AllPrimitives, TimeSpan>(suite, e => e.TimeSpanProperty))
-                    .Register(Build<AllPrimitives, double>(suite, e => e.DoubleProperty));
+                    .Register(Build<AllPrimitives, long>(e => e.LongProperty))
+                    .Register(Build<AllPrimitives, DateTime>(e => e.DateTimeProperty))
+                    .Register(Build<AllPrimitives, short>(e => e.ShortProperty))
+                    .Register(Build<AllPrimitives, decimal>(e => e.DecimalProperty))
+                    .Register(Build<AllPrimitives, int>(e => e.IntProperty))
+                    .Register(Build<AllPrimitives, string>(e => e.StringProperty))
+                    .Register(Build<AllPrimitives, Guid>(e => e.GuidProperty))
+                    .Register(Build<AllPrimitives, char>(e => e.CharProperty))
+                    .Register(Build<AllPrimitives, float>(e => e.FloatProperty))
+                    .Register(Build<AllPrimitives, TimeSpan>(e => e.TimeSpanProperty))
+                    .Register(Build<AllPrimitives, double>(e => e.DoubleProperty));
         }
 
-        private Func<IFixture> Build<TEntity, TProperty>(Suite suite, Expression<Func<TEntity, TProperty>> expression)
+        private Func<IFixture> Build<TEntity, TProperty>(Expression<Func<TEntity, TProperty>> expression)
         {
-            return () => new PrimitiveIgnoreFixture<TEntity, TProperty>(suite.Get<DomainGenerator>, expression);
+            return () => new PrimitiveIgnoreFixture<TEntity, TProperty>(expression);
         }
     }
 
-    public class PrimitiveIgnoreFixture<TEntity, TProperty> : Fixture
+    public class PrimitiveIgnoreFixture<TEntity, TProperty> : Fixture, IUse<DomainGenerator>
     {
-        private readonly Func<DomainGenerator> generator;
+        private DomainGenerator generator;
         private readonly Expression<Func<TEntity, TProperty>> expression;
         private readonly PropertyInfo propertyInfo;
         private object thing { get; set; }
 
-        public PrimitiveIgnoreFixture(Func<DomainGenerator> generator, Expression<Func<TEntity, TProperty>> expression)
+        public void Set(DomainGenerator state)
         {
-            this.generator = generator;
+            generator = state;
+        }
+
+        public PrimitiveIgnoreFixture(Expression<Func<TEntity, TProperty>> expression)
+        {
             this.expression = expression;
             propertyInfo = expression.AsPropertyInfo();
         }
 
         public override void Arrange()
         {
-            generator().With<TEntity>(opt => opt.Ignore(expression));
+            generator.With<TEntity>(opt => opt.Ignore(expression));
         }
 
         protected override void Act()
         {
-            thing = generator().One<TEntity>();
+            thing = generator.One<TEntity>();
         }
 
         [Spec]

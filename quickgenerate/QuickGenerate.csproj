@@ -45,6 +45,7 @@
     <Compile Include="DomainGeneratorImplementation\InheritanceGeneratorOptions.cs" />
     <Compile Include="DomainGeneratorImplementation\ManyToOneRelation.cs" />
     <Compile Include="Complex\NullableGenerator.cs" />
+    <Compile Include="DomainGeneratorImplementation\NoRelationAllowedOnComponentsException.cs" />
     <Compile Include="DomainGeneratorImplementation\RecursiveRelationDefinedException.cs" />
     <Compile Include="EntityGenerator.cs" />
     <Compile Include="Gathering\Gatherer.cs" />

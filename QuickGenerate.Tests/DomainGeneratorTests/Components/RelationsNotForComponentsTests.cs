@@ -11,7 +11,7 @@ namespace QuickGenerate.Tests.DomainGeneratorTests.Components
             Assert.Throws<NoRelationAllowedOnComponentsException>(
                 () => new DomainGenerator()
                           .OneToOne<SomeComponent, SomethingElse>((sc, se) => { })
-                          .Component<SomethingToGenerate>()
+                          .Component<SomeComponent>()
                           .One<SomethingToGenerate>());
         }
 
@@ -20,7 +20,7 @@ namespace QuickGenerate.Tests.DomainGeneratorTests.Components
         {
             Assert.Throws<NoRelationAllowedOnComponentsException>(
                 () => new DomainGenerator()
-                          .Component<SomethingToGenerate>()
+                          .Component<SomeComponent>()
                           .OneToOne<SomeComponent, SomethingElse>((sc, se )=> { })
                           .One<SomethingToGenerate>());
         }
@@ -31,7 +31,7 @@ namespace QuickGenerate.Tests.DomainGeneratorTests.Components
             Assert.Throws<NoRelationAllowedOnComponentsException>(
                 () => new DomainGenerator()
                           .OneToMany<SomeComponent, SomethingElse>(1, (sc, se) => { })
-                          .Component<SomethingToGenerate>()
+                          .Component<SomeComponent>()
                           .One<SomethingToGenerate>());
         }
 
@@ -40,7 +40,7 @@ namespace QuickGenerate.Tests.DomainGeneratorTests.Components
         {
             Assert.Throws<NoRelationAllowedOnComponentsException>(
                 () => new DomainGenerator()
-                          .Component<SomethingToGenerate>()
+                          .Component<SomeComponent>()
                           .OneToMany<SomeComponent, SomethingElse>(1, (sc, se) => { })
                           .One<SomethingToGenerate>());
         }
@@ -51,7 +51,7 @@ namespace QuickGenerate.Tests.DomainGeneratorTests.Components
             Assert.Throws<NoRelationAllowedOnComponentsException>(
                 () => new DomainGenerator()
                           .ManyToOne<SomeComponent, SomethingElse>(1, (sc, se) => { })
-                          .Component<SomethingToGenerate>()
+                          .Component<SomeComponent>()
                           .One<SomethingToGenerate>());
         }
 
@@ -60,7 +60,7 @@ namespace QuickGenerate.Tests.DomainGeneratorTests.Components
         {
             Assert.Throws<NoRelationAllowedOnComponentsException>(
                 () => new DomainGenerator()
-                          .Component<SomethingToGenerate>()
+                          .Component<SomeComponent>()
                           .ManyToOne<SomeComponent, SomethingElse>(1, (sc, se) => { })
                           .One<SomethingToGenerate>());
         }

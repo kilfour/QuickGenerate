@@ -65,13 +65,21 @@ namespace QuickGenerate
 
         public DomainGenerator OneToMany<TOne, TMany>(int numberOfMany, Action<TOne, TMany> action)
         {
+            var oneType = typeof (TOne);
+            if (IsComponentType(oneType))
+                throw new NoRelationAllowedOnComponentsException(string.Format("Component : {0}.", oneType.Name));
+
+            var manyType = typeof(TMany);
+            if (IsComponentType(manyType))
+                throw new NoRelationAllowedOnComponentsException(string.Format("Component : {0}.", manyType.Name));
+
             oneToManyRelations.Add(
                 new OneToManyRelation
                     {
                         AddChildElement = (one, many) => action((TOne)one, (TMany)many),
                         Amount = () => numberOfMany,
-                        One = typeof(TOne), 
-                        Many = typeof(TMany)
+                        One = oneType, 
+                        Many = manyType
                     });
             return this;
         }
@@ -90,6 +98,14 @@ namespace QuickGenerate
             Func<TOne, TMany> manyFunc,
             Action<TOne, TMany> action)
         {
+            var oneType = typeof(TOne);
+            if (IsComponentType(oneType))
+                throw new NoRelationAllowedOnComponentsException(string.Format("Component : {0}.", oneType.Name));
+
+            var manyType = typeof(TMany);
+            if (IsComponentType(manyType))
+                throw new NoRelationAllowedOnComponentsException(string.Format("Component : {0}.", manyType.Name));
+
             oneToManyRelations.Add(
                 new OneToManyRelation
                 {
@@ -122,6 +138,14 @@ namespace QuickGenerate
 
         public DomainGenerator ManyToOne<TMany, TOne>(int minmumNumberOfMany, int maximumNumberOfMany, Action<TMany, TOne> action)
         {
+            var oneType = typeof(TOne);
+            if (IsComponentType(oneType))
+                throw new NoRelationAllowedOnComponentsException(string.Format("Component : {0}.", oneType.Name));
+
+            var manyType = typeof(TMany);
+            if (IsComponentType(manyType))
+                throw new NoRelationAllowedOnComponentsException(string.Format("Component : {0}.", manyType.Name));
+
             manyToOneRelations.Add(
                 new ManyToOneRelation
                 {
@@ -459,7 +483,7 @@ namespace QuickGenerate
             return this;
         }
 
-        private Dictionary<PropertyInfo, FuncGenerator<int>> counters =
+        private readonly Dictionary<PropertyInfo, FuncGenerator<int>> counters =
             new Dictionary<PropertyInfo, FuncGenerator<int>>();
 
         private FuncGenerator<int> GetGenerator(PropertyInfo propertyInfo, int startingValue)
@@ -477,9 +501,14 @@ namespace QuickGenerate
             prop.SetValue(target, value, null);    
         }
 
+        private bool IsComponentType(Type type)
+        {
+            return (componentTypes.Any(t => t == type));
+        }
+
         private bool IsComponent(object target, PropertyInfo propertyInfo)
         {
-            if (componentTypes.Any(t => t == propertyInfo.PropertyType))
+            if (IsComponentType(propertyInfo.PropertyType))
             {
                 if(target.GetType() == propertyInfo.PropertyType)
                     throw new RecursiveRelationDefinedException(string.Format("Component Type for {0} is same as {1}.", target.GetType(), propertyInfo.PropertyType));
@@ -493,8 +522,17 @@ namespace QuickGenerate
         private readonly List<Type> componentTypes = new List<Type>();
         public DomainGenerator Component<T>()
         {
+            CheckIfComponentIsInRelation(typeof (T));
             componentTypes.Add(typeof(T));
             return this;
+        }
+
+        private void CheckIfComponentIsInRelation(Type type)
+        {
+            if(oneToManyRelations.Any(r => r.One == type || r.Many == type))
+                throw new NoRelationAllowedOnComponentsException(string.Format("Component : {0}.", type.Name));
+            if (manyToOneRelations.Any(r => r.One == type || r.Many == type))
+                throw new NoRelationAllowedOnComponentsException(string.Format("Component : {0}.", type.Name));
         }
 
         private bool IsAnEnumeration(object target, PropertyInfo propertyInfo)

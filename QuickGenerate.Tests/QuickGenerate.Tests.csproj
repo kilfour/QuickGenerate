@@ -51,6 +51,7 @@
     <Compile Include="Choices\TimesTests.cs" />
     <Compile Include="DomainGeneratorTests\Components\AvoidingRecursion.cs" />
     <Compile Include="DomainGeneratorTests\Components\ComponentsTests.cs" />
+    <Compile Include="DomainGeneratorTests\Components\RelationsNotForComponentsTests.cs" />
     <Compile Include="DomainGeneratorTests\Constructors\ChoosingAConstructorAndSupplyingValue.cs" />
     <Compile Include="DomainGeneratorTests\Issues\ForEachNotDoneWhenConstructorWithParams.cs" />
     <Compile Include="Specs\IgnoringPrimitivesTests.cs" />

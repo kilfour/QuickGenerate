@@ -13,7 +13,7 @@ namespace QuickGenerate.Primitives
 
         public override TimeSpan GetRandomValue()
         {
-            return new TimeSpan(Seed.Random.Next(0, max));
+            return new TimeSpan(Seed.Random.Next(1, max));
         }
     }
 }

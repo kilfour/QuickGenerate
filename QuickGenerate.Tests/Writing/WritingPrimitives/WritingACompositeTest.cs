@@ -8,10 +8,8 @@ namespace QuickGenerate.Tests.Writing.WritingPrimitives
         [Fact(Skip = "Too much again")]
         public void TheObjectWriter()
         {
-            var stream = new StringStream();
             var objectWriter = new ObjectWriter();
             objectWriter.Write(
-                stream,
                 new SomethingComplexToWrite
                     {
                         SomethingSimple =
@@ -20,7 +18,7 @@ namespace QuickGenerate.Tests.Writing.WritingPrimitives
                                     IntProperty = 42
                                 }
                     });
-            var reader = stream.ToReader();
+            var reader = objectWriter.ToReader();
             Assert.Equal("#1 : SomethingComplexToWrite.", reader.ReadLine());
             Assert.Equal("    SomethingSimple = #2 : SomethingToWrite.", reader.ReadLine());
             Assert.Equal("        IntProperty = 42 : Int32.", reader.ReadLine());

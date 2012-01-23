@@ -1,19 +1,22 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using QuickGenerate.Implementation;
 
 namespace QuickGenerate.Writing
 {
     public class ObjectWriter
     {
+        private readonly IStream stream = new StringStream();
         private readonly PrimitivesWriter primitivesWriter = new PrimitivesWriter();
         private readonly List<object> objectCounter = new List<object>();
-        public void Write(IStream stream, object somethingToWrite)
+
+        public void Write(object somethingToWrite)
         {
-            Write(stream, somethingToWrite, 1);
+            Write(somethingToWrite, 1);
         }
 
-        public void Write(IStream stream, object somethingToWrite, int level)
+        public void Write(object somethingToWrite, int level)
         {
             objectCounter.Add(somethingToWrite);
             stream.Write(string.Format("#{0} : {1}.", objectCounter.Count, somethingToWrite.GetType().Name));
@@ -46,6 +49,11 @@ namespace QuickGenerate.Writing
                 //    continue;
                 //}
             }
+        }
+
+        public StreamReader ToReader()
+        {
+            return stream.ToReader();
         }
     }
 }

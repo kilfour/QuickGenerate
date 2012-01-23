@@ -22,11 +22,10 @@ namespace QuickGenerate.Tests.Writing.WritingPrimitives
             somethingToWrite.SomethingSimple = somethingElseToWrite;
             somethingElseToWrite.SomethingSimple = somethingToWrite;
 
-            var stream = new StringStream();
             var objectWriter = new ObjectWriter();
 
-            objectWriter.Write(stream, somethingToWrite);
-            var reader = stream.ToReader();
+            objectWriter.Write(somethingToWrite);
+            var reader = objectWriter.ToReader();
             Assert.Equal("#1 : SomethingToWrite.", reader.ReadLine());
             Assert.Equal("    IntProperty = 42 : Int32.", reader.ReadLine());
             Assert.Equal("    SomethingSimple = #2 : SomethingElseToWrite.", reader.ReadLine());

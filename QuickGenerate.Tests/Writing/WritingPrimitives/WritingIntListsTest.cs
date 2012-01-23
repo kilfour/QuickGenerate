@@ -9,10 +9,9 @@ namespace QuickGenerate.Tests.Writing.WritingPrimitives
         [Fact(Skip = "On the todo list")]
         public void TheObjectWriter()
         {
-            var stream = new StringStream();
             var objectWriter = new ObjectWriter();
-            objectWriter.Write(stream, new SomethingToWrite());
-            var reader = stream.ToReader();
+            objectWriter.Write(new SomethingToWrite());
+            var reader = objectWriter.ToReader();
             Assert.Equal("#1 : SomethingToWrite.", reader.ReadLine());
             Assert.Equal("    IntListProperty : [Int32].", reader.ReadLine());
             Assert.True(reader.EndOfStream);

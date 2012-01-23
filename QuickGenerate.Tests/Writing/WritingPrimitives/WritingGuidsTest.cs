@@ -9,16 +9,14 @@ namespace QuickGenerate.Tests.Writing.WritingPrimitives
         [Fact]
         public void TheObjectWriter()
         {
-            var stream = new StringStream();
             var objectWriter = new ObjectWriter();
             objectWriter.Write(
-                stream,
                 new SomethingToWrite
                     {
                         Property = Guid.Empty,
                         OtherProperty = null
                     });
-            var reader = stream.ToReader();
+            var reader = objectWriter.ToReader();
             Assert.Equal("#1 : SomethingToWrite.", reader.ReadLine());
             Assert.Equal("    Property = 00000000-0000-0000-0000-000000000000 : Guid.", reader.ReadLine());
             Assert.Equal("    OtherProperty = null : Guid.", reader.ReadLine()); ;

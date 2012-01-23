@@ -9,10 +9,8 @@ namespace QuickGenerate.Tests.Writing.WritingPrimitives
         [Fact]
         public void TheObjectWriter()
         {
-            var stream = new StringStream();
             var objectWriter = new ObjectWriter();
             objectWriter.Write(
-                stream,
                 new SomethingToWrite
                 {
                     IntProperty = 42,
@@ -20,7 +18,7 @@ namespace QuickGenerate.Tests.Writing.WritingPrimitives
                     NullableIntProperty = 42,
                     NullableInt32Property = null
                 });
-            var reader = stream.ToReader();
+            var reader = objectWriter.ToReader();
             Assert.Equal("#1 : SomethingToWrite.", reader.ReadLine());
             Assert.Equal("    IntProperty = 42 : Int32.", reader.ReadLine());
             Assert.Equal("    Int32Property = 42 : Int32.", reader.ReadLine());

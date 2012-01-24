@@ -53,6 +53,7 @@
     <Compile Include="DomainGeneratorTests\Components\ComponentsTests.cs" />
     <Compile Include="DomainGeneratorTests\Components\RelationsNotForComponentsTests.cs" />
     <Compile Include="DomainGeneratorTests\Constructors\ChoosingAConstructorAndSupplyingValue.cs" />
+    <Compile Include="DomainGeneratorTests\Issues\CircularComponents.cs" />
     <Compile Include="DomainGeneratorTests\Issues\ForEachNotDoneWhenConstructorWithParams.cs" />
     <Compile Include="DomainGeneratorTests\Iterating\ForEachBaseTests.cs" />
     <Compile Include="DomainGeneratorTests\Iterating\ForEachGenericTests.cs" />

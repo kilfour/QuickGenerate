@@ -14,7 +14,7 @@ namespace QuickGenerate.Tests.DomainGeneratorTests
                             .With<SomethingToGenerate>(g => g.For(e => e.MyProperty, 42, 43));
         }
 
-        [Fact(Skip = "Fails .... sometimes")]
+        [Fact]
         public void ChangeAll()
         {
             var something = domainGenerator.One<SomethingToGenerate>();
@@ -38,7 +38,7 @@ namespace QuickGenerate.Tests.DomainGeneratorTests
             }
         }
 
-        [Fact(Skip="Fails ... sometimes")]
+        [Fact]
         public void ChangeThis()
         {
             var something = domainGenerator.One<SomethingToGenerate>();

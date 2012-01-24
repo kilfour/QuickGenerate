@@ -11,23 +11,16 @@ namespace QuickGenerate.Tests.DomainGeneratorTests.Issues
         {
             domainGenerator =
                 new DomainGenerator()
+                    .With<SomethingElseToGenerate>(opt => opt.Use<SomethingDerivedToGenerate>().Use<SomethingElseDerivedToGenerate>())
                     .OneToOne<SomethingToGenerate, SomethingElseToGenerate>((l, r) => l.MyMethod(r))
                     .ForEach<SomethingToGenerate>(s => s.SomethingElse.DoSomething());
         }
 
-        [Fact(Skip = "Inheritence support removed")]
-        public void GeneratingLeftHand()
+        [Fact]
+        public void Generating()
         {
             var something = domainGenerator.One<SomethingToGenerate>();
             Assert.Equal(something, something.SomethingElse.Something);
-            Assert.Equal(2, domainGenerator.GeneratedObjects.Count());
-        }
-
-        [Fact(Skip = "Inheritence support removed")]
-        public void GeneratingRightHand()
-        {
-            var somethingElse = domainGenerator.One<SomethingElseToGenerate>();
-            Assert.Equal(somethingElse, somethingElse.Something.SomethingElse);
             Assert.Equal(2, domainGenerator.GeneratedObjects.Count());
         }
 

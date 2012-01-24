@@ -21,15 +21,19 @@ namespace QuickGenerate.Modifying
         // return value means does not need to be changed
         private bool ChangeProperty(PropertyInfo propertyInfo)
         {
+            if (!generator.IsWritable(propertyInfo))
+                return false;
+            if (generator.NeedsToBeIgnored(propertyInfo))
+                return false;
             if (generator.IsSimpleProperty(value, propertyInfo))
                 return true;
-            return true;
+            return false;
         }
 
         private bool TryChangeProperty(PropertyInfo propertyInfo)
         {
             var before = propertyInfo.GetValue(value, null);
-            if (!ChangeProperty(propertyInfo))
+            if (ChangeProperty(propertyInfo))
             {
                 var after = propertyInfo.GetValue(value, null);
                 if (before == null)
@@ -49,7 +53,7 @@ namespace QuickGenerate.Modifying
             for (int i = 0; i < 50; i++)
             {
                 if (TryChangeProperty(propertyInfo)) break;
-                if (i == 49) throw new HeyITriedFiftyTimesButCouldNotGetADifferentValue();
+                if (i == 49) throw new HeyITriedFiftyTimesButCouldNotGetADifferentValue(string.Format("{0}.{1}", propertyInfo.DeclaringType.Name, propertyInfo.Name));
             }
         }
 

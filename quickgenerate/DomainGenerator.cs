@@ -283,7 +283,7 @@ namespace QuickGenerate
             return this;
         }
 
-        private bool NeedsToBeIgnored(PropertyInfo propertyInfo)
+        public bool NeedsToBeIgnored(PropertyInfo propertyInfo)
         {
             return 
                 ignoreConventions.Any(ignoreConvention => ignoreConvention(propertyInfo))
@@ -418,7 +418,7 @@ namespace QuickGenerate
             return OneWithoutRelations(this.Object(type));
         }
 
-        private bool IsWritable(PropertyInfo propertyInfo)
+        public bool IsWritable(PropertyInfo propertyInfo)
         {
             if (propertyInfo.CanWrite)
                 return true;

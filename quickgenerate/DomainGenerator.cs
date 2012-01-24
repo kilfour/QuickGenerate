@@ -79,8 +79,8 @@ namespace QuickGenerate
                 throw new NoRelationAllowedOnComponentsException(string.Format("Component : {0}.", oneType.Name));
 
             var manyType = typeof(TMany);
-            if (IsComponentType(manyType))
-                throw new NoRelationAllowedOnComponentsException(string.Format("Component : {0}.", manyType.Name));
+            //if (IsComponentType(manyType))
+            //    throw new NoRelationAllowedOnComponentsException(string.Format("Component : {0}.", manyType.Name));
 
             oneToManyRelations.Add(
                 new OneToManyRelation
@@ -111,9 +111,9 @@ namespace QuickGenerate
             if (IsComponentType(oneType))
                 throw new NoRelationAllowedOnComponentsException(string.Format("Component : {0}.", oneType.Name));
 
-            var manyType = typeof(TMany);
-            if (IsComponentType(manyType))
-                throw new NoRelationAllowedOnComponentsException(string.Format("Component : {0}.", manyType.Name));
+            //var manyType = typeof(TMany);
+            //if (IsComponentType(manyType))
+            //    throw new NoRelationAllowedOnComponentsException(string.Format("Component : {0}.", manyType.Name));
 
             oneToManyRelations.Add(
                 new OneToManyRelation
@@ -147,9 +147,9 @@ namespace QuickGenerate
 
         public DomainGenerator ManyToOne<TMany, TOne>(int minmumNumberOfMany, int maximumNumberOfMany, Action<TMany, TOne> action)
         {
-            var oneType = typeof(TOne);
-            if (IsComponentType(oneType))
-                throw new NoRelationAllowedOnComponentsException(string.Format("Component : {0}.", oneType.Name));
+            //var oneType = typeof(TOne);
+            //if (IsComponentType(oneType))
+            //    throw new NoRelationAllowedOnComponentsException(string.Format("Component : {0}.", oneType.Name));
 
             var manyType = typeof(TMany);
             if (IsComponentType(manyType))

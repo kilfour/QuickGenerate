@@ -54,6 +54,9 @@
     <Compile Include="DomainGeneratorTests\Components\RelationsNotForComponentsTests.cs" />
     <Compile Include="DomainGeneratorTests\Constructors\ChoosingAConstructorAndSupplyingValue.cs" />
     <Compile Include="DomainGeneratorTests\Issues\ForEachNotDoneWhenConstructorWithParams.cs" />
+    <Compile Include="DomainGeneratorTests\Iterating\ForEachBaseTests.cs" />
+    <Compile Include="DomainGeneratorTests\Iterating\ForEachInterfaceTests.cs" />
+    <Compile Include="DomainGeneratorTests\Iterating\ForEachSpy.cs" />
     <Compile Include="Specs\IgnoringPrimitivesTests.cs" />
     <Compile Include="Specs\TestObjects\AllPrimitives.cs" />
     <Compile Include="Specs\TestObjects\IHaveOnlyPrimitives.cs" />

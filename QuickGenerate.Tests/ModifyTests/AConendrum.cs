@@ -10,7 +10,7 @@ namespace QuickGenerate.Tests.ModifyTests
 
     public class AConendrum
     {
-        [Fact(Skip="Lost in Translation")]
+        [Fact]
         public void ChangeReallyMeansChange()
         {
             var something = Generate.One<WithBoolProperty>();
@@ -24,7 +24,7 @@ namespace QuickGenerate.Tests.ModifyTests
                 );
         }
 
-        [Fact(Skip = "Lost in translation")]
+        [Fact]
         public void NoChangePossible_Throws()
         {
             var repository = new DomainGenerator().With(true);

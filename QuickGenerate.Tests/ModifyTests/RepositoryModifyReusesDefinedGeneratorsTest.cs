@@ -4,7 +4,7 @@ namespace QuickGenerate.Tests.ModifyTests
 {
     public class RepositoryModifyReusesDefinedGeneratorsTest
     {
-        [Fact(Skip = "Lost in translation")]
+        [Fact]
         public void Demonstrating()
         {
             var repository = new DomainGenerator().With(0, 42).With<SomethingtoGenerate>();
@@ -26,7 +26,7 @@ namespace QuickGenerate.Tests.ModifyTests
             Assert.Equal(42, something.MyProperty);
         }
 
-        [Fact(Skip="Lost in translations")]
+        [Fact]
         public void ReusingConventions()
         {
             var repository =

@@ -191,6 +191,26 @@ namespace QuickGenerate
             return this;
         }
 
+        public DomainGenerator With<T>(params T[] choices)
+        {
+            choiceConventions
+                .Add(
+                    new ChoiceConvention
+                    {
+                        Type = typeof(T),
+                        Possibilities = choices.Cast<object>().ToArray()
+                    });
+            return this;
+        }
+
+        public DomainGenerator With<T>(Func<IGenerator<T>> generatorFunc)
+        {
+            var generator = generatorFunc();
+            Func<MemberInfo, bool> predicate = mi => ((PropertyInfo)mi).PropertyType == typeof(T);
+            dynamicValueConventions[predicate] = pi => generator.GetRandomValue();
+            return this;
+        }
+
         public DomainGenerator With<T>(Action<IgnoreGeneratorOptions<T>> customization)
         {
             if (!ignoreGeneratorOptions.ContainsKey(typeof(T)))
@@ -229,26 +249,6 @@ namespace QuickGenerate
                 return null;
             var options = constructorGeneratorOptions[type];
             return options.GetParameterInfos();
-        }
-
-        public DomainGenerator With<T>(Func<IGenerator<T>> generatorFunc)
-        {
-            var generator = generatorFunc();
-            Func<MemberInfo, bool> predicate = mi => ((PropertyInfo)mi).PropertyType == typeof(T);
-            dynamicValueConventions[predicate] = pi => generator.GetRandomValue();
-            return this;
-        }
-
-        public DomainGenerator With<T>(params T[] choices)
-        {
-            choiceConventions
-                .Add(
-                    new ChoiceConvention
-                        {
-                            Type = typeof (T), 
-                            Possibilities = choices.Cast<object>().ToArray()
-                        });
-            return this;
         }
 
         private bool IsAKnownPossibility(object target, PropertyInfo propertyInfo)

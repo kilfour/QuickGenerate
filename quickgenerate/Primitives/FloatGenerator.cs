@@ -8,7 +8,7 @@ namespace QuickGenerate.Primitives
         private readonly float min;
         private readonly float max;
 
-        public FloatGenerator() : this(-1, 100) { }
+        public FloatGenerator() : this(1, 100) { }
 
         public FloatGenerator(float minValue, float maxValue)
         {

@@ -8,7 +8,7 @@ namespace QuickGenerate.Primitives
         private readonly double min;
         private readonly double max;
 
-        public DoubleGenerator() : this(-1, 100) { }
+        public DoubleGenerator() : this(1, 100) { }
 
         public DoubleGenerator(double minValue, double maxValue)
         {

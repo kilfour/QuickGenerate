@@ -61,6 +61,10 @@
     <Compile Include="DomainGeneratorTests\Iterating\ForEachInterfaceTests.cs" />
     <Compile Include="DomainGeneratorTests\Iterating\ForEachSpy.cs" />
     <Compile Include="DomainGeneratorTests\Iterating\ForEachWithIndexTests.cs" />
+    <Compile Include="DomainGeneratorTests\MultipleStuffDefined\ForTests.cs" />
+    <Compile Include="DomainGeneratorTests\MultipleStuffDefined\IgnoreWithForTests.cs" />
+    <Compile Include="DomainGeneratorTests\MultipleStuffDefined\SupplyingGenerators.cs" />
+    <Compile Include="DomainGeneratorTests\MultipleStuffDefined\SupplyingValues.cs" />
     <Compile Include="DomainGeneratorTests\Relations\OneToManyTests\MultipleOneToManiesOfSameClassTests.cs" />
     <Compile Include="Specs\IgnoringPrimitivesTests.cs" />
     <Compile Include="Specs\TestObjects\AllPrimitives.cs" />

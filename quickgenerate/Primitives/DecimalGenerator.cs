@@ -8,7 +8,7 @@ namespace QuickGenerate.Primitives
         private readonly decimal min;
         private readonly decimal max;
 
-        public DecimalGenerator() : this(-1, 100) { }
+        public DecimalGenerator() : this(1, 100) { }
 
         public DecimalGenerator(decimal minValue, decimal maxValue)
         {

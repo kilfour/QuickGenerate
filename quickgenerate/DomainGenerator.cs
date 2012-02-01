@@ -283,6 +283,17 @@ namespace QuickGenerate
             return this;
         }
 
+        public DomainGenerator ForEach<T>(Action<int, T> action)
+        {
+            actionConventions.Add(
+                new ActionConvention
+                {
+                    Type = typeof(T),
+                    IndexAction = (i, t) => action(i, (T)t)
+                });
+            return this;
+        }
+
         public bool NeedsToBeIgnored(PropertyInfo propertyInfo)
         {
             return 
@@ -376,16 +387,34 @@ namespace QuickGenerate
         {
             generatedObjects.Clear();
             var result = AnotherOne(resultType);
+            ApplyActionConventions();
+            return result;
+        }
+
+        private void ApplyActionConventions()
+        {
+            var indices = new Dictionary<Type, int>();
             foreach (var actionConvention in actionConventions)
             {
                 for (int i = 0; i < generatedObjects.Count(); i++)
                 {
                     var obj = generatedObjects[i];
+
                     if (actionConvention.Type.IsAssignableFrom(obj.GetType()))
+                    {
+                        if (actionConvention.IndexAction != null)
+                        {
+                            if (!indices.Keys.Contains(actionConvention.Type))
+                                indices[actionConvention.Type] = 0;
+                            var index = indices[actionConvention.Type];
+                            actionConvention.IndexAction(index, obj);
+                            indices[actionConvention.Type] = index + 1;
+                            continue;
+                        }
                         actionConvention.Action(obj);
+                    }
                 }
             }
-            return result;
         }
 
         public object AnotherOne(Type resultType)
@@ -449,10 +478,14 @@ namespace QuickGenerate
 
         private IEnumerable<T> PrivateMany<T>(int numberOfMany)
         {
+            generatedObjects.Clear();
+            var list = new List<T>();
             for (int i = 0; i < numberOfMany; i++)
             {
-                yield return One<T>();
+                list.Add((T)AnotherOne(typeof(T)));
             }
+            ApplyActionConventions();
+            return list;
         }
 
         public IEnumerable<T> Many<T>(int numberOfMany)

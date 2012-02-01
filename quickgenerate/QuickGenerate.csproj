@@ -39,6 +39,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Complex\CircleGenerator.cs" />
     <Compile Include="DomainGeneratorImplementation\ActionGeneratorOptions.cs" />
     <Compile Include="DomainGeneratorImplementation\CantFindConstructorException.cs" />
     <Compile Include="DomainGeneratorImplementation\ConstructorGeneratorOptions.cs" />

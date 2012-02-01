@@ -1,6 +1,7 @@
 using System;
 using System.Linq.Expressions;
 using System.Reflection;
+using QuickGenerate.Complex;
 using QuickGenerate.Implementation;
 using QuickGenerate.Primitives;
 using QuickGenerate.Reflect;
@@ -67,6 +68,15 @@ namespace QuickGenerate.DomainGeneratorImplementation
             Func<TProperty, TProperty> valueFunc)
         {
             var generator = new FuncGenerator<TProperty>(seed, valueFunc);
+            AddConvention(propertyExpression, () => generator.GetRandomValue());
+            return this;
+        }
+
+        public GeneratorOptions<T> Circle<TProperty>(
+            Expression<Func<T, TProperty>> propertyExpression,
+            params TProperty[] list)
+        {
+            var generator = new CircleGenerator<TProperty>(list);
             AddConvention(propertyExpression, () => generator.GetRandomValue());
             return this;
         }

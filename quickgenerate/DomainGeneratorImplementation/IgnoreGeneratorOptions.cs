@@ -31,4 +31,20 @@ namespace QuickGenerate.DomainGeneratorImplementation
             return ignoreConventions.Any(ignoreConvention => ignoreConvention(propertyInfo));
         }
     }
+
+    public class IgnoreGeneratorOptions : IIgnoreGeneratorOptions
+    {
+        private readonly List<Func<MemberInfo, bool>> ignoreConventions =
+            new List<Func<MemberInfo, bool>>();
+
+        public void Ignore(Func<MemberInfo, bool> ignoreThis)
+        {
+            ignoreConventions.Add(ignoreThis);
+        }
+
+        public bool NeedsToBeIgnored(PropertyInfo propertyInfo)
+        {
+            return ignoreConventions.Any(ignoreConvention => ignoreConvention(propertyInfo));
+        }
+    }
 }

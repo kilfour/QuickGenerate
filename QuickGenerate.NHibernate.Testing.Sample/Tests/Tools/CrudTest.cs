@@ -23,7 +23,7 @@ namespace QuickGenerate.NHibernate.Testing.Sample.Tests.Tools
             Assert.Throws<GenericADOException>(
                 () =>
                     {
-                        GenerateIt().Ignore(expression).One<TEntity>();
+                        GenerateIt().With<TEntity>(opt => opt.Ignore(expression)).One<TEntity>();
                         NHibernateSession.Flush();
                     });
         }

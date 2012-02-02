@@ -15,13 +15,9 @@ namespace QuickGenerate
     {
         private readonly List<object> generatedObjects = new List<object>();
 
-        public IEnumerable<object> GeneratedObjects {get { return generatedObjects; }}
+        public IEnumerable<object> GeneratedObjects { get { return generatedObjects; } }
 
-        private readonly PrimitiveGenerators primitiveGenerators =
-            new PrimitiveGenerators();
-
-        private readonly List<Func<MemberInfo, bool>> ignoreConventions = 
-            new List<Func<MemberInfo, bool>>();
+        private readonly PrimitiveGenerators primitiveGenerators = new PrimitiveGenerators();
 
         public readonly Dictionary<Func<MemberInfo, bool>, Func<PropertyInfo, object>> dynamicValueConventions =
             new Dictionary<Func<MemberInfo, bool>, Func<PropertyInfo, object>>();
@@ -50,22 +46,6 @@ namespace QuickGenerate
         private readonly IDictionary<Type, IConstructorGeneratorOptions> constructorGeneratorOptions =
             new Dictionary<Type, IConstructorGeneratorOptions>();
 
-        public DomainGenerator Ignore(Func<MemberInfo, bool> ignoreThis)
-        {
-            ignoreConventions.Add(ignoreThis);
-            return this;
-        }
-
-        public DomainGenerator Ignore<T, TProperty>(Expression<Func<T, TProperty>> propertyExpression)
-        {
-            Func<MemberInfo, bool> func =
-                mi => mi.ReflectedType == typeof (T)
-                      && mi.Name == propertyExpression.AsPropertyInfo().Name;
-
-            ignoreConventions.Add(func);
-
-            return this;
-        }
 
         public DomainGenerator OneToOne<TOne, TMany>(Action<TOne, TMany> action)
         {
@@ -179,11 +159,11 @@ namespace QuickGenerate
             return this;
         }
 
-        public DomainGenerator With<T>(Func<MemberInfo, bool> predicate, IGenerator<T> generator)
-        {
-            dynamicValueConventions[predicate] = pi => generator.RandomAsObject();
-            return this;
-        }
+        //public DomainGenerator With<T>(Func<MemberInfo, bool> predicate, IGenerator<T> generator)
+        //{
+        //    dynamicValueConventions[predicate] = pi => generator.RandomAsObject();
+        //    return this;
+        //}
 
         public DomainGenerator With<T>(Func<GeneratorOptions<T>, GeneratorOptions<T>> customization)
         {
@@ -203,19 +183,27 @@ namespace QuickGenerate
             return this;
         }
 
-        public DomainGenerator With<T>(Func<IGenerator<T>> generatorFunc)
-        {
-            var generator = generatorFunc();
-            Func<MemberInfo, bool> predicate = mi => ((PropertyInfo)mi).PropertyType == typeof(T);
-            dynamicValueConventions[predicate] = pi => generator.GetRandomValue();
-            return this;
-        }
+        //public DomainGenerator With<T>(Func<IGenerator<T>> generatorFunc)
+        //{
+        //    var generator = generatorFunc();
+        //    Func<MemberInfo, bool> predicate = mi => ((PropertyInfo)mi).PropertyType == typeof(T);
+        //    dynamicValueConventions[predicate] = pi => generator.GetRandomValue();
+        //    return this;
+        //}
 
         public DomainGenerator With<T>(Action<IgnoreGeneratorOptions<T>> customization)
         {
             if (!ignoreGeneratorOptions.ContainsKey(typeof(T)))
                 ignoreGeneratorOptions[typeof (T)] = new IgnoreGeneratorOptions<T>();
             customization((IgnoreGeneratorOptions<T>)ignoreGeneratorOptions[typeof(T)]);
+            return this;
+        }
+
+        public DomainGenerator With(Action<IgnoreGeneratorOptions> customization)
+        {
+            if (!ignoreGeneratorOptions.ContainsKey(typeof(object)))
+                ignoreGeneratorOptions[typeof(object)] = new IgnoreGeneratorOptions();
+            customization((IgnoreGeneratorOptions)ignoreGeneratorOptions[typeof(object)]);
             return this;
         }
 
@@ -296,9 +284,7 @@ namespace QuickGenerate
 
         public bool NeedsToBeIgnored(PropertyInfo propertyInfo)
         {
-            return 
-                ignoreConventions.Any(ignoreConvention => ignoreConvention(propertyInfo))
-             || ignoreGeneratorOptions.Any(opt => opt.Value.NeedsToBeIgnored(propertyInfo));
+            return ignoreGeneratorOptions.Any(opt => opt.Value.NeedsToBeIgnored(propertyInfo));
         }
 
         private void ApplyConvention(object target, PropertyInfo propertyInfo, Func<MemberInfo, bool> key)

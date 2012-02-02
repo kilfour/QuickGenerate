@@ -25,9 +25,7 @@ namespace QuickGenerate.DomainGeneratorImplementation
                     .Select(type => generators[GetNullableTypeOfGeneratedValues(type)] = GetNullableGeneratorFor(type))
                     .ToList();
         }
-
         
-
         private IGenerator GetNullableGeneratorFor(Type type)
         {
             var nullable = typeof (NullableGenerator<>).MakeGenericType(GetTypeOfGeneratedValues(type));
@@ -44,13 +42,6 @@ namespace QuickGenerate.DomainGeneratorImplementation
             return null;
         }
 
-        public void foo()
-        {
-            foreach (var requiredGeneratorType in GetRequiredGeneratorTypes())
-            {
-                Console.WriteLine(requiredGeneratorType.Name);
-            }
-        }
         private static IEnumerable<Type> GetRequiredGeneratorTypes()
         {
             return typeof(PrimitiveGenerators).Assembly.GetTypes().Where(IsARequiredGenerator);

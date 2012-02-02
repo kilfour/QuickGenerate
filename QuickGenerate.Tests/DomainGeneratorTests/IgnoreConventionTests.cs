@@ -8,7 +8,7 @@ namespace QuickGenerate.Tests.DomainGeneratorTests
 
         public IgnoreConventionTests()
         {
-            domainGenerator = new DomainGenerator().Ignore(mi => mi.Name == "Id");
+            domainGenerator = new DomainGenerator().With(opt => opt.Ignore(mi => mi.Name == "Id"));
         }
 
         [Fact]

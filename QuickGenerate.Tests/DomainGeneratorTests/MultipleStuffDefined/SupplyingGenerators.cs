@@ -5,13 +5,13 @@ namespace QuickGenerate.Tests.DomainGeneratorTests.MultipleStuffDefined
 {
     public class SupplyingGenerators
     {
-        [Fact]
+        [Fact(Skip="Functionality removed")]
         public void LastOneWins()
         {
             var generator =
-                new DomainGenerator()
-                    .With(() => new IntGenerator(42, 42))
-                    .With(() => new IntGenerator(666, 666));
+                new DomainGenerator();
+                    //.With(() => new IntGenerator(42, 42))
+                    //.With(() => new IntGenerator(666, 666));
 
             var is42 = false;
             var is666 = false;

@@ -22,11 +22,11 @@ namespace QuickGenerate
             return this;
         }
 
-        public EntityGenerator<TEntity> With<T>(Func<MemberInfo, bool> predicate, IGenerator<T> aGenerator)
-        {
-            generator.With(predicate, aGenerator);
-            return this;
-        }
+        //public EntityGenerator<TEntity> With<T>(Func<MemberInfo, bool> predicate, IGenerator<T> aGenerator)
+        //{
+        //    generator.With(predicate, aGenerator);
+        //    return this;
+        //}
 
         public EntityGenerator<TEntity> Ignore<TProperty>(Expression<Func<TEntity, TProperty>> propertyExpression)
         {

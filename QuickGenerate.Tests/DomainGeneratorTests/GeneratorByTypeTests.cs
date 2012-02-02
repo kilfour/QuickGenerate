@@ -5,12 +5,12 @@ namespace QuickGenerate.Tests.DomainGeneratorTests
 {
     public class GeneratorByTypeTests
     {
-        [Fact]
+        [Fact(Skip = "Functionality removed")]
         public void GeneratorIsApplied()
         {
             var domainGenerator =
                 new DomainGenerator()
-                    .With(() => new IntGenerator(42, 42));
+                    ;//.With(() => new IntGenerator(42, 42));
 
             Assert.Equal(42, domainGenerator.One<SomethingToGenerate>().Value);
         }

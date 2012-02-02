@@ -10,7 +10,7 @@ namespace QuickGenerate.Tests.DomainGeneratorTests
         {
             domainGenerator =
                 new DomainGenerator()
-                            .Ignore(mi => mi.Name == "Id")
+                            .With(opt => opt.Ignore(mi => mi.Name == "Id"))
                             .With<SomethingToGenerate>(g => g.For(e => e.MyProperty, 42, 43));
         }
 

@@ -11,10 +11,10 @@ namespace QuickGenerate.Tests.DomainGeneratorTests
         {
             domainGenerator =
                 new DomainGenerator()
-                    .With(() => new IntGenerator(42, 42));
+                    ;//.With(() => new IntGenerator(42, 42));
         }
 
-        [Fact]
+        [Fact(Skip = "functionality removed")]
         public void GeneratorIsApplied()
         {
             Assert.Equal(42, domainGenerator.One<SomethingToGenerate>().SomeInt);

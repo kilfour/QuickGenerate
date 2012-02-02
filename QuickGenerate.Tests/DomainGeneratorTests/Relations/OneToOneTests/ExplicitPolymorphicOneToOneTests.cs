@@ -10,14 +10,13 @@ namespace QuickGenerate.Tests.DomainGeneratorTests.Relations.OneToOneTests
         {
             domainGenerator =
                 new DomainGenerator()
-                    .With<SomethingBaseToGenerate>(
-                        opt => opt.StartingValue(
+                    .With(
                             () => 
                                 new SomethingBaseToGenerate[]
                                     {
                                         new SomethingDerivedToGenerate(), 
                                         new SomethingElseDerivedToGenerate()
-                                    }.PickOne()))
+                                    }.PickOne())
                     .OneToOne<SomethingToGenerate, SomethingBaseToGenerate>((l, r) => l.MyMethod(r));
         }
 

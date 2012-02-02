@@ -10,20 +10,18 @@ namespace QuickGenerate.Tests.DomainGeneratorTests.Inheritance
         {
             domainGenerator =
                 new DomainGenerator()
-                    .With<BaseClass>(
-                        opt => opt.StartingValue(
+                    .With(
                             () =>
                             new[]
                                 {
                                     new BaseClass(), new DervivedOne(), new DervivedTwo()
-                                }.PickOne()))
-                    .With<AbstractBaseClass>(
-                        opt => opt.StartingValue(
+                                }.PickOne())
+                    .With(
                             () =>
                             new AbstractBaseClass[]
                                 {
                                     new AbstractDervivedOne(), new AbstractDervivedTwo()
-                                }.PickOne()))
+                                }.PickOne())
                     .With<DervivedTwo>(opt => opt.For(e => e.TheAnswer, 42));
         }
 

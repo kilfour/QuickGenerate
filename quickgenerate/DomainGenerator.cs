@@ -1,13 +1,11 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Linq.Expressions;
 using System.Reflection;
 using QuickGenerate.DomainGeneratorImplementation;
 using QuickGenerate.Implementation;
 using QuickGenerate.Modifying;
 using QuickGenerate.Primitives;
-using QuickGenerate.Reflect;
 
 namespace QuickGenerate
 {
@@ -31,10 +29,10 @@ namespace QuickGenerate
         public readonly List<ActionConvention> actionConventions
             = new List<ActionConvention>();
 
-        public readonly List<ChoiceConvention> choiceConventions
+        private readonly List<ChoiceConvention> choiceConventions
             = new List<ChoiceConvention>();
 
-        public readonly Dictionary<Type, Func<object>> constructionConventions
+        private readonly Dictionary<Type, Func<object>> constructionConventions
             = new Dictionary<Type, Func<object>>();
 
         private readonly IDictionary<Type, IIgnoreGeneratorOptions> ignoreGeneratorOptions =
@@ -56,11 +54,9 @@ namespace QuickGenerate
         {
             var oneType = typeof (TOne);
             if (IsComponentType(oneType))
-                throw new NoRelationAllowedOnComponentsException(string.Format("Component : {0}.", oneType.Name));
+                throw new NoRelationAllowedOnComponentsException(String.Format("Component : {0}.", oneType.Name));
 
             var manyType = typeof(TMany);
-            //if (IsComponentType(manyType))
-            //    throw new NoRelationAllowedOnComponentsException(string.Format("Component : {0}.", manyType.Name));
 
             oneToManyRelations.Add(
                 new OneToManyRelation
@@ -89,11 +85,7 @@ namespace QuickGenerate
         {
             var oneType = typeof(TOne);
             if (IsComponentType(oneType))
-                throw new NoRelationAllowedOnComponentsException(string.Format("Component : {0}.", oneType.Name));
-
-            //var manyType = typeof(TMany);
-            //if (IsComponentType(manyType))
-            //    throw new NoRelationAllowedOnComponentsException(string.Format("Component : {0}.", manyType.Name));
+                throw new NoRelationAllowedOnComponentsException(String.Format("Component : {0}.", oneType.Name));
 
             oneToManyRelations.Add(
                 new OneToManyRelation
@@ -127,13 +119,9 @@ namespace QuickGenerate
 
         public DomainGenerator ManyToOne<TMany, TOne>(int minmumNumberOfMany, int maximumNumberOfMany, Action<TMany, TOne> action)
         {
-            //var oneType = typeof(TOne);
-            //if (IsComponentType(oneType))
-            //    throw new NoRelationAllowedOnComponentsException(string.Format("Component : {0}.", oneType.Name));
-
             var manyType = typeof(TMany);
             if (IsComponentType(manyType))
-                throw new NoRelationAllowedOnComponentsException(string.Format("Component : {0}.", manyType.Name));
+                throw new NoRelationAllowedOnComponentsException(String.Format("Component : {0}.", manyType.Name));
 
             manyToOneRelations.Add(
                 new ManyToOneRelation
@@ -143,6 +131,12 @@ namespace QuickGenerate
                     One = typeof(TOne),
                     Many = typeof(TMany)
                 });
+            return this;
+        }
+
+        public DomainGenerator With<T>(Func<T> func)
+        {
+            constructionConventions[typeof (T)] = () => func();
             return this;
         }
 
@@ -158,12 +152,6 @@ namespace QuickGenerate
             dynamicValueConventions[decoratedPredicate] = pi => func();
             return this;
         }
-
-        //public DomainGenerator With<T>(Func<MemberInfo, bool> predicate, IGenerator<T> generator)
-        //{
-        //    dynamicValueConventions[predicate] = pi => generator.RandomAsObject();
-        //    return this;
-        //}
 
         public DomainGenerator With<T>(Func<GeneratorOptions<T>, GeneratorOptions<T>> customization)
         {
@@ -182,14 +170,6 @@ namespace QuickGenerate
                     });
             return this;
         }
-
-        //public DomainGenerator With<T>(Func<IGenerator<T>> generatorFunc)
-        //{
-        //    var generator = generatorFunc();
-        //    Func<MemberInfo, bool> predicate = mi => ((PropertyInfo)mi).PropertyType == typeof(T);
-        //    dynamicValueConventions[predicate] = pi => generator.GetRandomValue();
-        //    return this;
-        //}
 
         public DomainGenerator With<T>(Action<IgnoreGeneratorOptions<T>> customization)
         {
@@ -430,7 +410,7 @@ namespace QuickGenerate
             if (choiceConvention != null)
                 return choiceConvention.Possibilities.PickOne();
 
-            return OneWithoutRelations(this.Object(type));
+            return OneWithoutRelations(Object(type));
         }
 
         public bool IsWritable(PropertyInfo propertyInfo)
@@ -508,7 +488,7 @@ namespace QuickGenerate
             if (IsComponentType(propertyInfo.PropertyType))
             {
                 if(target.GetType() == propertyInfo.PropertyType)
-                    throw new RecursiveRelationDefinedException(string.Format("Component Type for {0} is same as {1}.", target.GetType(), propertyInfo.PropertyType));
+                    throw new RecursiveRelationDefinedException(String.Format("Component Type for {0} is same as {1}.", target.GetType(), propertyInfo.PropertyType));
 
                 SetPropertyValue(propertyInfo, target, OneWithoutRelations(propertyInfo.PropertyType));
                 return true;
@@ -527,9 +507,9 @@ namespace QuickGenerate
         private void CheckIfComponentIsInRelation(Type type)
         {
             if(oneToManyRelations.Any(r => r.One == type || r.Many == type))
-                throw new NoRelationAllowedOnComponentsException(string.Format("Component : {0}.", type.Name));
+                throw new NoRelationAllowedOnComponentsException(String.Format("Component : {0}.", type.Name));
             if (manyToOneRelations.Any(r => r.One == type || r.Many == type))
-                throw new NoRelationAllowedOnComponentsException(string.Format("Component : {0}.", type.Name));
+                throw new NoRelationAllowedOnComponentsException(String.Format("Component : {0}.", type.Name));
         }
 
         private bool IsAnEnumeration(object target, PropertyInfo propertyInfo)
@@ -554,10 +534,101 @@ namespace QuickGenerate
         {
             var oneToMany = oneToManyRelations.FirstOrDefault(r => r.One == parameterType && r.Many == type);
             if(oneToMany != null)
-                throw new RecursiveRelationDefinedException(string.Format("From {0} to {1}.", oneToMany.One, oneToMany.Many));
+                throw new RecursiveRelationDefinedException(String.Format("From {0} to {1}.", oneToMany.One, oneToMany.Many));
             var manyToOne = manyToOneRelations.FirstOrDefault(r => r.Many == parameterType && r.One == type);
             if (manyToOne != null)
-                throw new RecursiveRelationDefinedException(string.Format("From {0} to {1}.", manyToOne.Many, manyToOne.One));
+                throw new RecursiveRelationDefinedException(String.Format("From {0} to {1}.", manyToOne.Many, manyToOne.One));
+        }
+
+        private object Object(Type inputType)
+        {
+            var isPrimitiveGenerator = primitiveGenerators.Get(inputType);
+            if (isPrimitiveGenerator != null)
+            {
+                return isPrimitiveGenerator.RandomAsObject();
+            }
+            var type = GetTypeToGenerate(inputType);
+
+            var constructorTypeParameters = GetConstructorTypeParameters(type);
+            if (constructorTypeParameters != null)
+            {
+                var constructor =
+                    type
+                        .GetConstructors(MyBinding.Flags)
+                        .Where(c => c.GetParameters().Count() == constructorTypeParameters.Count())
+                        .FirstOrDefault(
+                            c =>
+                                {
+                                    var ctorParams = c.GetParameters();
+                                    int ix = 0;
+                                    foreach (var parameterInfo in ctorParams)
+                                    {
+                                        if (parameterInfo.ParameterType != constructorTypeParameters[ix].Type)
+                                            return false;
+                                        ix++;
+
+                                    }
+                                    return true;
+                                });
+                if (constructor == null)
+                {
+                    var types = String.Join(", ", constructorTypeParameters.Select(pi => pi.Type.Name).ToArray());
+                    throw new CantFindConstructorException(String.Format("For these types : {0}.", types));
+                }
+                return Construct(type, constructor, constructorTypeParameters);
+            }
+
+            if (constructionConventions.Keys.Any(t => t.IsAssignableFrom(type)))
+            {
+                if (constructionConventions.Keys.Contains(type))
+                    return constructionConventions[type]();
+            }
+
+            var publicConstructors = type.GetConstructors(MyBinding.Flags);
+
+            if (publicConstructors.Count() > 0)
+            {
+                var highestParameterCount = publicConstructors.Max(c => c.GetParameters().Count());
+                var constructor = publicConstructors.First(c => c.GetParameters().Count() == highestParameterCount);
+                return Construct(type, constructor, highestParameterCount);
+            }
+
+            var allConstructors = type.GetConstructors(MyBinding.Flags);
+            if (allConstructors.Count() > 0)
+            {
+                var highestParameterCount = allConstructors.Max(c => c.GetParameters().Count());
+                var constructor = allConstructors.First(c => c.GetParameters().Count() == highestParameterCount);
+                return Construct(type, constructor, highestParameterCount);
+            }
+            return Activator.CreateInstance(type);
+        }
+
+        private object Construct(Type type, ConstructorInfo constructor, ConstructorParameterInfo[] constructorTypeParameters)
+        {
+            var parameterValues = new object[constructorTypeParameters.Count()];
+            int i = 0;
+            foreach (var constructorTypeParameter in constructorTypeParameters)
+            {
+                CheckForRecursiveRelation(type, constructorTypeParameter.Type);
+                parameterValues.SetValue(
+                    constructorTypeParameter.Generate != null
+                        ? constructorTypeParameter.Generate()
+                        : AnotherOne(constructorTypeParameter.Type), i);
+                i++;
+            }
+            return constructor.Invoke(parameterValues);
+        }
+
+        private object Construct(Type type, ConstructorInfo constructor, int highestParameterCount)
+        {
+            var parameters = constructor.GetParameters();
+            var parameterValues = new object[highestParameterCount];
+            for (int i = 0; i < parameters.Length; i++)
+            {
+                CheckForRecursiveRelation(type, parameters[i].ParameterType);
+                parameterValues.SetValue(AnotherOne(parameters[i].ParameterType), i);
+            }
+            return constructor.Invoke(parameterValues);
         }
     }
 }

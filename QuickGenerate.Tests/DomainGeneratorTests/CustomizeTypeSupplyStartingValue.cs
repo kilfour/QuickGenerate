@@ -5,9 +5,8 @@ namespace QuickGenerate.Tests.DomainGeneratorTests
     public class CustomizeTypeSupplyStartingValue
     {
         private readonly DomainGenerator generator =
-            new DomainGenerator()
-                    .With<SomethingToGenerate>(
-                        opt => opt.StartingValue(() => new SomethingToGenerate(42)));
+            new DomainGenerator().With(() => new SomethingToGenerate(42));
+
         [Fact]
         public void UsesDefaultValue()
         {

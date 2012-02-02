@@ -7,7 +7,7 @@ namespace QuickGenerate.Tests.EntityGeneratorTests
         private readonly EntityGenerator<SomethingToGenerate> generator =
             new EntityGenerator<SomethingToGenerate>()
                 .With(42)
-                .StartingValue(
+                .With(
                     () =>
                     new[]
                         {

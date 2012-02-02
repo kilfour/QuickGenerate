@@ -68,7 +68,6 @@
     <Compile Include="DomainGeneratorImplementation\ActionConvention.cs" />
     <Compile Include="DomainGeneratorImplementation\ChoiceConvention.cs" />
     <Compile Include="DomainGeneratorImplementation\ConstructionConvention.cs" />
-    <Compile Include="DomainGeneratorImplementation\Create.cs" />
     <Compile Include="DomainGeneratorImplementation\GeneratorOptions.cs" />
     <Compile Include="DomainGeneratorImplementation\OneToManyRelation.cs" />
     <Compile Include="Gather.cs" />

@@ -107,7 +107,7 @@ namespace QuickGenerate.DomainGeneratorImplementation
 
         public GeneratorOptions<T> Counter(Expression<Func<T, int>> propertyExpression, int startingValue, int step)
         {
-            var generator = new FuncGenerator<int>(startingValue - step, val => val = val + step);
+            var generator = new FuncGenerator<int>(startingValue - step, val => val + step);
             return For(propertyExpression, generator);
         }
 
@@ -125,7 +125,7 @@ namespace QuickGenerate.DomainGeneratorImplementation
 
         public GeneratorOptions<T> Counter(Expression<Func<T, long>> propertyExpression, long startingValue, long step)
         {
-            var generator = new FuncGenerator<long>(startingValue - step, val => val = val + step);
+            var generator = new FuncGenerator<long>(startingValue - step, val => val + step);
             return For(propertyExpression, generator);
         }
 
@@ -143,12 +143,6 @@ namespace QuickGenerate.DomainGeneratorImplementation
                 mi => typeof(T).IsAssignableFrom(mi.ReflectedType)
                       && mi.Name == propertyExpression.AsPropertyInfo().Name;
             return predicate;
-        }
-
-        public GeneratorOptions<T> StartingValue(Func<T> func)
-        {
-            domainGenerator.constructionConventions[typeof(T)] = () => func();
-            return this;
         }
 
         public GeneratorOptions<T> Method(Expression<Action<T>> method)

@@ -7,14 +7,14 @@ namespace QuickGenerate.Tests.DomainGeneratorTests.Inheritance
         private readonly DomainGenerator domainGenerator =
             new DomainGenerator()
                 .With(42)
-                .With<SomethingToGenerate>(opt => opt.StartingValue(
+                .With(
                     () =>
                     new[]
                         {
                             new SomethingToGenerate(),
                             new SomethingDerivedToGenerate(),
                             new SomethingElseDerivedToGenerate()
-                        }.PickOne()));
+                        }.PickOne());
 
         [Fact]
         public void Inheritence()

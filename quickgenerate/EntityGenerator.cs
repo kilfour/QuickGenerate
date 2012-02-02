@@ -22,6 +22,11 @@ namespace QuickGenerate
             return this;
         }
 
+        public EntityGenerator<TEntity> With<T>(Func<T> func)
+        {
+            generator.With(func);
+            return this;
+        }
         //public EntityGenerator<TEntity> With<T>(Func<MemberInfo, bool> predicate, IGenerator<T> aGenerator)
         //{
         //    generator.With(predicate, aGenerator);
@@ -31,12 +36,6 @@ namespace QuickGenerate
         public EntityGenerator<TEntity> Ignore<TProperty>(Expression<Func<TEntity, TProperty>> propertyExpression)
         {
             generator.With<TEntity>(opt => opt.Ignore(propertyExpression));
-            return this;
-        }
-
-        public EntityGenerator<TEntity> StartingValue(Func<TEntity> func)
-        {
-            generator.With<TEntity>(opt => opt.StartingValue(func));
             return this;
         }
 

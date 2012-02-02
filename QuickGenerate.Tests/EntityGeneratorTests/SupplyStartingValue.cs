@@ -6,7 +6,7 @@ namespace QuickGenerate.Tests.EntityGeneratorTests
     {
         private readonly EntityGenerator<SomethingToGenerate> generator =
             new EntityGenerator<SomethingToGenerate>()
-                    .StartingValue(() => new SomethingToGenerate(42));
+                    .With(() => new SomethingToGenerate(42));
         [Fact]
         public void UsesDefaultValue()
         {

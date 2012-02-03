@@ -22,15 +22,34 @@ namespace QuickGenerate
 
         // -----------------------------------
         // Customization methods
+        //--
+
+        // Choosing a value
         IDomainGenerator With<T>(params T[] choices);
+
+        // Suplying a starting value
         IDomainGenerator With<T>(Func<T> func);
+
+        // Modyfying a generated value
         IDomainGenerator With<T>(Func<T, T> func);
+
+        // Suplying a starting value by convention
         IDomainGenerator With<T>(Func<MemberInfo, bool> predicate, Func<T> func);
+
+        // Modifying a generator option
         IDomainGenerator With<T>(Func<GeneratorOptions<T>, GeneratorOptions<T>> customization);
+
+        // Ignoring stuff
         IDomainGenerator With<T>(Action<IgnoreGeneratorOptions<T>> customization);
         IDomainGenerator With(Action<IgnoreGeneratorOptions> customization);
+
+        // Defining inheritance
         IDomainGenerator With<T>(Action<InheritanceGeneratorOptions<T>> customization);
+
+        // Picking a constructor
         IDomainGenerator With<T>(Action<ConstructorGeneratorOptions<T>> customization);
+
+        // Applying functions over generated values
         IDomainGenerator ForEach<T>(Action<T> action);
         IDomainGenerator ForEach<T>(Action<int, T> action);
         // -----------------------------------

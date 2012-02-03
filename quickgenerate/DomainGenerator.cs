@@ -20,14 +20,14 @@ namespace QuickGenerate
         public readonly Dictionary<Func<MemberInfo, bool>, Func<PropertyInfo, object>> dynamicValueConventions =
             new Dictionary<Func<MemberInfo, bool>, Func<PropertyInfo, object>>();
 
+        public readonly List<ActionConvention> actionConventions
+            = new List<ActionConvention>();
+
         private readonly List<OneToManyRelation> oneToManyRelations =
             new List<OneToManyRelation>();
 
         private readonly List<ManyToOneRelation> manyToOneRelations =
             new List<ManyToOneRelation>();
-
-        public readonly List<ActionConvention> actionConventions
-            = new List<ActionConvention>();
 
         private readonly List<ChoiceConvention> choiceConventions
             = new List<ChoiceConvention>();
@@ -52,16 +52,13 @@ namespace QuickGenerate
 
         public IDomainGenerator OneToMany<TOne, TMany>(int numberOfMany, Action<TOne, TMany> action)
         {
-            var oneType = typeof (TOne);
-            var manyType = typeof(TMany);
-
             oneToManyRelations.Add(
                 new OneToManyRelation
                     {
                         AddChildElement = (one, many) => action((TOne)one, (TMany)many),
                         Amount = () => numberOfMany,
-                        One = oneType, 
-                        Many = manyType
+                        One = typeof (TOne), 
+                        Many = typeof(TMany)
                     });
             return this;
         }

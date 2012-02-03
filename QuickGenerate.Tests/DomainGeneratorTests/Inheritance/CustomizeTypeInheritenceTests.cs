@@ -1,5 +1,4 @@
-﻿using QuickGenerate.DomainGeneratorImplementation;
-using Xunit;
+﻿using Xunit;
 
 namespace QuickGenerate.Tests.DomainGeneratorTests.Inheritance
 {

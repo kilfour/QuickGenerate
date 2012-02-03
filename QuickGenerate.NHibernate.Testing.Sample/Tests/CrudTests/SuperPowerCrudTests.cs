@@ -1,4 +1,3 @@
-using QuickGenerate.DomainGeneratorImplementation;
 using QuickGenerate.NHibernate.Testing.Sample.Domain;
 using QuickGenerate.NHibernate.Testing.Sample.Tests.Tools;
 

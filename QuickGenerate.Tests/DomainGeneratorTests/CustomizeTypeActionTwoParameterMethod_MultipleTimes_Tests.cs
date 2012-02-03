@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using QuickGenerate.DomainGeneratorImplementation;
 using Xunit;
 
 namespace QuickGenerate.Tests.DomainGeneratorTests

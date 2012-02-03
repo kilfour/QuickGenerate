@@ -1,5 +1,4 @@
 using System;
-using QuickGenerate.DomainGeneratorImplementation;
 using QuickGenerate.HardCodeThoseDates;
 using Xunit;
 

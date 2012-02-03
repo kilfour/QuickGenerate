@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using System.Linq;
-using QuickGenerate.DomainGeneratorImplementation;
 using Xunit;
 
 namespace QuickGenerate.Tests.DomainGeneratorTests.Relations.OneToManyTests

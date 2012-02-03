@@ -4,14 +4,16 @@ namespace QuickGenerate.Tests.DomainGeneratorTests.Issues
 {
     public class CircularComponents
     {
-        [Fact(Skip="The code below loops !")]
-        public void Aaaaaaaaaaaaaaaaaargh()
+        [Fact]
+        public void Applied()
         {
-            new DomainGenerator()
-                .Component<One>()
-                .Component<Two>()
-                .Component<Three>()
-                .One<Root>();
+            var thing =
+                new DomainGenerator()
+                    .Component<One>()
+                    .Component<Two>()
+                    .Component<Three>()
+                    .One<Root>();
+            Assert.Null(thing.MyOne.MyTwo.MyThree.MyOne);
         }
 
         public class Root

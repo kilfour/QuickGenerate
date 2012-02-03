@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using QuickGenerate.DomainGeneratorImplementation;
-using Xunit;
+﻿using Xunit;
 
 namespace QuickGenerate.Tests.DomainGeneratorTests.Components
 {
@@ -9,11 +7,12 @@ namespace QuickGenerate.Tests.DomainGeneratorTests.Components
         [Fact]
         public void Works()
         {
-            var domainGenerator =
+            var thing =
                 new DomainGenerator()
-                    .Component<Something>();
+                    .Component<Something>()
+                    .One<Something>();
 
-            Assert.Throws<RecursiveRelationDefinedException>(() => domainGenerator.One<Something>());
+            Assert.Null(thing.MySomething.MySomething);
         }
 
         public class Something

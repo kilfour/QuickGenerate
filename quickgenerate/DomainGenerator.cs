@@ -53,9 +53,6 @@ namespace QuickGenerate
         public DomainGenerator OneToMany<TOne, TMany>(int numberOfMany, Action<TOne, TMany> action)
         {
             var oneType = typeof (TOne);
-            if (IsComponentType(oneType))
-                throw new NoRelationAllowedOnComponentsException(String.Format("Component : {0}.", oneType.Name));
-
             var manyType = typeof(TMany);
 
             oneToManyRelations.Add(
@@ -83,10 +80,6 @@ namespace QuickGenerate
             Func<TOne, TMany> manyFunc,
             Action<TOne, TMany> action)
         {
-            var oneType = typeof(TOne);
-            if (IsComponentType(oneType))
-                throw new NoRelationAllowedOnComponentsException(String.Format("Component : {0}.", oneType.Name));
-
             oneToManyRelations.Add(
                 new OneToManyRelation
                 {
@@ -119,10 +112,6 @@ namespace QuickGenerate
 
         public DomainGenerator ManyToOne<TMany, TOne>(int minmumNumberOfMany, int maximumNumberOfMany, Action<TMany, TOne> action)
         {
-            var manyType = typeof(TMany);
-            if (IsComponentType(manyType))
-                throw new NoRelationAllowedOnComponentsException(String.Format("Component : {0}.", manyType.Name));
-
             manyToOneRelations.Add(
                 new ManyToOneRelation
                 {
@@ -295,8 +284,36 @@ namespace QuickGenerate
 
         private void ApplyRelations<TTarget>(TTarget target)
         {
+            ApplyComponents(target, oneToManyRelations);
             ApplyOneToManyRelations(target, oneToManyRelations);
             ApplyManyToOneRelations(target, manyToOneRelations);
+        }
+
+        private void ApplyComponents<TTarget>(TTarget target, List<OneToManyRelation> oneToManies)
+        {
+            foreach (var propertyInfo in target.GetType().GetProperties(MyBinding.Flags))
+            {
+                if (IsComponentType(propertyInfo.PropertyType))
+                {
+                    if (knownComponents.Contains(propertyInfo))
+                        return;
+                    knownComponents.Add(propertyInfo);
+                    var oneType = target.GetType();
+                    var manyType = propertyInfo.PropertyType;
+                    var info = propertyInfo;
+                    var relation =
+                        new OneToManyRelation
+                            {
+                                AddChildElement = (one, many) => SetPropertyValue(info, one, many),
+                                Amount = () => 1,
+                                One = oneType,
+                                Many = manyType
+                            };
+
+                    oneToManies.Add(relation);
+                    oneToManyRelations.Add(relation);
+                }
+            }
         }
 
         private void ApplyOneToManyRelations<TTarget>(TTarget target, List<OneToManyRelation> oneToManies)
@@ -312,6 +329,7 @@ namespace QuickGenerate
                             ? OneWithoutRelations(relation.Many)
                             : OneWithoutRelations(relation.CreateChildElement(target));
                     relation.AddChildElement(target, many);
+                    ApplyComponents(many, oneToManies.Where(r => r != relation).ToList());
                     ApplyOneToManyRelations(many, oneToManies.Where(r => r != relation).ToList());
                     ApplyManyToOneRelations(many, manyToOneRelations.Where(r => r.One != relation.One || r.Many != relation.Many).ToList());
                 }
@@ -330,6 +348,7 @@ namespace QuickGenerate
                 {
                     one = OneWithoutRelations(relation.One);
                     ApplyManyToOneRelations(one, manyToOnes.Where(r => r != relation).ToList());
+                    ApplyComponents(one, oneToManyRelations.Where(r => r.One != relation.One || r.Many != relation.Many).ToList()); 
                     ApplyOneToManyRelations(one, oneToManyRelations.Where(r => r.One != relation.One || r.Many != relation.Many).ToList());
                     relation.Action(target, one);
                 }
@@ -338,6 +357,7 @@ namespace QuickGenerate
                 {
                     var many = OneWithoutRelations(relation.Many);
                     ApplyManyToOneRelations(one, manyToOnes.Where(r => r != relation).ToList());
+                    ApplyComponents(one, oneToManyRelations.Where(r => r.One != relation.One || r.Many != relation.Many).ToList()); 
                     ApplyOneToManyRelations(one, oneToManyRelations.Where(r => r.One != relation.One || r.Many != relation.Many).ToList());
                     relation.Action(many, one);
                 }
@@ -398,8 +418,7 @@ namespace QuickGenerate
             generatedObjects.Add(target);
             foreach (var propertyInfo in target.GetType().GetProperties(MyBinding.Flags))
             {
-                if (IsSimpleProperty(target, propertyInfo))
-                    continue;
+                IsSimpleProperty(target, propertyInfo);
             }
             return target;
         }
@@ -436,8 +455,6 @@ namespace QuickGenerate
             if (IsAKnownPrimitive(target, propertyInfo))
                 return true;
             if (IsAnEnumeration(target, propertyInfo))
-                return true;
-            if (IsComponent(target, propertyInfo))
                 return true;
             return false;
         }
@@ -480,43 +497,22 @@ namespace QuickGenerate
 
         private bool IsComponentType(Type type)
         {
-            return (componentTypes.Any(t => t == type));
+            return (componentTypes.Keys.Any(t => t == type));
         }
 
-        private bool IsComponent(object target, PropertyInfo propertyInfo)
-        {
-            if (IsComponentType(propertyInfo.PropertyType))
-            {
-                if(target.GetType() == propertyInfo.PropertyType)
-                    throw new RecursiveRelationDefinedException(String.Format("Component Type for {0} is same as {1}.", target.GetType(), propertyInfo.PropertyType));
-
-                SetPropertyValue(propertyInfo, target, OneWithoutRelations(propertyInfo.PropertyType));
-                return true;
-            }
-            return false;
-        }
-
-        private readonly List<Type> componentTypes = new List<Type>();
+        private readonly Dictionary<Type, List<PropertyInfo>> componentTypes = new Dictionary<Type, List<PropertyInfo>>();
+        private readonly List<PropertyInfo> knownComponents = new List<PropertyInfo>();
+        
         public DomainGenerator Component<T>()
         {
-            CheckIfComponentIsInRelation(typeof (T));
-            componentTypes.Add(typeof(T));
+            componentTypes[typeof(T)] = new List<PropertyInfo>();
             return this;
-        }
-
-        private void CheckIfComponentIsInRelation(Type type)
-        {
-            if(oneToManyRelations.Any(r => r.One == type || r.Many == type))
-                throw new NoRelationAllowedOnComponentsException(String.Format("Component : {0}.", type.Name));
-            if (manyToOneRelations.Any(r => r.One == type || r.Many == type))
-                throw new NoRelationAllowedOnComponentsException(String.Format("Component : {0}.", type.Name));
         }
 
         private bool IsAnEnumeration(object target, PropertyInfo propertyInfo)
         {
             if (propertyInfo.PropertyType.IsEnum)
             {
-
                 SetPropertyValue(propertyInfo, target, GetEnumValues(propertyInfo.PropertyType).PickOne());
                 return true;
             }

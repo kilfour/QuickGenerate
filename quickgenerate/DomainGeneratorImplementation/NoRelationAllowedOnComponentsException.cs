@@ -2,9 +2,9 @@ using System;
 
 namespace QuickGenerate.DomainGeneratorImplementation
 {
-    public class NoRelationAllowedOnComponentsException : Exception
+    public class NoRelationssssAllowedOnComponentsException : Exception
     {
-        public NoRelationAllowedOnComponentsException(string message)
+        public NoRelationssssAllowedOnComponentsException(string message)
             : base(message) { }
     }
 }

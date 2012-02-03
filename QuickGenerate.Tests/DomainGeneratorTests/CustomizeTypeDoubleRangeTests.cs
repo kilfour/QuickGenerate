@@ -4,13 +4,13 @@ namespace QuickGenerate.Tests.DomainGeneratorTests
 {
     public class CustomizeTypeDoubleRangeTests
     {
-        private readonly DomainGenerator domainGenerator =
-            new DomainGenerator()
-                .With<SomethingToGenerate>(g => g.Range(e => e.MyProperty, 3, 10));
-
         [Fact]
         public void GeneratorIsApplied()
         {
+            var domainGenerator =
+                new DomainGenerator()
+                    .With<SomethingToGenerate>(g => g.Range(e => e.MyProperty, 3, 10));
+
             10.Times(
                 () =>
                     {

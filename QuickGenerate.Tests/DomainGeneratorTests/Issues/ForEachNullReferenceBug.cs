@@ -1,11 +1,12 @@
 ﻿using System.Linq;
+using QuickGenerate.DomainGeneratorImplementation;
 using Xunit;
 
 namespace QuickGenerate.Tests.DomainGeneratorTests.Issues
 {
     public class ForEachNullReferenceBug
     {
-        private readonly DomainGenerator domainGenerator;
+        private readonly IDomainGenerator domainGenerator;
 
         public ForEachNullReferenceBug()
         {
@@ -21,7 +22,7 @@ namespace QuickGenerate.Tests.DomainGeneratorTests.Issues
         {
             var something = domainGenerator.One<SomethingToGenerate>();
             Assert.Equal(something, something.SomethingElse.Something);
-            Assert.Equal(2, domainGenerator.GeneratedObjects.Count());
+            Assert.Equal(2, ((DomainGenerator)domainGenerator).GeneratedObjects.Count());
         }
 
         public class SomethingToGenerate

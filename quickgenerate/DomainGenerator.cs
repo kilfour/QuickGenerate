@@ -9,7 +9,7 @@ using QuickGenerate.Primitives;
 
 namespace QuickGenerate
 {
-    public class DomainGenerator
+    public class DomainGenerator : IDomainGenerator
     {
         private readonly List<object> generatedObjects = new List<object>();
 
@@ -45,12 +45,12 @@ namespace QuickGenerate
             new Dictionary<Type, IConstructorGeneratorOptions>();
 
 
-        public DomainGenerator OneToOne<TOne, TMany>(Action<TOne, TMany> action)
+        public IDomainGenerator OneToOne<TOne, TMany>(Action<TOne, TMany> action)
         {
             return OneToMany(1, action);
         }
 
-        public DomainGenerator OneToMany<TOne, TMany>(int numberOfMany, Action<TOne, TMany> action)
+        public IDomainGenerator OneToMany<TOne, TMany>(int numberOfMany, Action<TOne, TMany> action)
         {
             var oneType = typeof (TOne);
             var manyType = typeof(TMany);
@@ -66,7 +66,7 @@ namespace QuickGenerate
             return this;
         }
 
-        public DomainGenerator OneToMany<TOne, TMany>(
+        public IDomainGenerator OneToMany<TOne, TMany>(
             int numberOfMany,
             Func<TOne, TMany> manyFunc,
             Action<TOne, TMany> action)
@@ -74,7 +74,7 @@ namespace QuickGenerate
             return OneToMany(numberOfMany, numberOfMany, manyFunc, action);
         }
 
-        public DomainGenerator OneToMany<TOne, TMany>(
+        public IDomainGenerator OneToMany<TOne, TMany>(
             int minmumNumberOfMany,
             int maximumNumberOfMany,
             Func<TOne, TMany> manyFunc,
@@ -92,7 +92,7 @@ namespace QuickGenerate
             return this;
         }
 
-        public DomainGenerator OneToMany<TOne, TMany>(int minmumNumberOfMany, int maximumNumberOfMany, Action<TOne, TMany> action)
+        public IDomainGenerator OneToMany<TOne, TMany>(int minmumNumberOfMany, int maximumNumberOfMany, Action<TOne, TMany> action)
         {
             oneToManyRelations.Add(
                 new OneToManyRelation
@@ -105,12 +105,12 @@ namespace QuickGenerate
             return this;
         }
 
-        public DomainGenerator ManyToOne<TMany, TOne>(int numberOfMany, Action<TMany, TOne> action)
+        public IDomainGenerator ManyToOne<TMany, TOne>(int numberOfMany, Action<TMany, TOne> action)
         {
             return ManyToOne(numberOfMany, numberOfMany, action);
         }
 
-        public DomainGenerator ManyToOne<TMany, TOne>(int minmumNumberOfMany, int maximumNumberOfMany, Action<TMany, TOne> action)
+        public IDomainGenerator ManyToOne<TMany, TOne>(int minmumNumberOfMany, int maximumNumberOfMany, Action<TMany, TOne> action)
         {
             manyToOneRelations.Add(
                 new ManyToOneRelation
@@ -123,18 +123,18 @@ namespace QuickGenerate
             return this;
         }
 
-        public DomainGenerator With<T>(Func<T> func)
+        public IDomainGenerator With<T>(Func<T> func)
         {
             constructionConventions[typeof (T)] = () => func();
             return this;
         }
 
-        public DomainGenerator With<T>(Func<T, T> func)
+        public IDomainGenerator With<T>(Func<T, T> func)
         {
             return With(mi => true, () => func(One<T>()));
         }
 
-        public DomainGenerator With<T>(Func<MemberInfo, bool> predicate, Func<T> func)
+        public IDomainGenerator With<T>(Func<MemberInfo, bool> predicate, Func<T> func)
         {
             Func<MemberInfo, bool> decoratedPredicate =
                 mi => ((PropertyInfo)mi).PropertyType.IsAssignableFrom(typeof(T)) && predicate(mi);
@@ -142,13 +142,13 @@ namespace QuickGenerate
             return this;
         }
 
-        public DomainGenerator With<T>(Func<GeneratorOptions<T>, GeneratorOptions<T>> customization)
+        public IDomainGenerator With<T>(Func<GeneratorOptions<T>, GeneratorOptions<T>> customization)
         {
             customization(new GeneratorOptions<T>(this));
             return this;
         }
 
-        public DomainGenerator With<T>(params T[] choices)
+        public IDomainGenerator With<T>(params T[] choices)
         {
             choiceConventions
                 .Add(
@@ -160,7 +160,7 @@ namespace QuickGenerate
             return this;
         }
 
-        public DomainGenerator With<T>(Action<IgnoreGeneratorOptions<T>> customization)
+        public IDomainGenerator With<T>(Action<IgnoreGeneratorOptions<T>> customization)
         {
             if (!ignoreGeneratorOptions.ContainsKey(typeof(T)))
                 ignoreGeneratorOptions[typeof (T)] = new IgnoreGeneratorOptions<T>();
@@ -168,7 +168,7 @@ namespace QuickGenerate
             return this;
         }
 
-        public DomainGenerator With(Action<IgnoreGeneratorOptions> customization)
+        public IDomainGenerator With(Action<IgnoreGeneratorOptions> customization)
         {
             if (!ignoreGeneratorOptions.ContainsKey(typeof(object)))
                 ignoreGeneratorOptions[typeof(object)] = new IgnoreGeneratorOptions();
@@ -176,7 +176,7 @@ namespace QuickGenerate
             return this;
         }
 
-        public DomainGenerator With<T>(Action<InheritanceGeneratorOptions<T>> customization)
+        public IDomainGenerator With<T>(Action<InheritanceGeneratorOptions<T>> customization)
         {
             if (!inheritanceGeneratorOptions.ContainsKey(typeof(T)))
                 inheritanceGeneratorOptions[typeof(T)] = new InheritanceGeneratorOptions<T>();
@@ -192,7 +192,7 @@ namespace QuickGenerate
             return options.PickType();
         }
 
-        public DomainGenerator With<T>(Action<ConstructorGeneratorOptions<T>> customization)
+        public IDomainGenerator With<T>(Action<ConstructorGeneratorOptions<T>> customization)
         {
             if (!constructorGeneratorOptions.ContainsKey(typeof(T)))
                 constructorGeneratorOptions[typeof(T)] = new ConstructorGeneratorOptions<T>();
@@ -229,7 +229,7 @@ namespace QuickGenerate
             }
         }
 
-        public DomainGenerator ForEach<T>(Action<T> action)
+        public IDomainGenerator ForEach<T>(Action<T> action)
         {
             actionConventions.Add(
                 new ActionConvention
@@ -240,7 +240,7 @@ namespace QuickGenerate
             return this;
         }
 
-        public DomainGenerator ForEach<T>(Action<int, T> action)
+        public IDomainGenerator ForEach<T>(Action<int, T> action)
         {
             actionConventions.Add(
                 new ActionConvention
@@ -503,7 +503,7 @@ namespace QuickGenerate
         private readonly Dictionary<Type, List<PropertyInfo>> componentTypes = new Dictionary<Type, List<PropertyInfo>>();
         private readonly List<PropertyInfo> knownComponents = new List<PropertyInfo>();
         
-        public DomainGenerator Component<T>()
+        public IDomainGenerator Component<T>()
         {
             componentTypes[typeof(T)] = new List<PropertyInfo>();
             return this;

@@ -1,12 +1,13 @@
 using System.Collections.Generic;
 using System.Linq;
+using QuickGenerate.DomainGeneratorImplementation;
 using Xunit;
 
 namespace QuickGenerate.Tests.DomainGeneratorTests.Relations.OneToManyTests
 {
     public class MultipleOneToManiesTests
     {
-        private readonly DomainGenerator domainGenerator;
+        private readonly IDomainGenerator domainGenerator;
 
         public MultipleOneToManiesTests()
         {
@@ -22,7 +23,7 @@ namespace QuickGenerate.Tests.DomainGeneratorTests.Relations.OneToManyTests
             var something = domainGenerator.One<SomeParent>();
             Assert.Equal(1, something.Children.Count);
             Assert.Equal(1, something.OtherChildren.Count);
-            Assert.Equal(3, domainGenerator.GeneratedObjects.Count());
+            Assert.Equal(3, ((DomainGenerator)domainGenerator).GeneratedObjects.Count());
         }
 
         [Fact]
@@ -30,7 +31,7 @@ namespace QuickGenerate.Tests.DomainGeneratorTests.Relations.OneToManyTests
         {
             var something = domainGenerator.One<SomeChild>();
             Assert.NotNull(something);
-            Assert.Equal(1, domainGenerator.GeneratedObjects.Count());
+            Assert.Equal(1, ((DomainGenerator)domainGenerator).GeneratedObjects.Count());
         }
 
 

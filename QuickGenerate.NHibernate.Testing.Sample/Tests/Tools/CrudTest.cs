@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using NHibernate.Exceptions;
+using QuickGenerate.DomainGeneratorImplementation;
 using QuickGenerate.NHibernate.Testing.Sample.Domain;
 using Xunit;
 
@@ -11,7 +12,7 @@ namespace QuickGenerate.NHibernate.Testing.Sample.Tests.Tools
     public abstract class CrudTest<TEntity> : DatabaseTest
         where TEntity : IHaveAnId
     {
-        protected virtual DomainGenerator GenerateIt()
+        protected virtual IDomainGenerator GenerateIt()
         {
             return
                 new DomainGenerator()

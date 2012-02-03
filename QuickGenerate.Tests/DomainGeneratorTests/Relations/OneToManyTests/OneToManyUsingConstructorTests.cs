@@ -1,11 +1,12 @@
 ﻿using System.Collections.Generic;
+using QuickGenerate.DomainGeneratorImplementation;
 using Xunit;
 
 namespace QuickGenerate.Tests.DomainGeneratorTests.Relations.OneToManyTests
 {
     public class OneToManyUsingConstructorTests
     {
-        private readonly DomainGenerator domainGenerator;
+        private readonly IDomainGenerator domainGenerator;
 
         public OneToManyUsingConstructorTests()
         {

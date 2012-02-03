@@ -1,10 +1,11 @@
-﻿using Xunit;
+﻿using QuickGenerate.DomainGeneratorImplementation;
+using Xunit;
 
 namespace QuickGenerate.Tests.DomainGeneratorTests.Components
 {
     public class ComponentsTests
     {
-        private readonly DomainGenerator domainGenerator;
+        private readonly IDomainGenerator domainGenerator;
 
         public ComponentsTests()
         {

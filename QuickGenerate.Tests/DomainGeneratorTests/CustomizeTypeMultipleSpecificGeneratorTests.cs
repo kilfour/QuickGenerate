@@ -1,3 +1,4 @@
+using QuickGenerate.DomainGeneratorImplementation;
 using QuickGenerate.Primitives;
 using Xunit;
 
@@ -5,7 +6,7 @@ namespace QuickGenerate.Tests.DomainGeneratorTests
 {
     public class CustomizeTypeMultipleSpecificGeneratorTests
     {
-        private readonly DomainGenerator domainGenerator;
+        private readonly IDomainGenerator domainGenerator;
 
         public CustomizeTypeMultipleSpecificGeneratorTests()
         {

@@ -1,10 +1,11 @@
+using QuickGenerate.DomainGeneratorImplementation;
 using Xunit;
 
 namespace QuickGenerate.Tests.DomainGeneratorTests
 {
     public class ReplacingPrimitiveGeneratorsWithConstantValueTests
     {
-        private readonly DomainGenerator domainGenerator;
+        private readonly IDomainGenerator domainGenerator;
 
         public ReplacingPrimitiveGeneratorsWithConstantValueTests()
         {

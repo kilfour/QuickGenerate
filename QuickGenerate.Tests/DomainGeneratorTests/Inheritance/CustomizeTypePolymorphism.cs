@@ -1,10 +1,11 @@
+using QuickGenerate.DomainGeneratorImplementation;
 using Xunit;
 
 namespace QuickGenerate.Tests.DomainGeneratorTests.Inheritance
 {
     public class CustomizeTypePolymorphism
     {
-        private readonly DomainGenerator domainGenerator;
+        private readonly IDomainGenerator domainGenerator;
 
         public CustomizeTypePolymorphism()
         {

@@ -1,4 +1,5 @@
-﻿using QuickGenerate.NHibernate.Testing.Sample.Domain;
+﻿using QuickGenerate.DomainGeneratorImplementation;
+using QuickGenerate.NHibernate.Testing.Sample.Domain;
 using QuickGenerate.NHibernate.Testing.Sample.Tests.Tools;
 using Xunit;
 
@@ -6,7 +7,7 @@ namespace QuickGenerate.NHibernate.Testing.Sample.Tests.CrudTests
 {
     public class SuperHeroCrudTests : CrudTest<SuperHero>
     {
-        protected override DomainGenerator GenerateIt()
+        protected override IDomainGenerator GenerateIt()
         {
             return 
                 base.GenerateIt()

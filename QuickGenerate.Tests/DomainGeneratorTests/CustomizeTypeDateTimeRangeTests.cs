@@ -1,4 +1,5 @@
 using System;
+using QuickGenerate.DomainGeneratorImplementation;
 using QuickGenerate.HardCodeThoseDates;
 using Xunit;
 
@@ -6,7 +7,7 @@ namespace QuickGenerate.Tests.DomainGeneratorTests
 {
     public class CustomizeTypeDateTimeRangeTests
     {
-        private readonly DomainGenerator domainGenerator =
+        private readonly IDomainGenerator domainGenerator =
             new DomainGenerator()
                 .With<SomethingToGenerate>(g => g.Range(e => e.MyProperty, 1.January(2010), 3.January(2010)));
 

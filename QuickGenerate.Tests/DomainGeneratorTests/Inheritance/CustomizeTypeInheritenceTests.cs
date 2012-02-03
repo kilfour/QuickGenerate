@@ -1,24 +1,24 @@
-﻿using Xunit;
+﻿using QuickGenerate.DomainGeneratorImplementation;
+using Xunit;
 
 namespace QuickGenerate.Tests.DomainGeneratorTests.Inheritance
 {
     public class CustomizeTypeInheritenceTests
     {
-        private readonly DomainGenerator domainGenerator =
-            new DomainGenerator()
-                .With(42)
-                .With(
-                    () =>
-                    new[]
-                        {
-                            new SomethingToGenerate(),
-                            new SomethingDerivedToGenerate(),
-                            new SomethingElseDerivedToGenerate()
-                        }.PickOne());
-
+        private readonly IDomainGenerator domainGenerator =
+                new DomainGenerator()
+                    .With(42)
+                    .With(
+                        () =>
+                        new[]
+                            {
+                                new SomethingToGenerate(),
+                                new SomethingDerivedToGenerate(),
+                                new SomethingElseDerivedToGenerate()
+                            }.PickOne());
         [Fact]
         public void Inheritence()
-        {   
+        {
             var generatedSomething = false;
             var generatedSomethingDerived = false;
             var generatedSomethingElseDerived = false;

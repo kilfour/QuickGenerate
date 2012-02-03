@@ -1,11 +1,12 @@
 using System.Collections.Generic;
+using QuickGenerate.DomainGeneratorImplementation;
 using Xunit;
 
 namespace QuickGenerate.Tests.DomainGeneratorTests
 {
     public class CustomizeTypeActionTwoParameterMethod_MultipleTimes_Tests
     {
-        private readonly DomainGenerator domainGenerator;
+        private readonly IDomainGenerator domainGenerator;
 
         public CustomizeTypeActionTwoParameterMethod_MultipleTimes_Tests()
         {

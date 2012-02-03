@@ -1,10 +1,11 @@
+using QuickGenerate.DomainGeneratorImplementation;
 using Xunit;
 
 namespace QuickGenerate.Tests.DomainGeneratorTests
 {
     public class CustomizeTypeActionTwoParameterMethodTests
     {
-        private readonly DomainGenerator domainGenerator;
+        private readonly IDomainGenerator domainGenerator;
 
         public CustomizeTypeActionTwoParameterMethodTests()
         {

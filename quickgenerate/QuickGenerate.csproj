@@ -52,6 +52,7 @@
     <Compile Include="EntityGenerator.cs" />
     <Compile Include="Gathering\Gatherer.cs" />
     <Compile Include="Gathering\GathererMatchResult.cs" />
+    <Compile Include="IDomainGenerator.cs" />
     <Compile Include="IGenerator.cs" />
     <Compile Include="Implementation\MyBinding.cs" />
     <Compile Include="Inspector.cs" />

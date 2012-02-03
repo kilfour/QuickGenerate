@@ -1,10 +1,11 @@
+using QuickGenerate.DomainGeneratorImplementation;
 using Xunit;
 
 namespace QuickGenerate.Tests.DomainGeneratorTests.Relations.OneToOneTests
 {
     public class ExplicitOneToOneTests
     {
-        private readonly DomainGenerator domainGenerator;
+        private readonly IDomainGenerator domainGenerator;
 
         public ExplicitOneToOneTests()
         {

@@ -16,7 +16,7 @@ namespace QuickGenerate.Tests.DomainGeneratorTests.Relations.OneToManyTests
             var something = domainGenerator.One<SomeParent>();
             Assert.Equal(1, something.Children.Count);
             Assert.Equal(1, something.OtherChildren.Count);
-            Assert.Equal(3, domainGenerator.GeneratedObjects.Count());
+            Assert.Equal(3, ((DomainGenerator)domainGenerator).GeneratedObjects.Count());
         }
 
 

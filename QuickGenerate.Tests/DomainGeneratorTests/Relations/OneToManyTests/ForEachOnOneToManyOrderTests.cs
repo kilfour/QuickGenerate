@@ -1,12 +1,13 @@
 using System.Collections.Generic;
 using System.Linq;
+using QuickGenerate.DomainGeneratorImplementation;
 using Xunit;
 
 namespace QuickGenerate.Tests.DomainGeneratorTests.Relations.OneToManyTests
 {
     public class ForEachOnOneToManyOrderTests
     {
-        private readonly DomainGenerator domainGenerator;
+        private readonly IDomainGenerator domainGenerator;
         private readonly List<object> objects = new List<object>();
 
         public ForEachOnOneToManyOrderTests()
@@ -23,7 +24,7 @@ namespace QuickGenerate.Tests.DomainGeneratorTests.Relations.OneToManyTests
         {
             domainGenerator.One<One>();
 
-            Assert.Equal(3, domainGenerator.GeneratedObjects.Count());
+            Assert.Equal(3, ((DomainGenerator)domainGenerator).GeneratedObjects.Count());
             Assert.Equal(3, objects.Count());
 
             Assert.IsType<One>(objects[0]);
@@ -36,7 +37,7 @@ namespace QuickGenerate.Tests.DomainGeneratorTests.Relations.OneToManyTests
         {
             domainGenerator.One<Two>();
 
-            Assert.Equal(2, domainGenerator.GeneratedObjects.Count());
+            Assert.Equal(2, ((DomainGenerator)domainGenerator).GeneratedObjects.Count());
             Assert.Equal(2, objects.Count());
 
             Assert.IsType<Two>(objects[0]);
@@ -48,7 +49,7 @@ namespace QuickGenerate.Tests.DomainGeneratorTests.Relations.OneToManyTests
         {
             domainGenerator.One<Three>();
 
-            Assert.Equal(1, domainGenerator.GeneratedObjects.Count());
+            Assert.Equal(1, ((DomainGenerator)domainGenerator).GeneratedObjects.Count());
             Assert.Equal(1, objects.Count());
 
             Assert.IsType<Three>(objects[0]);

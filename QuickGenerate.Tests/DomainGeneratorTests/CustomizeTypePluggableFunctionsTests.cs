@@ -1,22 +1,17 @@
-using QuickGenerate.Complex;
+using QuickGenerate.DomainGeneratorImplementation;
 using Xunit;
 
 namespace QuickGenerate.Tests.DomainGeneratorTests
 {
     public class CustomizeTypePluggableFunctionsTests
     {
-        private readonly DomainGenerator domainGenerator;
-
-        public CustomizeTypePluggableFunctionsTests()
-        {
-            domainGenerator =
+        private readonly IDomainGenerator domainGenerator = 
                 new DomainGenerator()
                     .With<SomethingToGenerate>(
                         g => g.For(
                             e => e.MyProperty,
                             0, val => ++val,
                             val => string.Format("SomeString{0}", val)));
-        }
 
         [Fact]
         public void Works()

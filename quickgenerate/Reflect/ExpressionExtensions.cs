@@ -32,5 +32,10 @@ namespace QuickGenerate.Reflect
         {
             expression.AsPropertyInfo().SetValue(target, value, null);
         }
+
+        public static string GetName<TTarget, TExpression>(this Expression<Func<TTarget, TExpression>> expression, TTarget target, TExpression value)
+        {
+            return expression.AsPropertyInfo().Name;
+        }
     }
 }

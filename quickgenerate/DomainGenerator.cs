@@ -556,7 +556,7 @@ namespace QuickGenerate
                                     int ix = 0;
                                     foreach (var parameterInfo in ctorParams)
                                     {
-                                        if (parameterInfo.ParameterType != constructorTypeParameters[ix].Type)
+                                        if (!parameterInfo.ParameterType.IsAssignableFrom(constructorTypeParameters[ix].Type))
                                             return false;
                                         ix++;
 

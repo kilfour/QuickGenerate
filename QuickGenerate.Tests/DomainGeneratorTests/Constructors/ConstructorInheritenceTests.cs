@@ -4,28 +4,28 @@ namespace QuickGenerate.Tests.DomainGeneratorTests.Constructors
 {
     public class ConstructorInheritenceTests
     {
-        [Fact(Skip="Issue from Github")]
+        [Fact]
         public void TheDefaultConstructor()
         {
-            var y = new Y();
+            var y = new SomethingDerived();
             var thing =
                 new DomainGenerator()
-                    .With<X>(o => o.Construct(y))
-                    .One<X>();
+                    .With<SomethingToGenerate>(o => o.Construct(y))
+                    .One<SomethingToGenerate>();
 
             Assert.NotNull(thing.GetValue());
         }
 
-        public abstract class Z { }
-        public class Y : Z { }
-        public class X
+        public abstract class SomethingBase { }
+        public class SomethingDerived : SomethingBase { }
+        public class SomethingToGenerate
         {
-            private readonly Z value;
-            public Z GetValue()
+            private readonly SomethingBase value;
+            public SomethingBase GetValue()
             {
                 return value;
             }
-            public X(Z value)
+            public SomethingToGenerate(SomethingBase value)
             {
                 this.value = value;
             }

@@ -11,7 +11,7 @@ namespace QuickGenerate.NHibernate.Testing.Sample.Tests.Tools
         public ISession NHibernateSession { get; set; }
         private readonly ITransaction transaction;
 
-        protected DatabaseTest()
+        public DatabaseTest()
         {
             if (sessionFactory == null)
             {

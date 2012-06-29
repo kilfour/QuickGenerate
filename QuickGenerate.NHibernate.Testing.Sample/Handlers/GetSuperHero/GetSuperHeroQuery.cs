@@ -6,12 +6,7 @@ using QuickGenerate.NHibernate.Testing.Sample.Domain;
 
 namespace QuickGenerate.NHibernate.Testing.Sample.Handlers.GetSuperHero
 {
-    public interface IGetSuperHeroQuery
-    {
-        SuperHero One(Guid superHeroId);
-    }
-
-    public class GetSuperHeroQuery : IGetSuperHeroQuery
+    public class GetSuperHeroQuery
     {
         private readonly ISession session;
 
@@ -26,8 +21,8 @@ namespace QuickGenerate.NHibernate.Testing.Sample.Handlers.GetSuperHero
                 session
                     .CreateCriteria<SuperHero>()
                     .Add(Restrictions.Eq("Id", superHeroId))
-                    // Comment out line below to see the GetSuperHeroHandlerTest fail
                     .CreateAlias("SuperPowers", "sp", JoinType.LeftOuterJoin)
+                    .CreateAlias("sp.SuperPowerEffects", "spe", JoinType.LeftOuterJoin)
                     .UniqueResult<SuperHero>();
         }
     }

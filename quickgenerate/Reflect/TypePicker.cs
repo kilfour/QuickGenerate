@@ -50,5 +50,15 @@ namespace QuickGenerate.Reflect
         {
             return types.Where(t => t != typeof (T)).ToArray();
         }
+
+        public static Type[] InSameNamespaceAs<T>(this Type[] types)
+        {
+            return types.Where(t => t.Namespace == typeof(T).Namespace).ToArray();
+        }
+
+        public static Type[] NotAbstract(this Type[] types)
+        {
+            return types.Where(t => !t.IsAbstract).ToArray();
+        }
     }
 }

@@ -5,15 +5,11 @@
   namespace="QuickGenerate.NHibernate.Testing.Sample.Domain" 
   assembly="QuickGenerate.NHibernate.Testing.Sample">
 
-  <class name="SuperPower" optimistic-lock="dirty" dynamic-update="true">
+  <class name="SuperPowerEffect" optimistic-lock="dirty" dynamic-update="true">
     <id name="Id" column="Id" >
       <generator class="guid.comb" />
     </id>
     <property name="Name" length="50" not-null="true" />
     <property name="Description" length="255" not-null="true" />
-    <set name="SuperPowerEffects" cascade="all-delete-orphan">
-      <key column="SuperPowerId" />
-      <one-to-many class="SuperPowerEffect" />
-    </set>
   </class>
 </hibernate-mapping>

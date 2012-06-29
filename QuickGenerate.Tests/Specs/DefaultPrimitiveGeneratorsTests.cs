@@ -26,8 +26,8 @@ namespace QuickGenerate.Tests.Specs
         [Fact]
         public void RunTest()
         {
-            new Suite(100, 1)
-                .Register<DefaultPrimitiveGeneratorsTests>()
+            new Suite(100)
+                .Do<DefaultPrimitiveGeneratorsTests>()
                 .Run();
         }
 

@@ -14,7 +14,7 @@ namespace QuickGenerate.Tests.Specs
         [Fact]
         public void RunTest()
         {
-            var suite = new Suite(100, 1).Verbose();
+            var suite = new Suite(100);
             suite.Using(() => new DomainGenerator().With(true));
             RegisterFixtures(suite);
             suite.Run();
@@ -23,7 +23,7 @@ namespace QuickGenerate.Tests.Specs
         public Suite RegisterFixtures (Suite suite)
         {
             return
-                suite
+                suite.Do(1, opt => opt
                     .Register(Build<AllPrimitives, long>(e => e.LongProperty))
                     .Register(Build<AllPrimitives, DateTime>(e => e.DateTimeProperty))
                     .Register(Build<AllPrimitives, short>(e => e.ShortProperty))
@@ -34,7 +34,7 @@ namespace QuickGenerate.Tests.Specs
                     .Register(Build<AllPrimitives, char>(e => e.CharProperty))
                     .Register(Build<AllPrimitives, float>(e => e.FloatProperty))
                     .Register(Build<AllPrimitives, TimeSpan>(e => e.TimeSpanProperty))
-                    .Register(Build<AllPrimitives, double>(e => e.DoubleProperty));
+                    .Register(Build<AllPrimitives, double>(e => e.DoubleProperty)));
         }
 
         private Func<IFixture> Build<TEntity, TProperty>(Expression<Func<TEntity, TProperty>> expression)

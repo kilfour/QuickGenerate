@@ -16,6 +16,21 @@
     </FileUpgradeFlags>
     <OldToolsVersion>3.5</OldToolsVersion>
     <UpgradeBackupLocation />
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -55,6 +70,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Libs\NHibernate\NHibernate.ByteCode.Castle.dll</HintPath>
     </Reference>
+    <Reference Include="QuickDotNetCheck">
+      <HintPath>..\Libs\quickdotnetcheck\QuickDotNetCheck.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
@@ -73,12 +91,24 @@
   <ItemGroup>
     <Compile Include="Domain\SuperHero.cs" />
     <Compile Include="Domain\SuperPower.cs" />
+    <Compile Include="Domain\SuperPowerEffect.cs" />
+    <Compile Include="Handlers\GetAllSuperPowers\GetAllSuperPowersHandler.cs" />
+    <Compile Include="Handlers\GetAllSuperPowers\GetAllSuperPowersQuery.cs" />
+    <Compile Include="Handlers\GetAllSuperPowers\SuperPowerDto.cs" />
     <Compile Include="Handlers\GetSuperHero\GetSuperHeroHandler.cs" />
     <Compile Include="Handlers\GetSuperHero\GetSuperHeroQuery.cs" />
     <Compile Include="Handlers\GetSuperHero\SuperHeroDto.cs" />
     <Compile Include="Tests\CrudTests\SuperHeroCrudTests.cs" />
     <Compile Include="Tests\CrudTests\SuperPowerCrudTests.cs" />
+    <Compile Include="Tests\CrudTests\SuperPowerEffectCrudTests.cs" />
     <Compile Include="Tests\PerformanceTests\GetSuperHero\GetSuperHeroHandlerTests.cs" />
+    <Compile Include="Tests\qdnc\BuildDomainFixtures\AddSuperHero.cs" />
+    <Compile Include="Tests\qdnc\BuildDomainFixtures\AddSuperPower.cs" />
+    <Compile Include="Tests\qdnc\BuildDomainFixtures\AddSuperPowerEffect.cs" />
+    <Compile Include="Tests\qdnc\HandlerFixtures\GetAllSuperPowers.cs" />
+    <Compile Include="Tests\qdnc\HandlerFixtures\GetSuperHero.cs" />
+    <Compile Include="Tests\qdnc\HandlerSuite.cs" />
+    <Compile Include="Tests\qdnc\Tools\DataAccess.cs" />
     <Compile Include="Tests\Tools\AssertQuery.cs" />
     <Compile Include="Tests\Tools\AssertQueryBuilder.cs" />
     <Compile Include="Tests\Tools\DatabaseTest.cs" />
@@ -102,9 +132,27 @@
   <ItemGroup>
     <EmbeddedResource Include="Domain\SuperHero.hbm.xml" />
     <EmbeddedResource Include="Domain\SuperPower.hbm.xml" />
+    <Content Include="Domain\SuperPowerEffect.hbm.xml" />
     <Content Include="mysql.hibernate.cfg.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

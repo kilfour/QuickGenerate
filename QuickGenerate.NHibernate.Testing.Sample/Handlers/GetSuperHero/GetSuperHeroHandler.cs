@@ -5,9 +5,9 @@ namespace QuickGenerate.NHibernate.Testing.Sample.Handlers.GetSuperHero
 {
     public class GetSuperHeroHandler
     {
-        private readonly IGetSuperHeroQuery query;
+        private readonly GetSuperHeroQuery query;
 
-        public GetSuperHeroHandler(IGetSuperHeroQuery query)
+        public GetSuperHeroHandler(GetSuperHeroQuery query)
         {
             this.query = query;
         }
@@ -19,7 +19,13 @@ namespace QuickGenerate.NHibernate.Testing.Sample.Handlers.GetSuperHero
                 new SuperHeroDto
                     {
                         Name = hero.Name,
-                        SuperPowers = hero.SuperPowers.Select(sp => sp.Name).ToList()
+                        SuperPowers =
+                            hero.SuperPowers
+                                .Select(sp => sp.Name).ToList(),
+                        SuperPowerEffects =
+                            hero.SuperPowers
+                                .SelectMany(sp => sp.SuperPowerEffects)
+                                .Select(spe => spe.Name).ToList()
                     };
         }
     }

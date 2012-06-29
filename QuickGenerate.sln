@@ -1,16 +1,16 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 10.00
-# Visual Studio 2008
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{02795D3C-9026-4D1C-BE34-1543AE68509B}"
+	ProjectSection(SolutionItems) = preProject
+		Build.xml = Build.xml
+	EndProjectSection
+EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuickGenerate", "QuickGenerate\QuickGenerate.csproj", "{68DF7C81-2C36-4217-8CB2-429668A9A75F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuickGenerate.Example", "QuickGenerate.Example\QuickGenerate.Example.csproj", "{0B9FA665-8DEB-4255-8B4C-8A62023B3006}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuickGenerate.Tests", "QuickGenerate.Tests\QuickGenerate.Tests.csproj", "{8C8E0899-21E3-42AB-9F16-E1EDE349562E}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{02795D3C-9026-4D1C-BE34-1543AE68509B}"
-	ProjectSection(SolutionItems) = preProject
-		Build.xml = Build.xml
-	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuickGenerate.NHibernate.Testing.Sample", "QuickGenerate.NHibernate.Testing.Sample\QuickGenerate.NHibernate.Testing.Sample.csproj", "{765E3F9B-7AD6-4EBC-A16B-814CB68331AF}"
 EndProject

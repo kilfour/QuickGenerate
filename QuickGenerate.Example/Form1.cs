@@ -61,12 +61,12 @@ namespace QuickGenerate.Example
                     .With<Product>(
                         g => g.For(product => product.Description,
                                    new StringBuilderGenerator()
-                                       .Append(WordGenerator.FromFile("Adjectives.txt")).Space()
+                                       .Append(ListGenerator.FromFile("Adjectives.txt")).Space()
                                        .Space().Dot().Dot().Dot().Space().Question(),
                                    new StringBuilderGenerator()
-                                       .Append(WordGenerator.FromFile("Colours.txt")).Space()
-                                       .Append(WordGenerator.FromFile("Adjectives.txt")).Space()
-                                       .Append(WordGenerator.FromFile("Nouns.txt"))
+                                       .Append(ListGenerator.FromFile("Colours.txt")).Space()
+                                       .Append(ListGenerator.FromFile("Adjectives.txt")).Space()
+                                       .Append(ListGenerator.FromFile("Nouns.txt"))
                                        .Period()))
                     .With<Product>(g => g.For(product => product.Price, val => Math.Round(val, 2)))
                     .With<Product>(g => g.For(product => product.Created, 31.December(2009), val => val.AddDays(1)))

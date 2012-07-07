@@ -1,32 +1,12 @@
-using System.Collections.Generic;
-using System.IO;
-using QuickGenerate.Implementation;
+﻿using QuickGenerate.Primitives;
 
 namespace QuickGenerate.Complex
 {
-    public class WordGenerator : Generator<string>
+    public class WordGenerator : StringGenerator
     {
-        private readonly IGenerator<string> generator;
-
-        public WordGenerator(IGenerator<string> generator)
-        {
-            this.generator = generator;
-        }
-
-        public static WordGenerator FromFile(string fileName)
-        {
-            var words = new List<string>();
-            using (var reader = new StreamReader(fileName))
-            {
-                while (!reader.EndOfStream)
-                    words.Add(reader.ReadLine());
-            }
-            return new WordGenerator(new ChoiceGenerator<string>(words.ToArray()));
-        }
-
-        public override string GetRandomValue()
-        {
-            return generator.GetRandomValue();
-        }
+        public WordGenerator()
+            : this(2, 10) { }
+        public WordGenerator(int min, int max)
+            : base(min, max, "abcdefghijklmnopqrstuvwxyz".ToCharArray()) { }
     }
 }

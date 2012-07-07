@@ -43,7 +43,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Complex\CapitalizedWordGenerator.cs" />
+    <Compile Include="Complex\CapitalizeExtension.cs" />
     <Compile Include="Complex\CircleGenerator.cs" />
+    <Compile Include="Complex\DescriptionGenerator.cs" />
+    <Compile Include="Complex\NameGenerator.cs" />
+    <Compile Include="Complex\TitleGenerator.cs" />
+    <Compile Include="Complex\WordGenerator.cs" />
+    <Compile Include="Data\FemaleFirstNames.cs" />
+    <Compile Include="Data\Firstnames.cs" />
+    <Compile Include="Data\LastNames.cs" />
     <Compile Include="DomainGeneratorImplementation\ActionGeneratorOptions.cs" />
     <Compile Include="DomainGeneratorImplementation\CantFindConstructorException.cs" />
     <Compile Include="DomainGeneratorImplementation\ConstructorGeneratorOptions.cs" />
@@ -58,6 +67,7 @@
     <Compile Include="Gathering\GathererMatchResult.cs" />
     <Compile Include="IDomainGenerator.cs" />
     <Compile Include="IGenerator.cs" />
+    <Compile Include="Data\MaleFirstNames.cs" />
     <Compile Include="Implementation\MyBinding.cs" />
     <Compile Include="Inspector.cs" />
     <Compile Include="Modifying\HeyITriedFiftyTimesButCouldNotGetADifferentValue.cs" />
@@ -68,7 +78,7 @@
     <Compile Include="Complex\EmailGenerator.cs" />
     <Compile Include="Complex\NumericStringGenerator.cs" />
     <Compile Include="Complex\StringBuilderGenerator.cs" />
-    <Compile Include="Complex\WordGenerator.cs" />
+    <Compile Include="Complex\ListGenerator.cs" />
     <Compile Include="DomainGenerator.cs" />
     <Compile Include="DomainGeneratorImplementation\ActionConvention.cs" />
     <Compile Include="DomainGeneratorImplementation\ChoiceConvention.cs" />

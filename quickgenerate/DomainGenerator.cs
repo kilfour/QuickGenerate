@@ -147,6 +147,7 @@ namespace QuickGenerate
 
         public IDomainGenerator With<T>(params T[] choices)
         {
+            //choiceConventions.RemoveAll(c => c.Type == typeof (T));
             choiceConventions
                 .Add(
                     new ChoiceConvention

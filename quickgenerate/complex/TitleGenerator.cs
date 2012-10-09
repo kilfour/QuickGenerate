@@ -10,6 +10,8 @@ namespace QuickGenerate.Complex
             new Generator<string>[]
                 {
                     new ChoiceGenerator<string>("I", "a", "of", "it", "the"),
+                    new CapitalizedWordGenerator(),
+                    new CapitalizedWordGenerator(),
                     new CapitalizedWordGenerator()
                 };
 

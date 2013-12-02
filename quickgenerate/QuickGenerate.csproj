@@ -112,6 +112,7 @@
     <Compile Include="Reflect\FromAssembly.cs" />
     <Compile Include="Reflect\TypePicker.cs" />
     <Compile Include="RepeatingOnesSelve.cs" />
+    <Compile Include="TryingHardButNotTooMuch.cs" />
     <Compile Include="Uniqueness\UniqueGenerator.cs" />
     <Compile Include="Writing\GuidWriter.cs" />
     <Compile Include="Writing\PrimitivesWriter.cs" />

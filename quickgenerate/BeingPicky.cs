@@ -5,7 +5,7 @@ using QuickGenerate.Implementation;
 
 namespace QuickGenerate
 {
-    public static class BeingPicky
+	public static class BeingPicky
     {
         public class TheNumberOfElementsToPickMustBeSmallerThanTheNumberOfPossibleChoices 
             : Exception { }

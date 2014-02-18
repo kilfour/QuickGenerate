@@ -26,6 +26,7 @@ namespace QuickGenerate.DomainGeneratorImplementation
                     .ToList();
         }
         
+		
         private IGenerator GetNullableGeneratorFor(Type type)
         {
             var nullable = typeof (NullableGenerator<>).MakeGenericType(GetTypeOfGeneratedValues(type));
@@ -33,6 +34,12 @@ namespace QuickGenerate.DomainGeneratorImplementation
             var generator = (IGenerator)Activator.CreateInstance(nullable, new[] {innerGenerator});
             return generator;
         }
+
+		public void ReplaceGenerator<T> (IGenerator<T> generator)
+		{
+			generators[typeof (T)] = generator;
+			generators[typeof(Nullable<>).MakeGenericType(typeof(T))] = new NullableGenerator<T>(generator);
+		}
 
         public IGenerator Get(Type type)
         {

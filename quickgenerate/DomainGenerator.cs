@@ -144,6 +144,12 @@ namespace QuickGenerate
             customization(new GeneratorOptions<T>(this));
             return this;
         }
+		
+		public IDomainGenerator ForPrimitive<T>(IGenerator<T> generator)
+		{
+			primitiveGenerators.ReplaceGenerator(generator);
+			return this;
+		}
 
         public IDomainGenerator With<T>(params T[] choices)
         {

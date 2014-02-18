@@ -24,6 +24,9 @@ namespace QuickGenerate
         // Customization methods
         //--
 
+		// Replacing Primitive Generators
+    	IDomainGenerator ForPrimitive<T>(IGenerator<T> generator);
+
         // Choosing a value
         IDomainGenerator With<T>(params T[] choices);
 

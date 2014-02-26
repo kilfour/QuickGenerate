@@ -28,7 +28,31 @@ namespace QuickGenerate
 
         public static T PickOne<T>(this IEnumerable<T> choices)
         {
-            return new ChoiceGenerator<T>(choices.ToArray).GetRandomValue();
+            return new ChoiceGenerator<T>(choices).GetRandomValue();
         }
+
+		public static IEnumerable<T> InPlaceShuffle<T>(this IList<T> list)
+		{
+			return InPlaceShuffle(list, list.Count);
+		}
+
+		public static IEnumerable<T> InAnyOrder<T>(this IEnumerable<T> list)
+		{
+			var array = list.ToArray();
+			return InPlaceShuffle(array, array.Length);
+		}
+
+		private static IList<T> InPlaceShuffle<T>(IList<T> array, int n)
+		{
+			while (n > 1)
+			{
+				n--;
+				var k = Seed.Random.Next(n + 1);
+				T value = array[k];
+				array[k] = array[n];
+				array[n] = value;
+			}
+			return array;
+		}
     }
 }

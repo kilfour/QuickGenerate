@@ -88,6 +88,7 @@
     <Compile Include="DomainGeneratorTests\Relations\OneToManyTests\MultipleOneToManiesOfSameClassTests.cs" />
     <Compile Include="DomainGeneratorTests\WithValues\UsingFunc.cs" />
     <Compile Include="DomainGeneratorTests\WithValues\UsingValues.cs" />
+    <Compile Include="Ordering\InAnyOrderTest.cs" />
     <Compile Include="Specs\IgnoringPrimitivesTests.cs" />
     <Compile Include="Specs\TestObjects\AllPrimitives.cs" />
     <Compile Include="Specs\TestObjects\IHaveOnlyPrimitives.cs" />

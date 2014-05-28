@@ -15,7 +15,7 @@ namespace QuickGenerate.Implementation
         {
             if (choicesFunc != null)
                 choices = choicesFunc();
-			return choices.ElementAt(Seed.Random.Next(choices.Count()));
+			return choices.ElementAt(Seed.Random.Next(0, choices.Count()));
         }
     }
 }

@@ -47,7 +47,7 @@ namespace QuickGenerate
 			while (n > 1)
 			{
 				n--;
-				var k = Seed.Random.Next(n + 1);
+				var k = Seed.Random.Next(0, n + 1);
 				T value = array[k];
 				array[k] = array[n];
 				array[n] = value;

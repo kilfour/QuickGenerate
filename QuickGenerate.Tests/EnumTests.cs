@@ -36,7 +36,7 @@ namespace QuickGenerate.Tests
 
         public struct SomethingToGenerate
         {
-            public AnEnum Property { get; set; }
+            public AnEnum? Property { get; set; }
         }
     }
 }

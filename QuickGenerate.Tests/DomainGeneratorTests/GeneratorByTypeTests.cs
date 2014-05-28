@@ -23,7 +23,7 @@ namespace QuickGenerate.Tests.DomainGeneratorTests
 					.ForPrimitive(new IntGenerator(42, 42));
 			var is42 = false;
 			var isNull = false;
-			20.Times(() =>
+			30.Times(() =>
 			         	{
 			         		var value = domainGenerator.One<SomethingElseToGenerate>().Value;
 							if (value.HasValue)
